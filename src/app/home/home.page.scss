@@ -25,3 +25,16 @@
 #container a {
   text-decoration: none;
 }
+.mi-toolbar-personalizada {
+  background-color: rgb(62, 177, 158);
+}
+.mi-clase-gif {
+  width: 100px;
+  height: 100px;
+}
+.contenedor-centro {
+  display: flex;         // Habilita flexbox
+  justify-content: center; // Centra horizontalmente
+  align-items: center;     // Centra verticalmente
+  height: 100vh;           // Ocupa toda la altura de la ventana
+}

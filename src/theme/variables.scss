@@ -12,7 +12,7 @@
   --ion-color-primary-tint: #4c8dff;
 
   /** secondary **/
-  --ion-color-secondary: #3dc2ff;
+  --ion-color-secondary: #35b4aa;
   --ion-color-secondary-rgb: 61, 194, 255;
   --ion-color-secondary-contrast: #ffffff;
   --ion-color-secondary-contrast-rgb: 255, 255, 255;
@@ -233,4 +233,14 @@
 
     --ion-card-background: #1e1e1e;
   }
+  
+  
 }
+@media (prefers-color-scheme: light) {
+    ion-toolbar {
+      --background: rgb(66, 211, 211);
+    }
+  }
+  .mi-toolbar-personalizada {
+    background-color: rgb(62, 177, 158);
+  }
