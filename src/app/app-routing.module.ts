@@ -10,7 +10,19 @@ const routes: Routes = [
     path: '',
     redirectTo: 'home',
     pathMatch: 'full'
+  },  {
+    path: 'perros',
+    loadChildren: () => import('./perros/perros.module').then( m => m.PerrosPageModule)
   },
+  {
+    path: 'gatos',
+    loadChildren: () => import('./gatos/gatos.module').then( m => m.GatosPageModule)
+  },
+  {
+    path: 'cuenta',
+    loadChildren: () => import('./cuenta/cuenta.module').then( m => m.CuentaPageModule)
+  },
+
 ];
 
 @NgModule({
