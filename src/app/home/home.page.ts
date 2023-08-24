@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { NavigationExtras, Router } from '@angular/router';
+import { AlertController, ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
@@ -7,6 +9,8 @@ import { Component } from '@angular/core';
 })
 export class HomePage {
 
-  constructor() {}
+  constructor(private router: Router, private toastController: ToastController,
+    private alertController: AlertController) { }
+
 
 }
