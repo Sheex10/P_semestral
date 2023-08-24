@@ -1,6 +1,6 @@
 <ion-app>
 
-  <ion-menu contentId="menu-content">
+  <ion-menu  menuId="end" contentId="menu-content">
     <ion-header>
       <ion-toolbar color="secondary">
         <ion-title>HappyFootPrints</ion-title>
@@ -12,8 +12,8 @@
         <ion-button (click)="goToInicio()" size="default" expand="block"><ion-icon name="home-outline"> </ion-icon>   Inicio</ion-button>
       </ion-item>
 
-      <ion-item>
-          <ion-button (click)="goToPerros()" size="default" expand="block"><ion-icon name="paw-outline"> </ion-icon>     Perros</ion-button>
+      <ion-item (click)="goToPerros()">
+          <ion-button size="default" expand="block"><ion-icon name="paw-outline"> </ion-icon>     Perros</ion-button>
       </ion-item>
 
       <ion-item>

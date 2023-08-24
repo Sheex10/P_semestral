@@ -10,7 +10,8 @@ const routes: Routes = [
     path: '',
     redirectTo: 'home',
     pathMatch: 'full'
-  },  {
+  },
+  {
     path: 'perros',
     loadChildren: () => import('./perros/perros.module').then( m => m.PerrosPageModule)
   },
