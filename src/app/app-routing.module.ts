@@ -22,7 +22,8 @@ const routes: Routes = [
   {
     path: 'cuenta',
     loadChildren: () => import('./cuenta/cuenta.module').then( m => m.CuentaPageModule)
-  },  {
+  },
+  {
     path: 'camaperro',
     loadChildren: () => import('./camaperro/camaperro.module').then( m => m.CamaperroPageModule)
   },
@@ -31,6 +32,7 @@ const routes: Routes = [
     loadChildren: () => import('./casaperro/casaperro.module').then( m => m.CasaperroPageModule)
   },
   {
+
     path: 'comederoperro',
     loadChildren: () => import('./comederoperro/comederoperro.module').then( m => m.ComederoperroPageModule)
   },
@@ -53,6 +55,11 @@ const routes: Routes = [
   {
     path: 'juguetegato',
     loadChildren: () => import('./juguetegato/juguetegato.module').then( m => m.JuguetegatoPageModule)
+  },
+  {
+    path: 'login',
+    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
+
   },
 
 
