@@ -31,6 +31,7 @@ const routes: Routes = [
     loadChildren: () => import('./casaperro/casaperro.module').then( m => m.CasaperroPageModule)
   },
   {
+<<<<<<< Updated upstream
     path: 'comederoperro',
     loadChildren: () => import('./comederoperro/comederoperro.module').then( m => m.ComederoperroPageModule)
   },
@@ -53,6 +54,10 @@ const routes: Routes = [
   {
     path: 'juguetegato',
     loadChildren: () => import('./juguetegato/juguetegato.module').then( m => m.JuguetegatoPageModule)
+=======
+    path: 'login',
+    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
+>>>>>>> Stashed changes
   },
 
 
