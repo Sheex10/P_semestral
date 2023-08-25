@@ -22,7 +22,15 @@ const routes: Routes = [
   {
     path: 'cuenta',
     loadChildren: () => import('./cuenta/cuenta.module').then( m => m.CuentaPageModule)
+  },  {
+    path: 'camaperro',
+    loadChildren: () => import('./camaperro/camaperro.module').then( m => m.CamaperroPageModule)
   },
+  {
+    path: 'casaperro',
+    loadChildren: () => import('./casaperro/casaperro.module').then( m => m.CasaperroPageModule)
+  },
+
 
 ];
 
