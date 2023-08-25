@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { HomePage } from './home.page';
 
 import { HomePageRoutingModule } from './home-routing.module';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+
 
 
 @NgModule({
@@ -14,7 +14,6 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     FormsModule,
     IonicModule,
     HomePageRoutingModule,
-    MatProgressSpinnerModule
   ],
   declarations: [HomePage]
 })
