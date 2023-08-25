@@ -30,6 +30,30 @@ const routes: Routes = [
     path: 'casaperro',
     loadChildren: () => import('./casaperro/casaperro.module').then( m => m.CasaperroPageModule)
   },
+  {
+    path: 'comederoperro',
+    loadChildren: () => import('./comederoperro/comederoperro.module').then( m => m.ComederoperroPageModule)
+  },
+  {
+    path: 'jugueteperro',
+    loadChildren: () => import('./jugueteperro/jugueteperro.module').then( m => m.JugueteperroPageModule)
+  },
+  {
+    path: 'camagato',
+    loadChildren: () => import('./camagato/camagato.module').then( m => m.CamagatoPageModule)
+  },
+  {
+    path: 'casagato',
+    loadChildren: () => import('./casagato/casagato.module').then( m => m.CasagatoPageModule)
+  },
+  {
+    path: 'comederogato',
+    loadChildren: () => import('./comederogato/comederogato.module').then( m => m.ComederogatoPageModule)
+  },
+  {
+    path: 'juguetegato',
+    loadChildren: () => import('./juguetegato/juguetegato.module').then( m => m.JuguetegatoPageModule)
+  },
 
 
 ];

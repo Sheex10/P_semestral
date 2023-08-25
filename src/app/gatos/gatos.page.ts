@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-gatos',
@@ -7,9 +9,31 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GatosPage implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) { 
+
+  }
 
   ngOnInit() {
+  }
+
+  goTocamagato(){
+    this.router.navigate(['/camagato'])
+    
+  }
+
+  goTocasagato(){
+    this.router.navigate(['/casagato'])
+    
+  }
+
+  goTocomederogato(){
+    this.router.navigate(['/comederogato'])
+    
+  }
+
+  goTojuguetegato(){
+    this.router.navigate(['/juguetegato'])
+    
   }
 
 }
