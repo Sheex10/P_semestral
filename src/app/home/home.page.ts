@@ -12,5 +12,8 @@ export class HomePage {
   constructor(private router: Router, private toastController: ToastController,
     private alertController: AlertController) { }
 
+  goTocarrito() {
+    this.router.navigate(['/carrito'])
 
+  }
 }

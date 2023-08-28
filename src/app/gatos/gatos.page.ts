@@ -15,7 +15,10 @@ export class GatosPage implements OnInit {
 
   ngOnInit() {
   }
+  goTocarrito() {
+    this.router.navigate(['/carrito'])
 
+  }
   goTocamagato(){
     this.router.navigate(['/camagato'])
     

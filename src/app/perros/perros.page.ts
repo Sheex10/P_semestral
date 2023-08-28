@@ -16,7 +16,10 @@ export class PerrosPage implements OnInit {
 
   ngOnInit() {
   }
+  goTocarrito() {
+    this.router.navigate(['/carrito'])
 
+  }
   goTocamaperro(){
     this.router.navigate(['/camaperro'])
     
