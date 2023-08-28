@@ -62,8 +62,8 @@ const routes: Routes = [
 
   },
   {
-    path: 'registo',
-    loadChildren: () => import('./registo/registo.module').then( m => m.RegistoPageModule)
+    path: 'registro',
+    loadChildren: () => import('./registro/registro.module').then( m => m.RegistroPageModule)
   },
 
 
