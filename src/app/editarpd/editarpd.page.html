@@ -1,0 +1,141 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="secondary">
+    <ion-title>Editar productos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Productos</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item>
+          <ion-thumbnail slot="start">
+            <img alt="Silhouette of mountains"
+              src="https://www.amigales.cl/media/catalog/product/cache/e41c4201e1eb7e3f60e4abbd62ba2679/c/a/cama_oval.jpg" />
+          </ion-thumbnail>
+          <ion-label>Cama perro</ion-label>
+          <div class="centrado">
+            <ion-button id="modal-trigger" color="secondary"><ion-icon slot="icon-only"
+                name="pencil"></ion-icon></ion-button>
+          </div>
+          <ion-modal trigger="modal-trigger" #modal>
+            <ng-template>
+              <ion-header>
+                <ion-toolbar color="secondary">
+                  <ion-title>Editar Productos</ion-title>
+                  <ion-buttons slot="end">
+                    <ion-button (click)="closeModal()"><ion-icon name="close-outline"> </ion-icon></ion-button>
+                  </ion-buttons>
+                </ion-toolbar>
+              </ion-header>
+              <ion-thumbnail class="image-center" class="centrado1" width-80>
+                <img alt="Silhouette of mountains" src="https://www.amigales.cl/media/catalog/product/cache/e41c4201e1eb7e3f60e4abbd62ba2679/c/a/cama_oval.jpg" />
+              </ion-thumbnail>
+              <ion-card class="centrado2" slot="start">
+                <ion-card-content>
+                  Nombre:
+                  Cama Perro
+                  <br>
+                  Precio: 
+                  <br><br>
+                </ion-card-content>
+                <ion-button color="secondary"><ion-icon slot="icon-only" name="pencil"></ion-icon>Editar</ion-button>
+              </ion-card>
+            </ng-template>
+          </ion-modal>
+        </ion-item>
+
+        <ion-item>
+          <ion-thumbnail slot="start">
+            <img alt="Silhouette of mountains"
+              src="https://easycl.vtexassets.com/arquivos/ids/340090/1255099-01.jpg?v=637532902663630000" />
+          </ion-thumbnail>
+          <ion-label>Casa perro</ion-label>
+          <div class="centrado">
+            <ion-button id="modal-trigger" color="secondary"><ion-icon slot="icon-only"
+                name="pencil"></ion-icon></ion-button>
+          </div>
+        </ion-item>
+
+        <ion-item>
+          <ion-thumbnail slot="start">
+            <img alt="Silhouette of mountains" src="https://m.media-amazon.com/images/I/41c9taryhSL._SL500_.jpg" />
+          </ion-thumbnail>
+          <ion-label>Comedero y bebedero</ion-label>
+          <div class="centrado">
+            <ion-button id="modal-trigger" color="secondary"><ion-icon slot="icon-only"
+                name="pencil"></ion-icon></ion-button>
+          </div>
+        </ion-item>
+
+        <ion-item lines="none">
+          <ion-thumbnail slot="start">
+            <img alt="Silhouette of mountains"
+              src="https://sodimac.scene7.com/is/image/SodimacPeru/2599155_1?wid=800&hei=800&qlt=70" />
+          </ion-thumbnail>
+          <ion-label>Juguete perro</ion-label>
+          <div class="centrado">
+            <ion-button id="modal-trigger" color="secondary"><ion-icon slot="icon-only"
+                name="pencil"></ion-icon></ion-button>
+          </div>
+        </ion-item>
+
+        <ion-item>
+          <ion-thumbnail slot="start">
+            <img alt="Silhouette of mountains"
+              src="https://veterinariaelabrazo.cl/cdn/shop/products/Cama_felpa_morada_perro_gato_600x_15572b3f-1861-4342-88f3-0680b3f53048_800x.jpg?v=1630958717" />
+          </ion-thumbnail>
+          <ion-label>Cama gato</ion-label>
+          <div class="centrado">
+            <ion-button id="modal-trigger" color="secondary"><ion-icon slot="icon-only"
+                name="pencil"></ion-icon></ion-button>
+          </div>
+        </ion-item>
+
+        <ion-item>
+          <ion-thumbnail slot="start">
+            <img alt="Silhouette of mountains"
+              src="https://falabella.scene7.com/is/image/Falabella/gsc_121781502_3181716_1?wid=800&hei=800&qlt=70" />
+          </ion-thumbnail>
+          <ion-label>Casa gato</ion-label>
+          <div class="centrado">
+            <ion-button id="modal-trigger" color="secondary"><ion-icon slot="icon-only"
+                name="pencil"></ion-icon></ion-button>
+          </div>
+        </ion-item>
+
+        <ion-item>
+          <ion-thumbnail slot="start">
+            <img alt="Silhouette of mountains"
+              src="https://d2r9epyceweg5n.cloudfront.net/stores/120/791/products/119-comedero-inoxidable-para-perros-21-4e8921374258d7a05715122104378126-640-0.jpg" />
+          </ion-thumbnail>
+          <ion-label>Comedero y bebedero</ion-label>
+          <div class="centrado">
+            <ion-button id="modal-trigger" color="secondary"><ion-icon slot="icon-only"
+                name="pencil"></ion-icon></ion-button>
+          </div>
+        </ion-item>
+
+        <ion-item>
+          <ion-thumbnail slot="start">
+            <img alt="Silhouette of mountains"
+              src="https://www.animal-lovers.cl/wp-content/uploads/2022/10/juguete-gato-raton-orejon-rojo-600x600.jpg" />
+          </ion-thumbnail>
+          <ion-label>Juguete gato</ion-label>
+          <div class="centrado">
+            <ion-button id="modal-trigger" color="secondary"><ion-icon slot="icon-only"
+                name="pencil"></ion-icon></ion-button>
+          </div>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">editarpd</ion-title>
+    </ion-toolbar>
+  </ion-header>
+</ion-content>
