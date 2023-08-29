@@ -4,14 +4,31 @@
   }
 
   ion-thumbnail {
+    position: initial;
     --size: 140px;
-    --border-radius: 14px;
+    --border-radius: 8px;
   }
 
   .centrado{
     text-align: center;
+    position: initial;
     bottom: 40;
     left: 40; 
     top: 40;
     margin:85px;
+  }
+
+  .centrado1{
+    text-align: auto;
+    bottom: 0;
+    left: 0; 
+    top: 90;
+    margin:145px;
+  }
+  .centrado2{
+    text-align: start;
+    bottom: 0;
+    left: 0; 
+    top: 90;
+    margin:50px;
   }
