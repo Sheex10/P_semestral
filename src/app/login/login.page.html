@@ -18,11 +18,25 @@
     </ion-card-header>
 
     <ion-card-content class="ion-text-center">
-      <ion-input type="text" label="Ingresa tu correo" label-placement="floating" fill="solid" placeholder="alguien@gmail.com"></ion-input>
+      <ion-input type="text" 
+      label="Ingresa tu correo" 
+      label-placement="floating" 
+      fill="solid" 
+      placeholder="alguien@gmail.com"
+      [(ngModel)]="correoIngresado">
+    </ion-input>
       <br>
-      <ion-input type="password" label="Contraseña" label-placement="floating" fill="outline" placeholder="Contraseña"></ion-input>
+      <ion-input type="password" 
+      label="Contraseña" 
+      label-placement="floating" 
+      fill="outline" 
+      placeholder="Contraseña"
+      [(ngModel)]>
+    </ion-input>
       <br>
-      <ion-button mat-raised-button color="secondary">Iniciar Sesión</ion-button>
+      <ion-button mat-raised-button 
+      color="secondary"
+      (click)="verificarLogin"(correoIngresado,claveIngresada)>Iniciar Sesión</ion-button>
     </ion-card-content>
   </ion-card>
 

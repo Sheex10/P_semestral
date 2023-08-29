@@ -23,27 +23,15 @@ export class LoginPage implements OnInit {
   claveAdmin:string="123456789";
 
   correoIngresado:string="";
-  claveIngresado:string="";
+  claveIngresada:string="";
 
-  constructor(private router:Router, private toastController: ToastController) { 
-    
-  
-
-  }
+  constructor(private router:Router, private toastController: ToastController) { }
   
   ngOnInit() {
   }
-  verificarLogin(correo:string,clave:string){
-    if(this.correoUsuario == correo){
-      if (this.claveUsuario == clave){
-        this.router.navigate(['/perfil-user']);
-      }
-      else{
-        //this.presentToast('bottom','Contraseña Incorrecta',2000);
-        console.log('xddddd')
-      }
-    }
-  }
 
-  }
+  //async presentToast(position: 'top' | 'middle' | 'bottom', mensaje:string, duracion:number){
+
+  //}
+}
 
