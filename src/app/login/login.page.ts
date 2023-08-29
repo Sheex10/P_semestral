@@ -4,6 +4,8 @@ import{
 FormControl,
 Validators,
 FormBuilder} from '@angular/forms';
+import { Router } from '@angular/router';
+import { ToastController } from '@ionic/angular';
 
 
 @Component({
@@ -14,18 +16,34 @@ FormBuilder} from '@angular/forms';
 
 export class LoginPage implements OnInit {
 
-  formulariologin!: FormGroup;
+  correoUsuario:string="patoreyes@gmail.com";
+  claveUsuario:string="1234567";
 
-  constructor(public fb: FormBuilder) { 
+  correoAdmin:string="pipeshee@gmail.com";
+  claveAdmin:string="123456789";
+
+  correoIngresado:string="";
+  claveIngresado:string="";
+
+  constructor(private router:Router, private toastController: ToastController) { 
     
-    this.formulariologin = this.fb.group({
-      'correo': new FormControl("",Validators.required),
-      'password': new FormControl("",Validators.required)
-    })
+  
 
   }
   
   ngOnInit() {
   }
+  verificarLogin(correo:string,clave:string){
+    if(this.correoUsuario == correo){
+      if (this.claveUsuario == clave){
+        this.router.navigate(['/perfil-user']);
+      }
+      else{
+        //this.presentToast('bottom','Contraseña Incorrecta',2000);
+        console.log('xddddd')
+      }
+    }
+  }
 
-}
+  }
+
