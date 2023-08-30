@@ -72,6 +72,38 @@ const routes: Routes = [
     path: 'editarpd',
     loadChildren: () => import('./editarpd/editarpd.module').then( m => m.EditarpdPageModule)
   },
+  {
+    path: 'edcamaperro',
+    loadChildren: () => import('./edcamaperro/edcamaperro.module').then( m => m.EdcamaperroPageModule)
+  },
+  {
+    path: 'edcasaperro',
+    loadChildren: () => import('./edcasaperro/edcasaperro.module').then( m => m.EdcasaperroPageModule)
+  },
+  {
+    path: 'edcomederoperro',
+    loadChildren: () => import('./edcomederoperro/edcomederoperro.module').then( m => m.EdcomederoperroPageModule)
+  },
+  {
+    path: 'edjugueteperro',
+    loadChildren: () => import('./edjugueteperro/edjugueteperro.module').then( m => m.EdjugueteperroPageModule)
+  },
+  {
+    path: 'edcamagato',
+    loadChildren: () => import('./edcamagato/edcamagato.module').then( m => m.EdcamagatoPageModule)
+  },
+  {
+    path: 'edcasagato',
+    loadChildren: () => import('./edcasagato/edcasagato.module').then( m => m.EdcasagatoPageModule)
+  },
+  {
+    path: 'edcomederogato',
+    loadChildren: () => import('./edcomederogato/edcomederogato.module').then( m => m.EdcomederogatoPageModule)
+  },
+  {
+    path: 'edjuguetegato',
+    loadChildren: () => import('./edjuguetegato/edjuguetegato.module').then( m => m.EdjuguetegatoPageModule)
+  },
 
 
 
