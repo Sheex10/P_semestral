@@ -30,8 +30,35 @@ export class LoginPage implements OnInit {
   ngOnInit() {
   }
 
-  //async presentToast(position: 'top' | 'middle' | 'bottom', mensaje:string, duracion:number){
+  async presentToast(position: 'top' | 'middle' | 'bottom', mensaje:string, duracion:number){
+    const toast = await this.toastController.create({
+      message: mensaje,
+      duration: duracion,
+      position: position,
+      color: "dark"
+    });
+    await toast.present();
+  }
+  //Validación
+  verificarLogin(correo:string, clave:string){
+    if (this.correoUsuario == correo){
+      if (this.claveUsuario == clave){
+        this.router.navigate(['/cuenta']);
+      }else{
+        this.presentToast('bottom',"Contraseña Incorrecta",2000);
+      }
+    }
+    if (this.correoAdmin == correo){
+      if (this.claveAdmin == clave){
+        this.router.navigate(['/cuenta']);
+      }else{
+        this.presentToast('bottom',"Contraseña Incorrecta",2000)
+      }
+    }
+    if (this.correoUsuario != correo && this.correoAdmin != correo){
+      this.presentToast('bottom',"Usuario no existente",2000);
+    }
+  }
 
-  //}
 }
 

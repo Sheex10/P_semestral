@@ -31,12 +31,12 @@
       label-placement="floating" 
       fill="outline" 
       placeholder="Contraseña"
-      [(ngModel)]>
+      [(ngModel)]="claveIngresada">
     </ion-input>
       <br>
       <ion-button mat-raised-button 
       color="secondary"
-      (click)="verificarLogin"(correoIngresado,claveIngresada)>Iniciar Sesión</ion-button>
+      (click)="verificarLogin(correoIngresado,claveIngresada)">Iniciar Sesión</ion-button>
     </ion-card-content>
   </ion-card>
 
