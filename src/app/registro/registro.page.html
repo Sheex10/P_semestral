@@ -1,5 +1,8 @@
 <ion-header [translucent]="true">
   <ion-toolbar color="secondary">
+    <ion-buttons slot="start">
+      <ion-button (click)="goTologin()"><ion-icon name="arrow-back"></ion-icon></ion-button>
+    </ion-buttons>
     <ion-title>Registro</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -17,11 +20,9 @@
     </ion-card-header>
 
     <ion-card-content class="ion-text-center">
-      <ion-input type="text" label="Ingresa tu correo" label-placement="floating" fill="solid" placeholder="alguien@gmail.com"></ion-input>
+      <ion-input type="text" label="Nombres" label-placement="floating" fill="solid" placeholder="Nombre"></ion-input>
       <br>
-      <ion-input type="text" label="Nombre y apellido" label-placement="floating" fill="solid" placeholder="Nombre"></ion-input>
-      <br>
-      <ion-input type="text" label="Apellido" label-placement="floating" fill="solid" placeholder="Apellido"></ion-input>
+      <ion-input type="text" label="Apellidos" label-placement="floating" fill="solid" placeholder="Apellido"></ion-input>
       <br>
       <ion-input type="text" label="Ingresa tu correo" label-placement="floating" fill="solid" placeholder="alguien@gmail.com"></ion-input>
       <br>

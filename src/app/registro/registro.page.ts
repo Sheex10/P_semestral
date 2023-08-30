@@ -52,4 +52,8 @@ export class RegistroPage implements OnInit {
       this.NomColor="danger";
     }*/
   }
+  goTologin(){
+    this.router.navigate(['/login'])
+    
+  }
 }

@@ -50,7 +50,7 @@ export class LoginPage implements OnInit {
     }
     if (this.correoAdmin == correo){
       if (this.claveAdmin == clave){
-        this.router.navigate(['/cuenta']);
+        this.router.navigate(['/editarpd']);
       }else{
         this.presentToast('bottom',"Contraseña Incorrecta",2000)
       }
@@ -59,6 +59,7 @@ export class LoginPage implements OnInit {
       this.presentToast('bottom',"Usuario no existente",2000);
     }
   }
-
+  goToRegister(){
+    this.router.navigate(['/registro'])}
 }
 
