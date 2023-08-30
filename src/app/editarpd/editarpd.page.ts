@@ -53,6 +53,7 @@ export class EditarpdPage implements OnInit {
     this.router.navigate(['/edjuguetegato'])
     
   }
+  
 }
 
 

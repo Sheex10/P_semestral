@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-edjugueteperro',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EdjugueteperroPage implements OnInit {
 
-  constructor() { }
+  constructor(private router:Router) { }
 
   ngOnInit() {
   }
 
+  goToeditarpd(){
+    this.router.navigate(['/editarpd'])
+    
+  }
 }
