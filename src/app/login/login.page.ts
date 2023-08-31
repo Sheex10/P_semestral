@@ -31,7 +31,7 @@ export class LoginPage implements OnInit {
 
     this.formularioL=this.fb.group({
 
-      'Correo': new FormControl('',[Validators.required,Validators.minLength(5),Validators.email]),
+      'Correo': new FormControl('',[Validators.required,Validators.minLength(5),Validators.email,]),
       'Contraseña': new FormControl('',[Validators.required,Validators.minLength(5)])
     })
    }
