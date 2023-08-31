@@ -17,4 +17,8 @@ export class EdcamagatoPage implements OnInit {
     this.router.navigate(['/editarpd'])
     
   }
+  goToproductoed() {
+    this.router.navigate(['/productoed'])
+
+  }
 }

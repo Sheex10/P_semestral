@@ -108,7 +108,11 @@ const routes: Routes = [
   {
     path: 'menuadmin',
     loadChildren: () => import('./menuadmin/menuadmin.module').then( m => m.MenuadminPageModule)
+  },  {
+    path: 'productoed',
+    loadChildren: () => import('./productoed/productoed.module').then( m => m.ProductoedPageModule)
   },
+
 
 
 

@@ -17,4 +17,5 @@ export class CasaperroPage implements OnInit {
     this.router.navigate(['/carrito'])
 
   }
+ 
 }

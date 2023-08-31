@@ -18,4 +18,8 @@ export class EdcomederogatoPage implements OnInit {
     this.router.navigate(['/editarpd'])
     
   }
+  goToproductoed() {
+    this.router.navigate(['/productoed'])
+
+  }
 }

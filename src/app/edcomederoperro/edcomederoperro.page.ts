@@ -16,4 +16,8 @@ export class EdcomederoperroPage implements OnInit {
     this.router.navigate(['/editarpd'])
     
   }
+  goToproductoed() {
+    this.router.navigate(['/productoed'])
+
+  }
 }

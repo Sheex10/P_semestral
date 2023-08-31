@@ -1,0 +1,30 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="secondary">
+    <ion-buttons slot="start">
+      <ion-button (click)="goToeditarpd()"><ion-icon name="arrow-back"></ion-icon></ion-button>
+      </ion-buttons>
+      <ion-title>Editar producto</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-card-header>
+    <ion-card-title class="ion-text-center">Datos producto</ion-card-title>
+  </ion-card-header>
+
+  <ion-card-content class="ion-text-center">
+    <ion-input type="text" label="Nombre" label-placement="floating" fill="solid" placeholder="Nombre"></ion-input>
+    <br>
+    <ion-input type="text" label="Descripción" label-placement="floating" fill="solid"
+      placeholder="Descripción"></ion-input>
+    <br>
+    <ion-input type="text" label="Precio" label-placement="floating" fill="solid" placeholder="$$$$"></ion-input>
+    <br>
+    <ion-button (click)="goToeditarpd()" mat-raised-button color="secondary">Completar edición</ion-button>
+  </ion-card-content>
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">productoed</ion-title>
+    </ion-toolbar>
+  </ion-header>
+</ion-content>
