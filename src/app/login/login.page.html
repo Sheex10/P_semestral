@@ -11,6 +11,7 @@
     </ion-toolbar>
   </ion-header>
 
+  <form [formGroup]="formularioL" >
   <ion-card>
     <img alt="xd" src="../assets/img/InicioKJSDKSJD.jpg" />
     <ion-card-header>
@@ -18,15 +19,26 @@
     </ion-card-header>
 
     <ion-card-content class="ion-text-center">
-      <ion-input type="text" 
+      <ion-input formControlName="Correo" type="text" 
       label="Ingresa tu correo" 
       label-placement="floating" 
       fill="solid" 
       placeholder="alguien@gmail.com"
       [(ngModel)]="correoIngresado">
     </ion-input>
+    <div [hidden]="correo?.valid || correo?.pristine">
+      <span *ngIf="correo?.errors?.['required']">
+        El correo es requerido.
+      </span>
+      <span *ngIf="correo?.errors?.['email']">
+        El correo debe ser valido.
+      </span>
+      <span *ngIf="correo?.errors?.['minlength']">
+        <br>El numero de caracteres minimo es 5.
+      </span>
+    </div>
       <br>
-      <ion-input type="password" 
+      <ion-input formControlName="Contraseña" type="password" 
       label="Contraseña" 
       label-placement="floating" 
       fill="outline" 
@@ -36,12 +48,12 @@
       <br>
       <ion-button mat-raised-button 
       color="secondary"
-      (click)="verificarLogin(correoIngresado,claveIngresada)">Iniciar Sesión</ion-button>
+      (click)="verificarLogin(correoIngresado,claveIngresada)" [disabled]="formularioL.invalid">Iniciar Sesión</ion-button>
       <ion-button mat-raised-button 
       color="secondary"
       (click)="goToRegister()">Registrarse</ion-button>
     </ion-card-content>
   </ion-card>
-
+</form>
 </ion-content>
 

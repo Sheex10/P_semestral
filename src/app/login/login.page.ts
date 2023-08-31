@@ -25,10 +25,33 @@ export class LoginPage implements OnInit {
   correoIngresado:string="";
   claveIngresada:string="";
 
-  constructor(private router:Router, private toastController: ToastController) { }
+  formularioL:FormGroup;
+
+  constructor(private router:Router, private toastController: ToastController,public fb:FormBuilder) {
+
+    this.formularioL=this.fb.group({
+
+      'Correo': new FormControl('',[Validators.required,Validators.minLength(5),Validators.email]),
+      'Contraseña': new FormControl('',[Validators.required,Validators.minLength(5)])
+    })
+   }
   
+   get correo(){
+    return this.formularioL.get('Correo') as FormControl;
+
+   }
+
+   get contra(){
+    return this.formularioL.get('Correo') as FormControl;
+
+   }
+
+
+
   ngOnInit() {
   }
+
+
 
   async presentToast(position: 'top' | 'middle' | 'bottom', mensaje:string, duracion:number){
     const toast = await this.toastController.create({
