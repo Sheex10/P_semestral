@@ -8,27 +8,21 @@ import { MenuController } from '@ionic/angular';
   styleUrls: ['./menuadmin.page.scss'],
 })
 export class MenuadminPage implements OnInit {
-  menuOpts: any;
-  constructor(private router: Router,private menuCtrl: MenuController) { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
-  this.menuOpts = [
-    {
-      "url": this.router.navigate(['/home']),
-      "iconName": "home-outline",
-      "optionName": "Inicio"
-    },
-    {
-      "url": this.router.navigate(['/editarpd']),
-      "iconName": "pricetags-outline",
-      "optionName": "Productos"
-    },
-    {
-      "url": this.router.navigate(['/login']),
-      "iconName": "exit-outline",
-      "optionName": "Cerrar sesión"
-    },
-  ]
   }
+    goTomenuadmin(){
+      this.router.navigate(['/menuadmin'])
+    }
+  
+    goToeditarpd(){
+      this.router.navigate(['/editarpd'])
+    }
+  
+    goTologin(){
+      this.router.navigate(['/login'])
+    }
+
   
 }
