@@ -1,0 +1,43 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="secondary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title></ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-menu  menuId="end" contentId="menu-content">
+    <ion-header>
+      <ion-toolbar color="secondary">
+        <ion-title>HappyFootPrints</ion-title>
+      </ion-toolbar>
+    </ion-header>
+
+    <ion-content>
+      <ion-menu-toggle *ngFor="let i of menuOpts">
+        <ion-item [routerLink]="i.url">
+          <ion-icon slot="start" [name]="i.iconName"></ion-icon>
+          {{ i.optionName }}
+        </ion-item>
+      </ion-menu-toggle>
+
+      <!--<ion-menu-toggle >
+          <ion-button color="secondary" size="default" expand="block"><ion-icon name="paw-outline"> </ion-icon>     Perros</ion-button>
+      </ion-menu-toggle>
+
+      <ion-menu-toggle>
+          <ion-button color="secondary" size="default" expand="block"><ion-icon name="logo-octocat"> </ion-icon>   Gatos</ion-button>
+      </ion-menu-toggle>
+
+      <ion-menu-toggle>
+          <ion-button color="secondary" size="default" expand="block"><ion-icon name="person-outline"> </ion-icon>   Cuenta</ion-button>
+      </ion-menu-toggle>-->
+
+    </ion-content>
+  </ion-menu>
+  
+  <ion-router-outlet id = "menu-content" ></ion-router-outlet> 
+
+</ion-content>

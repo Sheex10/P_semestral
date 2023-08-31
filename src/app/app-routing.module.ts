@@ -64,7 +64,8 @@ const routes: Routes = [
   {
     path: 'registro',
     loadChildren: () => import('./registro/registro.module').then( m => m.RegistroPageModule)
-  },  {
+  },
+  {
     path: 'carrito',
     loadChildren: () => import('./carrito/carrito.module').then( m => m.CarritoPageModule)
   },
@@ -103,7 +104,12 @@ const routes: Routes = [
   {
     path: 'edjuguetegato',
     loadChildren: () => import('./edjuguetegato/edjuguetegato.module').then( m => m.EdjuguetegatoPageModule)
+  },  {
+    path: 'menuadmin',
+    loadChildren: () => import('./menuadmin/menuadmin.module').then( m => m.MenuadminPageModule)
   },
+
+
 
 
 

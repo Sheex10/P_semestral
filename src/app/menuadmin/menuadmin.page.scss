@@ -1,0 +1,46 @@
+#container {
+    text-align: center;
+  
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  
+  #container strong {
+    font-size: 20px;
+    line-height: 26px;
+  }
+  
+  #container p {
+    font-size: 16px;
+    line-height: 22px;
+  
+    color: #8c8c8c;
+  
+    margin: 0;
+  }
+  
+  #container a {
+    text-decoration: none;
+  }
+  .mi-toolbar-personalizada {
+    background-color: rgb(62, 177, 158);
+  }
+  .mi-clase-gif {
+    width: 100px;
+    height: 100px;
+  }
+  .contenedor-centro {
+    display: flex;         // Habilita flexbox
+    justify-content: center; // Centra horizontalmente
+    align-items: center;     // Centra verticalmente
+    height: 100vh;           // Ocupa toda la altura de la ventana
+  }
+  div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 800px;
+  }
