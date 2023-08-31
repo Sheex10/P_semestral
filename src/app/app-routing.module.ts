@@ -104,7 +104,8 @@ const routes: Routes = [
   {
     path: 'edjuguetegato',
     loadChildren: () => import('./edjuguetegato/edjuguetegato.module').then( m => m.EdjuguetegatoPageModule)
-  },  {
+  },
+  {
     path: 'menuadmin',
     loadChildren: () => import('./menuadmin/menuadmin.module').then( m => m.MenuadminPageModule)
   },

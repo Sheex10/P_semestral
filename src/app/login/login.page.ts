@@ -43,14 +43,14 @@ export class LoginPage implements OnInit {
   verificarLogin(correo:string, clave:string){
     if (this.correoUsuario == correo){
       if (this.claveUsuario == clave){
-        this.router.navigate(['/cuenta']);
+        this.router.navigate(['/home']);
       }else{
         this.presentToast('bottom',"Contraseña Incorrecta",2000);
       }
     }
     if (this.correoAdmin == correo){
       if (this.claveAdmin == clave){
-        this.router.navigate(['/editarpd']);
+        this.router.navigate(['/menuadmin']);
       }else{
         this.presentToast('bottom',"Contraseña Incorrecta",2000)
       }
