@@ -14,19 +14,19 @@ export class MenuadminPage implements OnInit {
   ngOnInit() {
   this.menuOpts = [
     {
-      "url": "/editarpd",
-      "iconName": "cash-outline",
-      "optionName": "Promociones"
+      "url": this.router.navigate(['/home']),
+      "iconName": "home-outline",
+      "optionName": "Inicio"
     },
     {
-      "url": "/editarpd",
-      "iconName": "cash-outline",
-      "optionName": "Promociones"
+      "url": this.router.navigate(['/editarpd']),
+      "iconName": "pricetags-outline",
+      "optionName": "Productos"
     },
     {
-      "url": "/editarpd",
-      "iconName": "cash-outline",
-      "optionName": "Promociones"
+      "url": this.router.navigate(['/login']),
+      "iconName": "exit-outline",
+      "optionName": "Cerrar sesión"
     },
   ]
   }
