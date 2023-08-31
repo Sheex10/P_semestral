@@ -17,10 +17,7 @@
 
     <ion-content>
       <ion-menu-toggle *ngFor="let i of menuOpts">
-        <ion-item [routerLink]="i.url">
-          <ion-icon slot="start" [name]="i.iconName"></ion-icon>
-          {{ i.optionName }}
-        </ion-item>
+        <ion-button color="secondary" [routerLink]="[i.url]" size="default" expand="block"><ion-icon name="{{ i.iconName }}"> </ion-icon>     {{ i.optionName }}</ion-button>
       </ion-menu-toggle>
 
       <!--<ion-menu-toggle >
