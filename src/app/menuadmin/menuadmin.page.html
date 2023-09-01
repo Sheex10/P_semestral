@@ -8,16 +8,17 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <br>
-  <div class="centrado">
-    <ion-button (click)="goToProductos()" id="modal-trigger" color="secondary">Productos</ion-button>
-  </div>
-  <div class="centrado">
-    <ion-button (click)="goToeditarperfil()" color="secondary" id="modal-trigger">Editar perfil</ion-button>
-  </div>
-  <div class="centrado">
-    <ion-button (click)="goTologin()" id="modal-trigger" color="secondary">Cerrar Sesión</ion-button>
-  </div>
+  <ion-content class="ion-padding">
+    <div class="centrado">
+      <ion-button (click)="goToeditarpd()" color="secondary">Productos</ion-button>
+    </div>
+    <div class="centrado">
+      <ion-button (click)="goToeditarperfil()" color="secondary" id="modal-trigger">Editar perfil</ion-button>
+    </div>
+    <div class="centrado">
+      <ion-button (click)="goTologin()" id="modal-trigger" color="secondary">Cerrar Sesión</ion-button>
+    </div>
 
-  <ion-router-outlet id="menu-content"></ion-router-outlet>
+    <ion-router-outlet id="menu-content"></ion-router-outlet>
+  </ion-content>
 </ion-content>

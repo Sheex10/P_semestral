@@ -12,19 +12,19 @@ export class MenuadminPage implements OnInit {
 
   ngOnInit() {
   }
-    goTomenuadmin(){
-      this.router.navigate(['/menuadmin'])
-    }
-  
-    goToProductos(){
-      this.router.navigate(['/editarpd'])
-    }
-  
-    goTologin(){
-      this.router.navigate(['/login'])
-    }
-    goToeditarperfil(){
-      this.router.navigate(['/editarperfil'])
-      
-    }
+  goTomenuadmin() {
+    this.router.navigate(['/menuadmin'])
+  }
+
+  goToeditarpd() {
+    this.router.navigate(['/editarpd'])
+  }
+
+  goTologin() {
+    this.router.navigate(['/login'])
+  }
+  goToeditarperfil() {
+    this.router.navigate(['/editarperfil'])
+
+  }
 }
