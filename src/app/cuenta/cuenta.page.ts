@@ -53,6 +53,10 @@ export class CuentaPage implements OnInit {
     this.router.navigate(['/editarperfil'])
     
   }
+  goToeditarpd(){
+    this.router.navigate(['/editarpd'])
+    
+  }
 }
 
 
