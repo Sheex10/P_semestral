@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { MenuController } from '@ionic/angular';
 
 
 @Component({
@@ -9,8 +10,8 @@ import { Router } from '@angular/router';
 })
 export class EditarpdPage implements OnInit {
 
-  constructor(private router: Router) {
-
+  constructor(private router: Router, private menuCtrl: MenuController) {
+    this.menuCtrl.enable(true, 'principal');
   }
 
   ngOnInit() {

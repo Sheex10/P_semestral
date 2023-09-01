@@ -3,22 +3,22 @@ import { Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
 
 @Component({
-  selector: 'app-padmin',
-  templateUrl: './padmin.component.html',
-  styleUrls: ['./padmin.component.scss'],
+  selector: 'app-meniu',
+  templateUrl: './meniu.component.html',
+  styleUrls: ['./meniu.component.scss'],
 })
-export class PadminComponent  implements OnInit {
+export class MeniuComponent  implements OnInit {
 
-  constructor(private router: Router, private menuCtrl: MenuController) { }
+  constructor(private router:Router, private menuCtrl: MenuController) { }
 
   ngOnInit() {}
-  
+
   goToInicio(){
     this.router.navigate(['/home'])
   }
 
-  goToProductos(){
-    this.router.navigate(['/editarpd'])
+  goToPerros(){
+    this.router.navigate(['/perros'])
     this.menuCtrl.close('end'); 
   }
 
