@@ -8,21 +8,11 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-    <ion-card>
-        <ion-card-header>
-          <ion-card-title>HappyFootPrints</ion-card-title>
-          <ion-card-subtitle>Aquí tenemos los mejores productos para tu mascota.</ion-card-subtitle>
-        </ion-card-header>
-        <ion-card-content>
-          Somos una tienda de accesorios para mascotas donde pretendemos entregar la mejor atención y productos
-          a nuestros clientes. 
-          Contamos con cosas básicas para tu peludx hasta juguetes para que puedan
-          jugar, divertirse y desestresarse.
-        </ion-card-content>
-      </ion-card>
-      <div class="contenedor-centro" class="div" style="align-items:flex-start">
-        <img src="https://i.pinimg.com/originals/f5/ce/16/f5ce16422edbc1cf4711eca8660837cd.gif" alt="xd">
-    </div>
+  <div>
+    <ion-button (click)="goToProductos()" color="secondary" expand="full">Productos</ion-button>
+    <ion-button (click)="goTologin()" color="secondary" expand="full">Cerrar Sesión</ion-button>
+    <ion-button (click)="goToeditarperfil()" color="secondary" id="modal-trigger">Editar perfil</ion-button>
+  </div>
  <ion-router-outlet id="menu-content"></ion-router-outlet>
 
 </ion-content>

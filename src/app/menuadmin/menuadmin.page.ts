@@ -16,13 +16,15 @@ export class MenuadminPage implements OnInit {
       this.router.navigate(['/menuadmin'])
     }
   
-    goToeditarpd(){
+    goToProductos(){
       this.router.navigate(['/editarpd'])
     }
   
     goTologin(){
       this.router.navigate(['/login'])
     }
-
-  
+    goToeditarperfil(){
+      this.router.navigate(['/editarperfil'])
+      
+    }
 }
