@@ -112,6 +112,10 @@ const routes: Routes = [
     path: 'productoed',
     loadChildren: () => import('./productoed/productoed.module').then( m => m.ProductoedPageModule)
   },
+  {
+    path: 'editarperfil',
+    loadChildren: () => import('./editarperfil/editarperfil.module').then( m => m.EditarperfilPageModule)
+  },
 
 
 

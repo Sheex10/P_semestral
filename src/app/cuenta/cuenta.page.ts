@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild  } from '@angular/core';
+import { Router } from '@angular/router';
 import type { IonModal } from '@ionic/angular';
 import { AnimationController } from '@ionic/angular';
 
@@ -10,7 +11,7 @@ import { AnimationController } from '@ionic/angular';
 export class CuentaPage implements OnInit {
   @ViewChild('modal', { static: true })
   modal!: IonModal;
-  constructor(private animationCtrl: AnimationController) { }
+  constructor(private animationCtrl: AnimationController, private router: Router) { }
 
   ngOnInit() {
     const enterAnimation = (baseEl: HTMLElement) => {
@@ -47,6 +48,10 @@ export class CuentaPage implements OnInit {
 
   closeModal() {
     this.modal.dismiss();
+  }
+  goToeditarperfil(){
+    this.router.navigate(['/editarperfil'])
+    
   }
 }
 

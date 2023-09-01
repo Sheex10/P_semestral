@@ -1,0 +1,31 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="secondary">
+    <ion-buttons slot="start">
+      <ion-button (click)="goTocuenta()"><ion-icon name="arrow-back"></ion-icon></ion-button>
+    </ion-buttons>
+    <ion-title></ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-card-header>
+    <ion-card-title class="ion-text-center">Editar datos</ion-card-title>
+  </ion-card-header>
+
+  <ion-card-content class="ion-text-center">
+    <ion-input type="text" label="Nombres" label-placement="floating" fill="solid" placeholder="Nombre"></ion-input>
+    <br>
+    <ion-input type="text" label="Apellidos" label-placement="floating" fill="solid" placeholder="Apellido"></ion-input>
+    <br>
+    <ion-input type="password" label="Contraseña" label-placement="floating" fill="outline" placeholder="Contraseña"></ion-input>
+    <br>
+    <ion-input type="password" label="Confirmar contraseña" label-placement="floating" fill="outline" placeholder="Contraseña"></ion-input>
+    <br>
+    <ion-button (click)="goTocuenta()" mat-raised-button color="secondary">Registrarse</ion-button>
+  </ion-card-content>
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">editarperfil</ion-title>
+    </ion-toolbar>
+  </ion-header>
+</ion-content>

@@ -12,6 +12,9 @@
     <div class="centrado">
       <ion-button id="modal-trigger">Información de perfil</ion-button>
     </div>
+    <div class="centrado">
+      <ion-button (click)="goToeditarperfil()" id="modal-trigger">Editar perfil</ion-button>
+    </div>
     <ion-modal trigger="modal-trigger" #modal>
       <ng-template>
         <ion-header>
@@ -36,7 +39,6 @@
             Correo: Mau_margutierrez@gmail.com
             <br><br>
           </ion-card-content>
-          <ion-button color="secondary"><ion-icon slot="icon-only" name="pencil"></ion-icon>Editar</ion-button>
         </ion-card>
       </ng-template>
     </ion-modal>
