@@ -12,8 +12,8 @@ export class MenuadminPage implements OnInit {
 
   ngOnInit() {
   }
-  goTomenuadmin() {
-    this.router.navigate(['/menuadmin'])
+  goTocuenta() {
+    this.router.navigate(['/cuenta'])
   }
 
   goToeditPd() {
@@ -23,8 +23,8 @@ export class MenuadminPage implements OnInit {
   goTologin() {
     this.router.navigate(['/login'])
   }
-  goToeditarperfil() {
-    this.router.navigate(['/editarperfil'])
+  goToeditarperfil2() {
+    this.router.navigate(['/editarperfil2'])
 
   }
 }

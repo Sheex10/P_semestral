@@ -8,7 +8,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'login',
     pathMatch: 'full'
   },
   {
@@ -108,7 +108,8 @@ const routes: Routes = [
   {
     path: 'menuadmin',
     loadChildren: () => import('./menuadmin/menuadmin.module').then( m => m.MenuadminPageModule)
-  },  {
+  },
+  {
     path: 'productoed',
     loadChildren: () => import('./productoed/productoed.module').then( m => m.ProductoedPageModule)
   },
@@ -116,6 +117,15 @@ const routes: Routes = [
     path: 'editarperfil',
     loadChildren: () => import('./editarperfil/editarperfil.module').then( m => m.EditarperfilPageModule)
   },
+  {
+    path: 'editarperfil2',
+    loadChildren: () => import('./editarperfil2/editarperfil2.module').then( m => m.Editarperfil2PageModule)
+  },
+  {
+    path: '**',
+    loadChildren: () => import('./notfound/notfound.module').then( m => m.NotfoundPageModule)
+  },
+
 
 
 
