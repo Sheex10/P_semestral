@@ -11,6 +11,8 @@
   <ion-content class="ion-padding">
     <div class="centrado">
       <ion-button id="modal-trigger" color="secondary">Información de perfil</ion-button>
+      <br>
+      <ion-button (click)="goToeditarperfil()" id="modal-trigger" color="secondary">Editar perfil</ion-button>
     </div>
     <ion-modal trigger="modal-trigger" #modal>
       <ng-template>

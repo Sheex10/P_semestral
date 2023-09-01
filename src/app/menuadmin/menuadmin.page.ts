@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { MenuController } from '@ionic/angular';
+
 
 @Component({
   selector: 'app-menuadmin',
@@ -16,7 +16,7 @@ export class MenuadminPage implements OnInit {
     this.router.navigate(['/menuadmin'])
   }
 
-  goToeditarpd() {
+  goToeditPd() {
     this.router.navigate(['/editarpd'])
   }
 

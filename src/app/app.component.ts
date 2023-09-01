@@ -29,11 +29,8 @@ export class AppComponent {
   }
 
   goToCuenta(){
-    this.router.navigate(['/cuenta'])
-  }
-
-  goToLogin(){
     this.router.navigate(['/login'])
   }
+
   
 }

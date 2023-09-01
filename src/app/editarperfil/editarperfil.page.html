@@ -1,7 +1,8 @@
 <ion-header [translucent]="true">
   <ion-toolbar color="secondary">
     <ion-buttons slot="start">
-      <ion-button (click)="goTocuenta()"><ion-icon name="arrow-back"></ion-icon></ion-button>
+      <ion-back-button></ion-back-button>
+      
     </ion-buttons>
     <ion-title></ion-title>
   </ion-toolbar>
@@ -21,7 +22,7 @@
     <br>
     <ion-input type="password" label="Confirmar contraseña" label-placement="floating" fill="outline" placeholder="Contraseña"></ion-input>
     <br>
-    <ion-button (click)="goTocuenta()" mat-raised-button color="secondary">Registrarse</ion-button>
+    <ion-button (click)="goTocuenta()" mat-raised-button color="secondary">Guardar</ion-button>
   </ion-card-content>
   <ion-header collapse="condense">
     <ion-toolbar>
