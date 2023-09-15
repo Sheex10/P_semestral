@@ -20,30 +20,56 @@
     </ion-card-header>
 
     <ion-card-content class="ion-text-center">
-      <form [formGroup]="formularioR">
-      <ion-input type="text" label="Nombres" 
-      label-placement="floating" fill="solid" 
-      placeholder="Nombre"></ion-input>
-      <br>
-      <ion-input type="text" label="Apellidos" 
-      label-placement="floating" fill="solid" 
-      placeholder="Apellido"></ion-input>
-      <br>
-      <ion-input type="text" label="Ingresa tu correo" 
-      label-placement="floating" fill="solid" 
-      placeholder="alguien@gmail.com"></ion-input>
-      <br>
-      <ion-input type="password" label="Contraseña" 
-      label-placement="floating" fill="outline" 
-      placeholder="Contraseña"></ion-input>
-      <br>
-      <ion-input type="password" label="Confirmar contraseña" 
-      label-placement="floating" fill="outline" 
-      placeholder="Contraseña"></ion-input>
-      <br>
-      <ion-button (click)="goTologin()" 
-      mat-raised-button color="secondary">Registrarse</ion-button>
-    </form>
+      <form [formGroup]="formularioReg">
+        <ion-label type="text" label="Nombres" label-placement="floating" fill="solid" placeholder="Nombre"></ion-label>
+        <ion-input formControlName="nombre" type="password"></ion-input>
+        <div [hidden]="nomUser?.valid || nomUser?.pristine ">
+          <span *ngIf="nomUser?.errors?.['required']">
+            La nombre de usuario es requerido.
+          </span>
+          <span *ngIf="nomUser?.errors?.['minlength']">
+            La contraseña permite un minimo de 5 caracteres.
+          </span>
+        </div>
+        <br>
+        <ion-input type="text" label="Apellidos" label-placement="floating" fill="solid"
+          placeholder="Apellido"></ion-input>
+        <br>
+        <ion-input type="text" label="Ingresa tu correo" label-placement="floating" fill="solid"
+          placeholder="alguien@gmail.com"></ion-input>
+        <br>
+        <ion-label type="password" label="Contraseña" label-placement="floating" fill="outline"
+          placeholder="Contraseña"></ion-label>
+        <ion-input formControlName="contrasena" type="password"></ion-input>
+        <div [hidden]="pwdUser?.valid || pwdUser?.pristine ">
+          <span *ngIf="pwdUser?.errors?.['required']">
+            La contraseña es requerida.
+          </span>
+          <span *ngIf="pwdUser?.errors?.['minlength']">
+            La contraseña permite un minimo de 8 caracteres.
+          </span>
+          <span *ngIf="pwdUser?.errors?.['maxlength']">
+            La contraseña permite un maximo de 15 caracteres.
+          </span>
+          <span *ngIf="pwdUser?.errors?.['pattern']">
+            La contraseña requiere un numero.
+            La contraseña requiere una minuscula.
+            La contraseña requiere una mayuscula.
+            La contraseña requiere un caracter especial.
+          </span>
+        </div>
+        <br>
+        <ion-label type="password" label="Confirmar contraseña" label-placement="floating" fill="outline"
+          placeholder="Contraseña"></ion-label>
+        <ion-input formControlName="confirmar_contrasena" type="password"></ion-input>
+        <div [hidden]="conpwdUser?.valid || conpwdUser.pristine ">
+          <span *ngIf="conpwdUser.errors?.['required']">
+            Confirmar contraseña es requerida. {{ mensaje }}
+          </span>
+        </div>
+        <br>
+        <ion-button (click)="goTologin()" mat-raised-button color="secondary">Registrarse</ion-button>
+      </form>
     </ion-card-content>
   </ion-card>
 </ion-content>

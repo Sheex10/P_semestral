@@ -4,7 +4,7 @@ import{
 FormControl,
 Validators,
 FormBuilder} from '@angular/forms';
-import { Router } from '@angular/router';
+import { NavigationExtras, Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 
 @Component({
@@ -14,19 +14,47 @@ import { AlertController } from '@ionic/angular';
 })
 export class RegistroPage implements OnInit {
 
-  formularioR:FormGroup;
+  formularioReg:FormGroup;
+  contrasena1: any;
+  mensaje: any;
+  contrasena2: any;
   constructor(public alertController: AlertController, private router:Router, public fb:FormBuilder) { 
-    this.formularioR=this.fb.group({
-      'Correo': new FormControl('',[Validators.required,Validators.minLength(5), Validators.email]),
-      'Contraseña': new FormControl('',[Validators.required,Validators.minLength(5)]),
-      'ConfirmarPwd': new FormControl('',Validators.compose([
-        Validators.maxLength(25),
-        Validators.minLength(5),
-        Validators.pattern('^(?=.*[a-zA-Z])(?=.*[0-9])[a-zA-Z0-9]+$'),
-        Validators.required
-      ]))
+
+    this.formularioReg=this.fb.group({
+      'nombre': new FormControl("",[ Validators.required,Validators.minLength(5)]),
+      'apellido': new FormControl("",[ Validators.required, Validators.minLength(5)]),
+      'correo': new FormControl("",[Validators.required,Validators.minLength(5),Validators.email]),
+      'contrasena': new FormControl("",[Validators.required,Validators.minLength(8),Validators.maxLength(15),Validators.pattern(new RegExp("(?=.*[0-9])")),Validators.pattern(new RegExp("(?=.*[A-Z]")),Validators.pattern(new RegExp("(?=.*[a-z])")),Validators.pattern(new RegExp("(?=.*[$@^!%*?&]"))]),
+      'confirmar_contrasena': new FormControl("",[Validators.required])
     })
+
   }
+
+  register(){
+    if(this.contrasena1==this.contrasena2){
+      this.router.navigate(['/login'],)
+    
+    }else{
+      let navigationextra:NavigationExtras={
+        state:{
+          mensaje:this.mensaje
+        }
+      }
+    }
+  }
+
+  get nomUser(){
+    return this.formularioReg.get('nombre') as FormControl;
+  }
+
+  get pwdUser(){
+    return this.formularioReg.get('contrasena') as FormControl;
+  }
+
+  get conpwdUser(){
+    return this.formularioReg.get('confirmar_contrasena') as FormControl;
+  }
+
 
   ngOnInit() {
   }
