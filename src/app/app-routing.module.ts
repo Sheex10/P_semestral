@@ -122,9 +122,16 @@ const routes: Routes = [
     loadChildren: () => import('./editarperfil2/editarperfil2.module').then( m => m.Editarperfil2PageModule)
   },
   {
+    path: 'recuperar',
+    loadChildren: () => import('./recuperar/recuperar.module').then( m => m.RecuperarPageModule)
+  },
+  //Cualquier pagina nueva debe ir antes que esto.
+  {
     path: '**',
     loadChildren: () => import('./notfound/notfound.module').then( m => m.NotfoundPageModule)
   },
+  
+
 
 
 
