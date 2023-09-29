@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import{
+import {
   FormGroup,
-FormControl,
-Validators,
-FormBuilder} from '@angular/forms';
+  FormControl,
+  Validators,
+  FormBuilder
+} from '@angular/forms';
 import { NavigationExtras, Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 
@@ -14,49 +15,49 @@ import { AlertController } from '@ionic/angular';
 })
 export class RegistroPage implements OnInit {
 
-  formularioReg:FormGroup;
+  formularioReg: FormGroup;
   contrasena1: any;
   mensaje: any;
   contrasena2: any;
-  constructor(public alertController: AlertController, private router:Router, public fb:FormBuilder) { 
+  constructor(public alertController: AlertController, private router: Router, public fb: FormBuilder) {
 
-    this.formularioReg=this.fb.group({
-      'nombre': new FormControl("",[ Validators.required,Validators.minLength(5)]),
-      'apellido': new FormControl("",[ Validators.required, Validators.minLength(5)]),
-      'correo': new FormControl("",[Validators.required,Validators.minLength(5),Validators.email]),
-      'contrasena': new FormControl("",[Validators.required,Validators.minLength(8),Validators.maxLength(15),Validators.pattern(new RegExp("(?=.*[0-9])")),Validators.pattern(new RegExp("(?=.*[A-Z]")),Validators.pattern(new RegExp("(?=.*[a-z])")),Validators.pattern(new RegExp("(?=.*[$@^!%*?&]"))]),
-      'confirmar_contrasena': new FormControl("",[Validators.required])
+    this.formularioReg = this.fb.group({
+      'nombre': new FormControl("", [Validators.required, Validators.minLength(5)]),
+      'apellido': new FormControl("", [Validators.required, Validators.minLength(5)]),
+      'correo': new FormControl("", [Validators.required, Validators.minLength(5), Validators.email]),
+      'contrasena': new FormControl("", [Validators.required, Validators.minLength(8), Validators.maxLength(15) ]),
+      'confirmar_contrasena': new FormControl("", [Validators.required])
     })
 
   }
 
-  register(){
-    if(this.contrasena1==this.contrasena2){
+  register() {
+    if (this.contrasena1 == this.contrasena2) {
       this.router.navigate(['/login'],)
-    
-    }else{
-      let navigationextra:NavigationExtras={
-        state:{
-          mensaje:this.mensaje
+
+    } else {
+      let navigationextra: NavigationExtras = {
+        state: {
+          mensaje: this.mensaje
         }
       }
     }
   }
 
-  get nomUser(){
+  get nomUser() {
     return this.formularioReg.get('nombre') as FormControl;
   }
-  get apeUser(){
+  get apeUser() {
     return this.formularioReg.get('apellido') as FormControl;
   }
-  get mailUser(){
+  get mailUser() {
     return this.formularioReg.get('correo') as FormControl;
   }
-  get pwdUser(){
+  get pwdUser() {
     return this.formularioReg.get('contrasena') as FormControl;
   }
 
-  get conpwdUser(){
+  get conpwdUser() {
     return this.formularioReg.get('confirmar_contrasena') as FormControl;
   }
 
@@ -64,7 +65,7 @@ export class RegistroPage implements OnInit {
   ngOnInit() {
   }
 
-  async presentAlert(mensaje:string){
+  async presentAlert(mensaje: string) {
     const alert = await this.alertController.create({
       header: "Aviso",
       subHeader: 'Seguridad de la contraseña',
@@ -75,9 +76,9 @@ export class RegistroPage implements OnInit {
   }
 
 
-  goTologin(){
+  goTologin() {
     this.router.navigate(['/login'])
-    
+
   }
 
 
