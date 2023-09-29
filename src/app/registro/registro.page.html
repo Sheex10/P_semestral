@@ -21,24 +21,43 @@
 
     <ion-card-content class="ion-text-center">
       <form [formGroup]="formularioReg">
-        <ion-label type="text" label="Nombres" label-placement="floating" fill="solid" placeholder="Nombre"></ion-label>
+        <ion-label label="Nombres" label-placement="floating" fill="solid" placeholder="Nombre"></ion-label>
         <ion-input formControlName="nombre" type="password"></ion-input>
         <div [hidden]="nomUser?.valid || nomUser?.pristine ">
           <span *ngIf="nomUser?.errors?.['required']">
-            La nombre de usuario es requerido.
+            El nombre de usuario es requerido.
           </span>
           <span *ngIf="nomUser?.errors?.['minlength']">
-            La contraseña permite un minimo de 5 caracteres.
+            El nombre debe tener un minimo de 5 caracteres.
           </span>
         </div>
         <br>
-        <ion-input type="text" label="Apellidos" label-placement="floating" fill="solid"
+        <ion-input formControlName="apellido" type="text" label="Apellidos" label-placement="floating" fill="solid"
           placeholder="Apellido"></ion-input>
+          <div [hidden]="apeUser?.valid || apeUser?.pristine ">
+            <span *ngIf="apeUser?.errors?.['required']">
+              El apellido es requerido
+            </span>
+            <span *ngIf="apeUser?.errors?.['minlength']">
+              El nombre debe tener un minimo de 5 caracteres.
+            </span>
+          </div>
         <br>
-        <ion-input type="text" label="Ingresa tu correo" label-placement="floating" fill="solid"
+        <ion-input formControlName="correo" type="text" label="Ingresa tu correo" label-placement="floating" fill="solid"
           placeholder="alguien@gmail.com"></ion-input>
+          <div [hidden]="mailUser?.valid || apeUser?.pristine ">
+            <span *ngIf="mailUser?.errors?.['required']">
+              El apellido es requerido
+            </span>
+            <span *ngIf="mailUser?.errors?.['minlength']">
+              El nombre debe tener un minimo de 5 caracteres.
+            </span>
+            <span *ngIf="mailUser?.errors?.['email']">
+              El nombre debe tener un minimo de 5 caracteres.
+            </span>
+          </div>
         <br>
-        <ion-label type="password" label="Contraseña" label-placement="floating" fill="outline"
+        <ion-label label="Contraseña" label-placement="floating" fill="outline"
           placeholder="Contraseña"></ion-label>
         <ion-input formControlName="contrasena" type="password"></ion-input>
         <div [hidden]="pwdUser?.valid || pwdUser?.pristine ">
@@ -59,12 +78,12 @@
           </span>
         </div>
         <br>
-        <ion-label type="password" label="Confirmar contraseña" label-placement="floating" fill="outline"
+        <ion-label label="Confirmar contraseña" label-placement="floating" fill="outline"
           placeholder="Contraseña"></ion-label>
         <ion-input formControlName="confirmar_contrasena" type="password"></ion-input>
         <div [hidden]="conpwdUser?.valid || conpwdUser.pristine ">
           <span *ngIf="conpwdUser.errors?.['required']">
-            Confirmar contraseña es requerida. {{ mensaje }}
+            Confirmar contraseña es requerida.
           </span>
         </div>
         <br>

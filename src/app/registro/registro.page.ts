@@ -46,7 +46,12 @@ export class RegistroPage implements OnInit {
   get nomUser(){
     return this.formularioReg.get('nombre') as FormControl;
   }
-
+  get apeUser(){
+    return this.formularioReg.get('apellido') as FormControl;
+  }
+  get mailUser(){
+    return this.formularioReg.get('correo') as FormControl;
+  }
   get pwdUser(){
     return this.formularioReg.get('contrasena') as FormControl;
   }
@@ -74,4 +79,6 @@ export class RegistroPage implements OnInit {
     this.router.navigate(['/login'])
     
   }
+
+
 }
