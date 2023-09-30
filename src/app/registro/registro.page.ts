@@ -25,7 +25,7 @@ export class RegistroPage implements OnInit {
       'nombre': new FormControl("", [Validators.required, Validators.minLength(5)]),
       'apellido': new FormControl("", [Validators.required, Validators.minLength(5)]),
       'correo': new FormControl("", [Validators.required, Validators.minLength(5), Validators.email]),
-      'contrasena': new FormControl("", [Validators.required, Validators.minLength(8), Validators.maxLength(15) ]),
+      'contrasena': new FormControl("", [Validators.required, Validators.minLength(8), Validators.maxLength(15), Validators.pattern('(?=.*[0-9])')]),
       'confirmar_contrasena': new FormControl("", [Validators.required])
     })
 
