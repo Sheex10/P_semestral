@@ -15,6 +15,12 @@ import { AlertController } from '@ionic/angular';
 })
 export class RegistroPage implements OnInit {
 
+  pNombre="";
+  pApellido="";
+  pCorreo="";
+  pContra="";
+  pConContra="";
+
   formularioReg: FormGroup;
   contrasena1: any;
   mensaje: any;
@@ -81,5 +87,13 @@ export class RegistroPage implements OnInit {
 
   }
 
-
+  /*registrar(){
+    if (this.contrasena1==this.contrasena2){
+      this.bd.insertarUsuario(this.pNombre,this.pApellido, this.pCorreo, this.pContra, this.pConContra);
+      this.bd.presentAlert("Usuario registrado");
+      this.router.navigate(['/login'])
+    }else{
+      this.presentAlert("Las claves no coinciden!");
+    }
+  }*/
 }
