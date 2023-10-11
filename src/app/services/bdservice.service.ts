@@ -12,22 +12,21 @@ export class BdserviceService {
     public database!: SQLiteObject;
 
     //variables para la creacion de tablas
-    //tablaProducto: string = "CREATE TABLE IF NOT EXISTS producto(id_producto INTEGER PRIMARY KEY autoincrement, nombre VARCHAR(30) NOT NULL, descripcion VARCHAR(300) NOT NULL, precio INTEGER NOT NULL, categoria FOREIGN KEY);";
+    tablaProducto: string = "CREATE TABLE IF NOT EXISTS producto(id_producto INTEGER PRIMARY KEY autoincrement, nombre VARCHAR(30) NOT NULL, descripcion VARCHAR(300) NOT NULL, precio INTEGER NOT NULL, categoria INTEGER, FOREIGN KEY(categoria) REFERENCES tablaCategoria(id_categoria));";
 
-    //tablaUsuario: string = "CREATE TABLE IF NOT EXISTS usuario(id INTEGER PRIMARY KEY autoincrement, nombre VARCHAR(20) NOT NULL, apellido VARCHAR(20) NOT NULL, correo VARHCAR (50) NOT NULL, clave VARCHAR (12) NOT NULL, rol FOREIGN KEY);";
+    tablaUsuario: string = "CREATE TABLE IF NOT EXISTS usuario(id INTEGER PRIMARY KEY autoincrement, nombre VARCHAR(20) NOT NULL, apellido VARCHAR(20) NOT NULL, correo VARHCAR (50) NOT NULL, clave VARCHAR (12) NOT NULL, rol INTEGER, FOREIGN KEY(rol) REFERENCES tablaRol(id_rol));";
 
-    //tablaCategoria: string = "CREATE TABLE IF NOT EXISTS categoria(id_categoria PRIMARY KEY autoincrement, nombre VARCHAR (20));";
+    tablaCategoria: string = "CREATE TABLE IF NOT EXISTS categoria(id_categoria PRIMARY KEY autoincrement, nombre VARCHAR (20));";
 
-    //tablaRol: string = "CREATE TABLE IF NOT EXISTS rol(id_rol PRIMARY KEY autoincrement, nombre VARCHAR (20));";
+    tablaRol: string = "CREATE TABLE IF NOT EXISTS rol(id_rol PRIMARY KEY autoincrement, nombre VARCHAR (20));";
 
-    //tablaDetalle: string = "CREATE TABLE IF NOT EXISTS detalle(id_detalle PRIMARY KEY autoincrement, total INTEGER NOT NULL, usuario INTEGER, FOREIGN KEY(usuario) REFERENCES tablaUsuario(id), producto FOREIGN KEY);";
+    tablaDetalle: string = "CREATE TABLE IF NOT EXISTS detalle(id_detalle PRIMARY KEY autoincrement, total INTEGER NOT NULL, usuario INTEGER, FOREIGN KEY(usuario) REFERENCES tablaUsuario(id));";
     
-    //LO DEL EJEMPLO DEL PROFE!!!!
+
     //variables para los insert iniciales
-    //registroNoticia: string = "INSERT or IGNORE INTO noticia(id,titulo,texto,usuario) VALUES (1,'Soy un titulo','Soy un texto largo de esta noticia', 1);";
-  
+    registrarProducto: string = "INSERT or IGNORE INTO tablaProducto(id_producto,nombre,descripcion,precio,categoria) VALUES (1,'Cama Perro','Linda cama cómoda para tu mascota',5990,perro);";
     //observables de las tablas
-    //listaNoticias = new BehaviorSubject([]);
+    listaProductos = new BehaviorSubject([]);
   
     //observable para la BD
     private isDBReady: BehaviorSubject<boolean> = new BehaviorSubject(false);
