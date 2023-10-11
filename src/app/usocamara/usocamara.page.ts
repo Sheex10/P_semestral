@@ -1,28 +1,19 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 
 
 @Component({
-  selector: 'app-cuenta',
-  templateUrl: './cuenta.page.html',
-  styleUrls: ['./cuenta.page.scss'],
+  selector: 'app-usocamara',
+  templateUrl: './usocamara.page.html',
+  styleUrls: ['./usocamara.page.scss'],
 })
-export class CuentaPage implements OnInit {
+export class UsocamaraPage implements OnInit {
 
   image: any;
 
-  constructor(private router: Router) { }
+  constructor() { }
 
   ngOnInit() {
-  }
-  goToeditarperfil() {
-    this.router.navigate(['/editarperfil'])
-
-  }
-  goToeditarpd() {
-    this.router.navigate(['/editarpd'])
-
   }
 
   takePicture = async () => {
@@ -43,5 +34,3 @@ export class CuentaPage implements OnInit {
     //imageElement.src = imageUrl;
   };
 }
-
-

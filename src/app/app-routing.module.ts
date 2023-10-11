@@ -125,11 +125,17 @@ const routes: Routes = [
     path: 'recuperar',
     loadChildren: () => import('./recuperar/recuperar.module').then( m => m.RecuperarPageModule)
   },
+  {
+    path: 'usocamara',
+    loadChildren: () => import('./usocamara/usocamara.module').then( m => m.UsocamaraPageModule)
+  },
+
   //Cualquier pagina nueva debe ir antes que esto.
   {
     path: '**',
     loadChildren: () => import('./notfound/notfound.module').then( m => m.NotfoundPageModule)
   },
+  
   
 
 
