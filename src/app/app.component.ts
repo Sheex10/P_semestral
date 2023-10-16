@@ -31,6 +31,10 @@ export class AppComponent {
   goToCuenta(){
     this.router.navigate(['/cuenta'])
   }
+  
+  goTologin() {
+    this.router.navigate(['/login'])
+  }
 
   
 }
