@@ -1,11 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import{
+import { NavigationExtras} from '@angular/router';
+import {
   FormGroup,
-FormControl,
-Validators,
-FormBuilder} from '@angular/forms';
+  FormControl,
+  Validators,
+  FormBuilder
+} from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
+import { BdserviceService } from '../services/bdservice.service';
 
 
 @Component({
@@ -16,44 +19,62 @@ import { ToastController } from '@ionic/angular';
 
 export class LoginPage implements OnInit {
 
-  correoUsuario:string="patoreyes@gmail.com";
-  claveUsuario:string="1234567";
-
-  correoAdmin:string="pipeshee@gmail.com";
-  claveAdmin:string="123456789";
-
-  correoIngresado:string="";
-  claveIngresada:string="";
-
-  formularioL:FormGroup;
-
-  constructor(private router:Router, private toastController: ToastController,public fb:FormBuilder) {
-
-    this.formularioL=this.fb.group({
-
-      'Correo': new FormControl('',[Validators.required,Validators.minLength(5),Validators.email,]),
-      'Contraseña': new FormControl('',[Validators.required,Validators.minLength(5)])
-    })
-   }
+  correoUsuario: string = "patoreyes@gmail.com";
+  claveUsuario: string = "1234567";
+  correoAdmin: string = "pipeshee@gmail.com";
+  claveAdmin: string = "123456789";
   
-   get correo(){
+  formularioL: FormGroup;
+
+  correoIngresado: string = "";
+  claveIngresada: string = "";
+
+  usuarios: any = [
+    {
+      id: 0,
+      nombre: "",
+      apellido: "",
+      correo: "",
+      clave: "",
+      imagen: "",
+      idRol: 0
+    }
+  ]
+
+  constructor(private bd: BdserviceService, private router: Router, private toastController: ToastController, public fb: FormBuilder) {
+
+    this.formularioL = this.fb.group({
+
+      'Correo': new FormControl('', [Validators.required, Validators.minLength(5), Validators.email,]),
+      'Contraseña': new FormControl('', [Validators.required, Validators.minLength(5)])
+    })
+  }
+
+  get correo() {
     return this.formularioL.get('Correo') as FormControl;
 
-   }
+  }
 
-   get contra(){
+  get contra() {
     return this.formularioL.get('Correo') as FormControl;
 
-   }
-
-
-
-  ngOnInit() {
   }
 
 
 
-  async presentToast(position: 'top' | 'middle' | 'bottom', mensaje:string, duracion:number){
+  ngOnInit() {
+    this.bd.bdState().subscribe(res => {
+      if (res) {
+        this.bd.fetchUsuarios().subscribe(datos => {
+          this.usuarios = datos
+        })
+      }
+    })
+  }
+
+
+
+  async presentToast(position: 'top' | 'middle' | 'bottom', mensaje: string, duracion: number) {
     const toast = await this.toastController.create({
       message: mensaje,
       duration: duracion,
@@ -63,29 +84,35 @@ export class LoginPage implements OnInit {
     await toast.present();
   }
   //Validación
-  verificarLogin(correo:string, clave:string){
-    if (this.correoUsuario == correo){
-      if (this.claveUsuario == clave){
-        this.router.navigate(['/home']);
-      }else{
-        this.presentToast('bottom',"Contraseña Incorrecta",2000);
+  iniciar() {
+    for (var i = 0; i < this.usuarios.length; i++) {
+      if (this.correoIngresado == this.usuarios[i].correo) {
+        if (this.claveIngresada == this.usuarios[i].clave) {
+          if (this.usuarios[i].idRol == 2) {
+            let navigationExtras: NavigationExtras = {
+              state: {
+                infoUsuario: this.usuarios[i]
+              }
+            }
+            this.router.navigate(['/cuenta'], navigationExtras)
+          }
+          if (this.usuarios[i].idRol == 1) {
+            let navigationExtras: NavigationExtras = {
+              state: {
+                infoUsuario: this.usuarios[i]
+              }
+            }
+            this.router.navigate(['/menuadmin'], navigationExtras)
+          }
+        }
       }
-    }
-    if (this.correoAdmin == correo){
-      if (this.claveAdmin == clave){
-        this.router.navigate(['/menuadmin']);
-      }else{
-        this.presentToast('bottom',"Contraseña Incorrecta",2000)
-      }
-    }
-    if (this.correoUsuario != correo && this.correoAdmin != correo){
-      this.presentToast('bottom',"Usuario no existente",2000);
     }
   }
-  goToRegister(){
+
+  goToRegister() {
     this.router.navigate(['/registro'])
   }
-  goTorecuperar(){
+  goTorecuperar() {
     this.router.navigate(['/recuperar'])
   }
 }
