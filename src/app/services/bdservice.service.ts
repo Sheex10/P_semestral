@@ -146,8 +146,8 @@ export class BdserviceService {
       })
   }
 
-  actualizaPerfilUsuario(id: any, correo: any, nombreU: any, foto: any) {
-    return this.database.executeSql('UPDATE usuario SET correo=?, nombreU= ?, foto= ? WHERE id= ?', [correo, nombreU, foto, id])
+  actualizaPerfilUsuario(id: any, correo: any, nombre: any, foto: any) {
+    return this.database.executeSql('UPDATE usuario SET correo=?, nombre= ?, foto= ? WHERE id= ?', [correo, nombre, foto, id])
       .then(res => {
         this.cargarUsuarios();
       }).catch(e => {
