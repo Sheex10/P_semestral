@@ -17,13 +17,13 @@ export class Editarperfil2Page implements OnInit {
   imagenNueva:any;
 
   arreglousuario:any =[{
-    idU: 0,
-    nombreU: '' ,
+    id: 0,
+    nombre: '' ,
+    apellido:'',
     correo:'',
-    contrasena:'',
-    idPregunta:0,
-    respuesta:'',
-    foto:'',
+    clave:0,
+    rol:'',
+    imagen:'',
     descripcion:''
   }]
 

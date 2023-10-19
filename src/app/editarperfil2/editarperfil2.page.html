@@ -15,7 +15,7 @@
   <ion-card-content class="ion-text-center">
     <ion-input [(ngModel)]="nombre" formControlName="NombreUsuario" type="text" label="Nombres" label-placement="floating" fill="solid" placeholder="Nombre"></ion-input>
     <br>
-    <ion-input [(ngModel)]="apellido" formControlName="ApellidoUsuario" type="text" label="Apellidos" label-placement="floating" fill="solid" placeholder="Apellido"></ion-input>
+    <ion-input formControlName="ApellidoUsuario" type="text" label="Apellidos" label-placement="floating" fill="solid" placeholder="Apellido" [(ngModel)]="correo"></ion-input>
     <br>
     <ion-item>
       <ion-button (click)="takePicture()" >Seleccione una foto</ion-button>  
