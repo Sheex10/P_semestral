@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { SQLite, SQLiteObject } from '@awesome-cordova-plugins/sqlite/ngx';
 import { AlertController, Platform } from '@ionic/angular';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { Producto } from './producto';
+
 
 @Injectable({
   providedIn: 'root'
@@ -152,6 +154,32 @@ export class BdserviceService {
         this.presentAlert("Error Modificar Usuario " + e)
       })
   }
+
+  fetchNoticias(): Observable<Producto[]>{
+    return this.listaProductos.asObservable();
+  }
+  buscarProducto(){
+    return this.database.executeSql('SELECT * FROM producto',[]).then(res=>{
+      //variable para almacenar el resultado
+      let items: Producto[] = [];
+      //verfico la cantidad de registros
+      if(res.rows.length > 0){
+        //agrego registro a registro en mi variable
+        for(var i=0; i < res.rows.length; i++){
+          items.push({
+            nombre_producto: res.rows.item(i).nombre_producto,
+            descripcion: res.rows.item(i).descripcion,
+            precio: res.rows.item(i).precio
+          })
+
+        }
+      }
+      //actualizo el observable
+      this.listaProductos.next(items as any);
+
+    })
+  }
+
   bdState() {
     return this.isDBReady.asObservable();
   }
