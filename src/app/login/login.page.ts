@@ -19,10 +19,10 @@ import { BdserviceService } from '../services/bdservice.service';
 
 export class LoginPage implements OnInit {
 
-  correoUsuario: string = "patoreyes@gmail.com";
+  /*correoUsuario: string = "patoreyes@gmail.com";
   claveUsuario: string = "1234567";
   correoAdmin: string = "pipeshee@gmail.com";
-  claveAdmin: string = "123456789";
+  claveAdmin: string = "123456789";*/
   
   formularioL: FormGroup;
 
@@ -84,30 +84,30 @@ export class LoginPage implements OnInit {
     await toast.present();
   }
   //Validación
-  iniciar() {
-    for (var i = 0; i < this.usuarios.length; i++) {
-      if (this.correoIngresado == this.usuarios[i].correo) {
-        if (this.claveIngresada == this.usuarios[i].clave) {
-          if (this.usuarios[i].idRol == 2) {
-            let navigationExtras: NavigationExtras = {
-              state: {
-                infoUsuario: this.usuarios[i]
-              }
+  iniciarSesion(){
+    for(var i =0;i<this.usuarios.length;i++){
+      if(this.correoIngresado == this.usuarios[i].correo){
+        if(this.claveIngresada == this.usuarios[i].clave){
+          if(this.usuarios[i].idRol == 2){
+          let navigationExtras:NavigationExtras = {
+            state:{
+              infoUsuario:this.usuarios[i]
             }
-            this.router.navigate(['/cuenta'], navigationExtras)
           }
-          if (this.usuarios[i].idRol == 1) {
-            let navigationExtras: NavigationExtras = {
-              state: {
-                infoUsuario: this.usuarios[i]
-              }
+          this.router.navigate(['/cuenta'],navigationExtras)
+        }
+        if(this.usuarios[i].idRol== 1){
+          let navigationExtras:NavigationExtras = {
+            state:{
+              infoUsuario:this.usuarios[i]
             }
-            this.router.navigate(['/menuadmin'], navigationExtras)
           }
+          this.router.navigate(['/menuadmin'],navigationExtras)
         }
       }
     }
   }
+}
 
   goToRegister() {
     this.router.navigate(['/registro'])

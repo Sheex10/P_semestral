@@ -7,6 +7,7 @@ import {
 } from '@angular/forms';
 import { NavigationExtras, Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
+import { BdserviceService } from '../services/bdservice.service';
 
 @Component({
   selector: 'app-registro',
@@ -15,17 +16,17 @@ import { AlertController } from '@ionic/angular';
 })
 export class RegistroPage implements OnInit {
 
-  pNombre="";
-  pApellido="";
-  pCorreo="";
-  pContra="";
-  pConContra="";
+  pNombre: any ;
+  pApellido: any ;
+  pCorreo: any ;
+  pContra: any ;
+  pConContra: any ;
 
   formularioReg: FormGroup;
   contrasena1: any;
   mensaje: any;
   contrasena2: any;
-  constructor(public alertController: AlertController, private router: Router, public fb: FormBuilder) {
+  constructor(public alertController: AlertController, private router: Router, public fb: FormBuilder, private bd: BdserviceService) {
 
     this.formularioReg = this.fb.group({
       'nombre': new FormControl("", [Validators.required, Validators.minLength(5)]),
@@ -37,7 +38,7 @@ export class RegistroPage implements OnInit {
 
   }
 
-  register() {
+  /*register() {
     if (this.contrasena1 == this.contrasena2) {
       this.router.navigate(['/login'],)
 
@@ -48,7 +49,7 @@ export class RegistroPage implements OnInit {
         }
       }
     }
-  }
+  }*/
 
   get nomUser() {
     return this.formularioReg.get('nombre') as FormControl;
@@ -95,5 +96,19 @@ export class RegistroPage implements OnInit {
     }else{
       this.presentAlert("Las claves no coinciden!");
     }
+
+    this.bd.insertarUsuario(this.pNombre,this.pCorreo,this.pContra)
   }*/
+
+  ingresar(){
+    this.presentAlert("correo "+this.pCorreo)
+    if(this.pContra == this.pConContra){
+      this.bd.insertarUsuario(this.pNombre, this.pApellido, this.pCorreo, this.pContra)
+      this.router.navigate(['/login'])
+    }else{
+      this.presentAlert("Las contraseñas no coinciden entre si u.u")
+    }
+  }
+
+  
 }
