@@ -13,15 +13,19 @@
   </ion-card-header>
 
   <ion-card-content class="ion-text-center">
-    <ion-input type="text" label="Nombres" label-placement="floating" fill="solid" placeholder="Nombre"></ion-input>
+    <ion-input [(ngModel)]="nombre" formControlName="NombreUsuario" type="text" label="Nombres" label-placement="floating" fill="solid" placeholder="Nombre"></ion-input>
     <br>
-    <ion-input type="text" label="Apellidos" label-placement="floating" fill="solid" placeholder="Apellido"></ion-input>
+    <ion-input [(ngModel)]="apellido" formControlName="ApellidoUsuario" type="text" label="Apellidos" label-placement="floating" fill="solid" placeholder="Apellido"></ion-input>
     <br>
-    <ion-input type="password" label="Contraseña" label-placement="floating" fill="outline" placeholder="Contraseña"></ion-input>
-    <br>
-    <ion-input type="password" label="Confirmar contraseña" label-placement="floating" fill="outline" placeholder="Contraseña"></ion-input>
-    <br>
-    <ion-button (click)="goTomenuadmin()" mat-raised-button color="secondary">Guardar</ion-button>
+    <ion-item>
+      <ion-button (click)="takePicture()" >Seleccione una foto</ion-button>  
+    </ion-item>
+    <div *ngIf="fotoN != '' ">
+      <ion-item color="dark">
+        <img [src]="fotoN" alt="image" style="width: 60%;height: 60%;">
+      </ion-item>
+    </div>
+    <ion-button (click)="modificarP()" mat-raised-button color="secondary">Guardar</ion-button>
   </ion-card-content>
   <ion-header collapse="condense">
     <ion-toolbar>
