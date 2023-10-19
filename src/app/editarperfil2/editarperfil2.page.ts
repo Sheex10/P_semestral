@@ -100,14 +100,13 @@ export class Editarperfil2Page implements OnInit {
     this.prueba = true;
 
     if(this.correoU == this.pedirCorreo){
-      this.bd.actualizaPerfilUsuario(this.idUsuario,this.pedirCorreo,this.nombre,this.descripcion,this.fotoN);
+      this.bd.actualizaPerfilUsuario(this.idUsuario,this.pedirCorreo,this.nombre,this.fotoN);
       this.presentAlert("Usuario Modificado");
       let infoUsuario={
-            idU:this.idUsuario,
+            id:this.idUsuario,
             correo:this.pedirCorreo,
             nombre:this.nombre,
             foto:this.fotoN,
-            descripcion:this.descripcion
         }
         let navigationextra:NavigationExtras={
           state:{
@@ -124,14 +123,13 @@ export class Editarperfil2Page implements OnInit {
         }
       }
       if(this.prueba){
-        this.bd.actualizaPerfilUsuario(this.idUsuario,this.pedirCorreo,this.nombre,this.descripcion ,this.fotoN);
+        this.bd.actualizaPerfilUsuario(this.idUsuario,this.pedirCorreo,this.nombre,this.fotoN);
         this.presentAlert("Usuario Modificado");
         let infoUsuario={
-          idU:this.idUsuario,
+          id:this.idUsuario,
           correo:this.pedirCorreo,
           nombre:this.nombre,
           foto:this.fotoN,
-          descripcion:this.descripcion
           }
       let navigationextra:NavigationExtras={
         state:{
