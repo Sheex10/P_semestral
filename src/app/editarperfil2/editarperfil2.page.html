@@ -13,9 +13,9 @@
   </ion-card-header>
 
   <ion-card-content class="ion-text-center">
-    <ion-input [(ngModel)]="nombre" formControlName="NombreUsuario" type="text" label="Nombres" label-placement="floating" fill="solid" placeholder="Nombre"></ion-input>
+    <ion-input formControlName="NombreUsuario" type="text" label="Nombre" label-placement="floating" fill="solid" [(ngModel)]="nombre"></ion-input>
     <br>
-    <ion-input [(ngModel)]="apellido" formControlName="ApellidoUsuario" type="text" label="Apellidos" label-placement="floating" fill="solid" placeholder="Apellido"></ion-input>
+    <ion-input formControlName="ApellidoUsuario" type="text" label="Apellido" label-placement="floating" fill="solid" [(ngModel)]="apellido"></ion-input>
     <br>
     <ion-item>
       <ion-button (click)="takePicture()" >Seleccione una foto</ion-button>  
@@ -33,3 +33,7 @@
     </ion-toolbar>
   </ion-header>
 </ion-content>
+
+<!--
+  <ion-input [(ngModel)]="apellido" formControlName="ApellidoUsuario" type="text" label="Apellidos" label-placement="floating" fill="solid" placeholder="Apellido"></ion-input>
+-->

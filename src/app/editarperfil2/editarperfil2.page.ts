@@ -37,6 +37,7 @@ export class Editarperfil2Page implements OnInit {
 
   prueba=true;
 
+  apellido="";
   correoU="";
   nombre="";
   descripcion="";
@@ -50,6 +51,7 @@ export class Editarperfil2Page implements OnInit {
         this.infoUsuario = this.router.getCurrentNavigation()?.extras?.state?.["infoUsuario"];
         this.correoU= this.infoUsuario.correo;
         this.nombre= this.infoUsuario.nombre;
+        this.apellido= this.infoUsuario.apellido;
         this.descripcion= this.infoUsuario.descripcion;
         this.fotoN=this.infoUsuario.foto;
         this.idUsuario=this.infoUsuario.idU; 
@@ -63,21 +65,20 @@ export class Editarperfil2Page implements OnInit {
 
     this.formularioModificar=this.fb.group({
       'NombreUsuario': new FormControl("",[Validators.required]),
-      'Descripcion': new FormControl("",[Validators.required]),
+      'ApellidoUsuario': new FormControl("",[Validators.required]),
       'Correo': new FormControl("",[Validators.required]),
     })
 
   }
   ngOnInit() {
-    /*this.bd.bdstate().subscribe(res => {
+    this.bd.bdState().subscribe(res => {
       if (res) {
-        this.bd.fetchUsuario().subscribe(datos => {
+        this.bd.fetchUsuarios().subscribe(datos => {
           this.arreglousuario = datos;
-        });
+        })
       }
-    });*/
+    });
   }
-  
   /*perfil(){
     this.perfilUsuario.emit(["false"]);
   }*/
@@ -112,7 +113,7 @@ export class Editarperfil2Page implements OnInit {
           state:{
             infoUsuario:infoUsuario }
         }
-      this.router.navigate(['/perfil-usuario'],navigationextra)
+      this.router.navigate(['/cuenta'],navigationextra)
     }
 
     if (this.correoU != this.pedirCorreo) {
@@ -135,7 +136,7 @@ export class Editarperfil2Page implements OnInit {
         state:{
           infoUsuario:infoUsuario }
           }
-        this.router.navigate(['/perfil-usuario'],navigationextra)
+        this.router.navigate(['/cuenta'],navigationextra)
       }
     }
   }
