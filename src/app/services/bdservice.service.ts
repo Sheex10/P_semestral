@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { SQLite, SQLiteObject } from '@awesome-cordova-plugins/sqlite/ngx';
 import { AlertController, Platform } from '@ionic/angular';
 import { BehaviorSubject, Observable } from 'rxjs';
@@ -146,8 +147,8 @@ export class BdserviceService {
       })
   }
 
-  actualizaPerfilUsuario(id: any, correo: any, nombre: any, foto: any) {
-    return this.database.executeSql('UPDATE usuario SET correo=?, nombre= ?, foto= ? WHERE id= ?', [correo, nombre, foto, id])
+  actualizaPerfilUsuario(id: any, nombre: any, apellido: any, foto: any) {
+    return this.database.executeSql('UPDATE usuario SET nombre=?, apellido= ?, foto= ? WHERE id= ?', [nombre, apellido, foto, id])
       .then(res => {
         this.cargarUsuarios();
       }).catch(e => {

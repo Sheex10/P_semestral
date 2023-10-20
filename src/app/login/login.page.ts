@@ -89,9 +89,18 @@ export class LoginPage implements OnInit {
       if(this.correoIngresado == this.usuarios[i].correo){
         if(this.claveIngresada == this.usuarios[i].clave){
           if(this.usuarios[i].idRol == 2){
+            let infoUsuario ={
+              iduser:this.usuarios[i].id,
+              nomUser:this.usuarios[i].nombre,
+              apeUser:this.usuarios[i].apellido,
+              correoU:this.usuarios[i].correo,
+              clavee:this.usuarios[i].clave,
+              imgg:this.usuarios[i].imagen,
+              rolcito:this.usuarios[i].idRol,
+            }
           let navigationExtras:NavigationExtras = {
             state:{
-              infoUsuario:this.usuarios[i]
+              infoUsuario:infoUsuario
             }
           }
           this.router.navigate(['/cuenta'],navigationExtras)
