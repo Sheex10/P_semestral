@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
-import { AlertController } from '@ionic/angular/providers/alert-controller';
+import { AlertController } from '@ionic/angular';
 import { BdserviceService } from '../services/bdservice.service';
 
 @Component({
