@@ -19,10 +19,10 @@ import { BdserviceService } from '../services/bdservice.service';
 
 export class LoginPage implements OnInit {
 
-  /*correoUsuario: string = "patoreyes@gmail.com";
+  correoUsuario: string = "patoreyes@gmail.com";
   claveUsuario: string = "1234567";
   correoAdmin: string = "pipeshee@gmail.com";
-  claveAdmin: string = "123456789";*/
+  claveAdmin: string = "123456789";
   
   formularioL: FormGroup;
 

@@ -28,7 +28,7 @@
             El nombre de usuario es requerido.
           </span>
           <span *ngIf="nomUser?.errors?.['minlength']">
-            El nombre debe tener un minimo de 5 caracteres.
+            El nombre debe tener un minimo de 3 caracteres.
           </span>
         </div>
         <br>
@@ -39,7 +39,7 @@
               El apellido es obligatorio
             </span>
             <span *ngIf="apeUser?.errors?.['minlength']">
-              El nombre debe tener un minimo de 5 caracteres.
+              El nombre debe tener un minimo de 3 caracteres.
             </span>
           </div>
         <br>
@@ -66,12 +66,6 @@
           </span>
           <span *ngIf="pwdUser?.errors?.['maxlength']">
             La contraseña permite un maximo de 15 caracteres.
-          </span>
-          <span *ngIf="pwdUser?.errors?.['pattern']">
-            La contraseña requiere un numero.
-            La contraseña requiere una minuscula.
-            La contraseña requiere una mayuscula.
-            La contraseña requiere un caracter especial.
           </span>
         </div>
         <br>

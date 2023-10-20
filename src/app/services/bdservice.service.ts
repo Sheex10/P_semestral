@@ -146,6 +146,38 @@ export class BdserviceService {
       })
   }
 
+  cargarProducto() {
+    return this.database.executeSql('SELECT * FROM PRODUCTO',[])
+    .then(res=>{
+      let items:any=[];
+      if(res.rows.length>0){
+        for (var i = 0; i < res.rows.length; i++) {
+    items.push({
+            id:res.rows.item(i).id_producto, 
+            nombre:res.rows.item(i).nombre_producto,
+            descripcion:res.rows.item(i).descripcion,
+            precio:res.rows.item(i).precio,
+            categoria:res.rows.item(i).categoria,
+            img:res.rows.item(i).img
+    });
+  
+  
+  
+  
+    }
+      }
+      this.listaProductos.next(items as any);
+    }).catch(e=>{
+      this.presentAlert("error al cargar producto "+e)
+    })}
+
+  eliminarProducto(id:any){
+    return this.database.executeSql('DELETE FROM PRODUCTO WHERE ID=?',[id])
+    .then(res=>{
+      this.cargarProducto();
+    })
+  }
+
   actualizaPerfilUsuario(id: any, nombre: any, apellido: any, foto: any) {
     return this.database.executeSql('UPDATE usuario SET nombre=?, apellido= ?, foto= ? WHERE id= ?', [nombre, apellido, foto, id])
       .then(res => {

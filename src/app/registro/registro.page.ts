@@ -29,10 +29,10 @@ export class RegistroPage implements OnInit {
   constructor(public alertController: AlertController, private router: Router, public fb: FormBuilder, private bd: BdserviceService) {
 
     this.formularioReg = this.fb.group({
-      'nombre': new FormControl("", [Validators.required, Validators.minLength(5)]),
-      'apellido': new FormControl("", [Validators.required, Validators.minLength(5)]),
+      'nombre': new FormControl("", [Validators.required, Validators.minLength(3)]),
+      'apellido': new FormControl("", [Validators.required, Validators.minLength(3)]),
       'correo': new FormControl("", [Validators.required, Validators.minLength(5), Validators.email]),
-      'contrasena': new FormControl("", [Validators.required, Validators.minLength(8), Validators.maxLength(15), Validators.pattern('(?=.*[0-9])')]),
+      'contrasena': new FormControl("", [Validators.required, Validators.minLength(8), Validators.maxLength(15)]),
       'confirmar_contrasena': new FormControl("", [Validators.required])
     })
 
@@ -96,8 +96,6 @@ export class RegistroPage implements OnInit {
     }else{
       this.presentAlert("Las claves no coinciden!");
     }
-
-    this.bd.insertarUsuario(this.pNombre,this.pCorreo,this.pContra)
   }*/
 
   ingresar(){
