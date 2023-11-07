@@ -5,11 +5,11 @@ describe('MenuadminPage', () => {
   let component: MenuadminPage;
   let fixture: ComponentFixture<MenuadminPage>;
 
-  beforeEach(async(() => {
+  beforeEach(async() => {
     fixture = TestBed.createComponent(MenuadminPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
-  }));
+  });
 
   it('should create', () => {
     expect(component).toBeTruthy();
