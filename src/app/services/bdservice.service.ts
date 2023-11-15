@@ -21,7 +21,7 @@ export class BdserviceService {
   //variables para la creacion de tablas
   tablaProducto: string = "CREATE TABLE IF NOT EXISTS producto(id_producto INTEGER PRIMARY KEY autoincrement, nombre_producto VARCHAR(30) NOT NULL, descripcion VARCHAR(300) NOT NULL, precio INTEGER NOT NULL, categoria INTEGER, img BLOB, FOREIGN KEY(categoria) REFERENCES tablaCategoria(id_categoria));";
 
-  tablaUsuario: string = "CREATE TABLE IF NOT EXISTS usuarios(id INTEGER PRIMARY KEY autoincrement, nombre VARCHAR(20) NOT NULL, apellido VARCHAR(20) NOT NULL, correo VARHCAR (50) NOT NULL, clave VARCHAR (12) NOT NULL, rol INTEGER, imagen BLOB, idRol INTEGER,FOREIGN KEY(idRol) REFERENCES tablaRol(id_rol));";
+  tablaUsuario: string = "CREATE TABLE IF NOT EXISTS usuarios(id INTEGER PRIMARY KEY autoincrement, respuesta VARCHAR(50) NOT NULL, nombre VARCHAR(20) NOT NULL, apellido VARCHAR(20) NOT NULL, correo VARHCAR (50) NOT NULL, clave VARCHAR (12) NOT NULL, rol INTEGER, imagen BLOB, idRol INTEGER, idPregunta INTEGER, FOREIGN KEY(idP) REFERENCES tablaPregunta(idPregunta), FOREIGN KEY(idRol) REFERENCES tablaRol(id_rol));";
 
   tablaCategoria: string = "CREATE TABLE IF NOT EXISTS categoria(id_categoria PRIMARY KEY autoincrement, nombre_categoria VARCHAR (20));";
 
@@ -29,7 +29,7 @@ export class BdserviceService {
 
   tablaDetalle: string = "CREATE TABLE IF NOT EXISTS detalle(id_detalle PRIMARY KEY autoincrement, total INTEGER NOT NULL, usuario INTEGER, FOREIGN KEY(usuario) REFERENCES tablaUsuario(id));";
 
-  tablaPregunta: string = "CREATE TABLE IF NOT EXISTS pregunta(idPregunta INTEGER PRIMARY KEY AUTOINCREMENT, nombrePregunta VARCHAR(30) NOT NULL);";
+  tablaPregunta: string = "CREATE TABLE IF NOT EXISTS pregunta(idP INTEGER PRIMARY KEY AUTOINCREMENT, nombrePregunta VARCHAR(30) NOT NULL);";
 
 
 
@@ -70,7 +70,11 @@ export class BdserviceService {
   }
 
 
-  //Fetchs
+  //Fetchs 
+  bdState() {
+    return this.isDBReady.asObservable();
+  }
+
   fetchrol(): Observable<Rol[]> {
     return this.listaRol.asObservable();
   }
@@ -134,6 +138,83 @@ export class BdserviceService {
     })
   }
   //Fin rol
+
+  //Usuario
+  buscarUsuario() {
+    return this.database.executeSql('SELECT * FROM usuarios', []).then(res => {
+      //variable para lmacenar el resultado
+      let items: Usuario[] = [];
+      //verifico la cantidad de registros
+      if (res.rows.length > 0) {
+        //agrego registro a registro em mi variable
+        for (var i = 0; i < res.rows.length; i++) {
+          items.push({
+            id: res.rows.item(i).id,
+            respuesta: res.rows.item(i).respuesta,
+            nombre: res.rows.item(i).nombre,
+            clave: res.rows.item(i).clave,
+            correo: res.rows.item(i).correo,
+            apellido: res.rows.item(i).apellido,
+            imagen: res.rows.item(i).imagen,
+            idRol: res.rows.item(i).idRol,
+            idPregunta: res.rows.item(i).idPregunta
+
+          })
+        }
+      }
+      this.tablaUsuario.next(items as any);
+    })
+  }
+
+
+  insertarUsuario(respuesta: any, nombre: any, contrasena: any, correo: any, descripcion: any, foto: any, monedas: any, idRol: any, idPregunta: any) {
+    return this.database.executeSql('INSERT INTO usuarios(respuesta, nombre, contrasena, correo, descripcion, foto, monedas, idRol,idPregunta ) VALUES(?,?,?,?,?,?,?,?,?)', [respuesta, nombre, contrasena, correo, descripcion, foto, monedas, idRol, idPregunta]).then(res => {
+      this.buscarUsuario();
+    }).catch(e => {
+      this.presentAlert("Error en insertar usuario");
+    })
+  }
+
+  actualizarUsuario(id: any, respuesta: any, nombre: any, contrasena: any, correo: any, descripcion: any, foto: any, monedas: any, idRol: any, idPregunta: any) {
+    return this.database.executeSql('UPDATE usuarios SET respuesta= ?, nombre= ?, contrasena= ?, correo= ?, descripcion= ?, foto= ?, monedas= ?, idRol= ?, idPregunta= ? WHERE idU= ?', [respuesta, nombre, contrasena, correo, descripcion, foto, monedas, idRol, idPregunta, id]).then(res => {
+      this.buscarUsuario();
+    })
+  }
+
+  actualizaPerfilUsuario(id: any, correo: any, nombre: any, descripcion: any, foto: any) {
+    return this.database.executeSql('UPDATE usuarios SET correo=?, nombre= ?, descripcion= ?, foto= ? WHERE idU= ?', [correo, nombre, descripcion, foto, id])
+      .then(res => {
+        this.buscarUsuario();
+      }).catch(e => {
+        this.presentAlert("Error Modificar Usuario " + e)
+      })
+  }
+
+  actualizarclaveUsuario(id: any, contrasena: any) {
+    return this.database.executeSql('UPDATE usuarios SET contrasena= ? WHERE id= ?', [contrasena, id])
+      .then(res => {
+        this.buscarUsuario();
+      }).catch(e => {
+        this.presentAlert("Error Modificar Clave: " + e)
+      })
+  }
+
+  actualizarRolUsuario(id: any, idRol: any) {
+    return this.database.executeSql('UPDATE usuarios SET idRol= ? WHERE id= ?', [idRol, id])
+      .then(res => {
+        this.buscarUsuario();
+      }).catch(e => {
+        this.presentAlert("Error Modificar Rol: " + e)
+      })
+  }
+
+  eliminarUsuario(id: any) {
+    return this.database.executeSql('DELETE FROM usuarios WHERE id = ?', [id]).then(res => {
+      this.buscarUsuario();
+    })
+  }
+
+  //Fin Usuario
   async presentAlert(msj: string) {
     const alert = await this.alertController.create({
       header: 'Alert',
@@ -157,14 +238,14 @@ export class BdserviceService {
         //capturar la conexión a la BD
         this.database = db;
         //comando que ejecuta la creación de tablas
-        this.crearTablas();
+        //this.crearTablas();
       }).catch(e => {
         this.presentAlert("Error en crear la Base de datos: " + e);
       })
     })
   }
 
-  async crearTablas() {
+  /*async crearTablas() {
     try {
       await this.database.executeSql(this.tablaProducto, []);
       await this.database.executeSql(this.tablaUsuario, []);
@@ -176,7 +257,7 @@ export class BdserviceService {
     } catch (error) {
       this.presentAlert("Error en crear tablas: " + error);
     }
-  }
+  }*/
   async insertTablas() {
     try {
       await this.database.executeSql(this.registrarProducto, []);
@@ -261,7 +342,7 @@ export class BdserviceService {
   }
 
   actualizaPerfilUsuario(id: any, nombre: any, apellido: any, foto: any) {
-    return this.database.executeSql('UPDATE usuario SET nombre=?, apellido= ?, foto= ? WHERE id= ?', [nombre, apellido, foto, id])
+    return this.database.executeSql('UPDATE usuarios SET nombre=?, apellido= ?, foto= ? WHERE id= ?', [nombre, apellido, foto, id])
       .then(res => {
         this.cargarUsuarios();
       }).catch(e => {
@@ -294,11 +375,22 @@ export class BdserviceService {
     })
   }
 
-  bdState() {
-    return this.isDBReady.asObservable();
-  }
-  fetchUsuarios(): Observable<any> {
-    return this.listaUsuarios.asObservable();
+
+
+  async crearTablaUsuario() {
+    try {
+      //this.database.executeSql(this.registroUsuario,[]);
+      //this.database.executeSql(this.registroUsuarioDos,[]);
+      await this.database.executeSql(this.tablaUsuario, []);
+
+      //ejecución inserts
+      this.database.executeSql(this.registroUsuario, []);
+      this.database.executeSql(this.registroUsuarioDos, []);
+
+      //cambio de observable
+      this.isDBReady.next(true);
+      this.buscarUsuario();
+    }
   }
 
 
