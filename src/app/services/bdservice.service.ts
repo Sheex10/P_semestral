@@ -47,11 +47,11 @@ export class BdserviceService {
   registroRolDos: string = "INSERT or IGNORE INTO tablaRol(id_rol, nombre_rol) VALUES (2,'Usuario');";
 
   registroDetalle: string = "INSERT or IGNORE INTO tablaDetalle(id_detalle, total, usuario) values (21,12990,2);";
-  
-  registroPregunta:string="INSERT or IGNORE INTO pregunta(idP, nombreP) VALUES(1, '¿cual es tu comida favorita?');";
-  registroPregunta2:string="INSERT or IGNORE INTO pregunta(idP, nombreP) VALUES(2, '¿cual es tu color favorito?');";
-  registroPregunta3:string="INSERT or IGNORE INTO pregunta(idP, nombreP) VALUES(3, '¿nombre de tu mascota?');";
-  
+
+  registroPregunta: string = "INSERT or IGNORE INTO pregunta(idP, nombreP) VALUES(1, '¿cual es tu comida favorita?');";
+  registroPregunta2: string = "INSERT or IGNORE INTO pregunta(idP, nombreP) VALUES(2, '¿cual es tu color favorito?');";
+  registroPregunta3: string = "INSERT or IGNORE INTO pregunta(idP, nombreP) VALUES(3, '¿nombre de tu mascota?');";
+
   //No se si esta bien este insert!
   //observables de las tablas
   listaProductos = new BehaviorSubject([]);
@@ -96,25 +96,44 @@ export class BdserviceService {
   }
 
   //Rol
-buscarRol(){
-  return this.database.executeSql('SELECT * FROM rol',[]).then(res=>{
-    //variable para lmacenar el resultado
-    let items:Rol[]=[];
-    //verifico la cantidad de registros
-    if(res.rows.length > 0 ){
-      //agrego registro a registro em mi variable
-      for(var i = 0; i< res.rows.length; i++){
-        items.push({
-          id_rol:res.rows.item(i).id_rol,
-          nombre_rol:res.rows.item(i).nombre_rol
+  buscarRol() {
+    return this.database.executeSql('SELECT * FROM rol', []).then(res => {
+      //variable para lmacenar el resultado
+      let items: Rol[] = [];
+      //verifico la cantidad de registros
+      if (res.rows.length > 0) {
+        //agrego registro a registro em mi variable
+        for (var i = 0; i < res.rows.length; i++) {
+          items.push({
+            id_rol: res.rows.item(i).id_rol,
+            nombre_rol: res.rows.item(i).nombre_rol
 
-        })
+          })
+        }
       }
-    }
-    this.listaRol.next(items as any);
+      this.listaRol.next(items as any);
 
-  }) 
-} 
+    })
+  }
+
+  insertarRol(nombre_rol: any) {
+    return this.database.executeSql('INSERT INTO tablaRol(nombre_rol) VALUES(?)', [nombre_rol]).then(res => {
+      this.buscarRol();
+    })
+  }
+
+  actualizarRol(id_rol: any, nombre_rol: any) {
+    return this.database.executeSql('UPDATE tablaRol SET nombre_rol=? WHERE idR=?', [nombre_rol, id_rol]).then(res => {
+      this.buscarRol();
+    })
+  }
+
+  eliminarRol(id_rol: any) {
+    return this.database.executeSql('DELETE FROM tablaRol WHERE id_rol = ?', [id_rol]).then(res => {
+      this.buscarRol();
+    })
+  }
+  //Fin rol
   async presentAlert(msj: string) {
     const alert = await this.alertController.create({
       header: 'Alert',
