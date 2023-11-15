@@ -8,6 +8,7 @@ import { Rol } from './rol';
 import { Usuario } from './usuario';
 import { Categoria } from './categoria';
 import { Detalle } from './detalle';
+import { Pregunta } from './pregunta';
 
 
 @Injectable({
@@ -95,8 +96,8 @@ export class BdserviceService {
     return this.listaDetalle.asObservable();
   }
 
-  fetchpregunta(): Observable<Producto[]> {
-    return this.listaProductos.asObservable();
+  fetchpregunta(): Observable<Pregunta[]> {
+    return this.listaPregunta.asObservable();
   }
 
   //Rol
@@ -121,23 +122,61 @@ export class BdserviceService {
   }
 
   insertarRol(nombre_rol: any) {
-    return this.database.executeSql('INSERT INTO tablaRol(nombre_rol) VALUES(?)', [nombre_rol]).then(res => {
+    return this.database.executeSql('INSERT INTO rol(nombre_rol) VALUES(?)', [nombre_rol]).then(res => {
       this.buscarRol();
     })
   }
 
   actualizarRol(id_rol: any, nombre_rol: any) {
-    return this.database.executeSql('UPDATE tablaRol SET nombre_rol=? WHERE idR=?', [nombre_rol, id_rol]).then(res => {
+    return this.database.executeSql('UPDATE rol SET nombre_rol=? WHERE idR=?', [nombre_rol, id_rol]).then(res => {
       this.buscarRol();
     })
   }
 
   eliminarRol(id_rol: any) {
-    return this.database.executeSql('DELETE FROM tablaRol WHERE id_rol = ?', [id_rol]).then(res => {
+    return this.database.executeSql('DELETE FROM rol WHERE id_rol = ?', [id_rol]).then(res => {
       this.buscarRol();
     })
   }
   //Fin rol
+
+  //Pregunta
+  buscarPregunta(){
+    return this.database.executeSql('SELECT * FROM pregunta',[]).then(res=>{
+      //variable para lmacenar el resultado
+      let items:Pregunta[]=[];
+      //verifico la cantidad de registros
+      if(res.rows.length > 0 ){
+        //agrego registro a registro em mi variable
+        for(var i = 0; i< res.rows.length; i++){
+          items.push({
+            idP:res.rows.item(i).idP,
+            nombrePregunta:res.rows.item(i).nombrePregunta
+          })
+        }
+      }
+      this.listaPregunta.next(items as any);
+      })
+    }
+  
+    insertarPregunta(nombrePregunta:any){
+      return this.database.executeSql('INSERT INTO pregunta(nombrePregunta) VALUES(?)',[nombrePregunta]).then(res=>{
+        this.buscarPregunta();
+      })
+    }
+  
+    actualizarPregunta(idP:any, nombrePregunta:any){
+      return this.database.executeSql('UPDATE pregunta SET nombrePregunta=? WHERE idP=?',[nombrePregunta, idP]).then(res=>{
+        this.buscarPregunta();
+      })
+    }
+  
+    eliminarPregunta(idP:any){
+      return this.database.executeSql('DELETE FROM pregunta WHERE idP = ?',[idP]).then(res=>{
+        this.buscarPregunta();
+      })
+    }
+    //Fin pregunta
 
   //Usuario
   buscarUsuario() {
@@ -162,27 +201,27 @@ export class BdserviceService {
           })
         }
       }
-      this.tablaUsuario.next(items as any);
+      this.listaUsuarios.next(items as any);
     })
   }
 
 
-  insertarUsuario(respuesta: any, nombre: any, contrasena: any, correo: any, descripcion: any, foto: any, monedas: any, idRol: any, idPregunta: any) {
-    return this.database.executeSql('INSERT INTO usuarios(respuesta, nombre, contrasena, correo, descripcion, foto, monedas, idRol,idPregunta ) VALUES(?,?,?,?,?,?,?,?,?)', [respuesta, nombre, contrasena, correo, descripcion, foto, monedas, idRol, idPregunta]).then(res => {
+  insertarUsuario(respuesta: any, nombre: any, clave: any, correo: any, descripcion: any, foto: any, id_rol: any, idP: any) {
+    return this.database.executeSql('INSERT INTO usuarios(respuesta, nombre, clave, correo, descripcion, foto, id_rol,idP ) VALUES(?,?,?,?,?,?,?,?,?)', [respuesta, nombre, clave, correo, descripcion, foto, id_rol, idP]).then(res => {
       this.buscarUsuario();
     }).catch(e => {
       this.presentAlert("Error en insertar usuario");
     })
   }
 
-  actualizarUsuario(id: any, respuesta: any, nombre: any, contrasena: any, correo: any, descripcion: any, foto: any, monedas: any, idRol: any, idPregunta: any) {
-    return this.database.executeSql('UPDATE usuarios SET respuesta= ?, nombre= ?, contrasena= ?, correo= ?, descripcion= ?, foto= ?, monedas= ?, idRol= ?, idPregunta= ? WHERE idU= ?', [respuesta, nombre, contrasena, correo, descripcion, foto, monedas, idRol, idPregunta, id]).then(res => {
+  actualizarUsuario(id: any, respuesta: any, nombre: any, clave: any, correo: any, descripcion: any, foto: any, id_rol: any, idP: any) {
+    return this.database.executeSql('UPDATE usuarios SET respuesta= ?, nombre= ?, clave= ?, correo= ?, descripcion= ?, foto= ?, id_rol= ?, idP= ? WHERE id= ?', [respuesta, nombre, clave, correo, descripcion, foto, id_rol, idP, id]).then(res => {
       this.buscarUsuario();
     })
   }
 
   actualizaPerfilUsuario(id: any, correo: any, nombre: any, descripcion: any, foto: any) {
-    return this.database.executeSql('UPDATE usuarios SET correo=?, nombre= ?, descripcion= ?, foto= ? WHERE idU= ?', [correo, nombre, descripcion, foto, id])
+    return this.database.executeSql('UPDATE usuarios SET correo=?, nombre= ?, descripcion= ?, foto= ? WHERE id= ?', [correo, nombre, descripcion, foto, id])
       .then(res => {
         this.buscarUsuario();
       }).catch(e => {
@@ -190,8 +229,8 @@ export class BdserviceService {
       })
   }
 
-  actualizarclaveUsuario(id: any, contrasena: any) {
-    return this.database.executeSql('UPDATE usuarios SET contrasena= ? WHERE id= ?', [contrasena, id])
+  actualizarclaveUsuario(id: any, clave: any) {
+    return this.database.executeSql('UPDATE usuarios SET clave= ? WHERE id= ?', [clave, id])
       .then(res => {
         this.buscarUsuario();
       }).catch(e => {
@@ -199,8 +238,8 @@ export class BdserviceService {
       })
   }
 
-  actualizarRolUsuario(id: any, idRol: any) {
-    return this.database.executeSql('UPDATE usuarios SET idRol= ? WHERE id= ?', [idRol, id])
+  actualizarRolUsuario(id: any, id_rol: any) {
+    return this.database.executeSql('UPDATE usuarios SET idRol= ? WHERE id= ?', [id_rol, id])
       .then(res => {
         this.buscarUsuario();
       }).catch(e => {
@@ -298,18 +337,8 @@ export class BdserviceService {
       })
   }
 
-
-  insertarUsuario(nombre: any, apellido: any, correo: any, clave: any) {
-    return this.database.executeSql('INSERT INTO usuarios(nombre, apellido, correo, clave, imagen, rol) VALUES(?,?,?,?,?,?)', [nombre, apellido, correo, clave, "", 2])
-      .then(res => {
-        this.cargarUsuarios();
-      }).catch(e => {
-        this.presentAlert("Error al insertar usuario" + e)
-      })
-  }
-
   cargarProducto() {
-    return this.database.executeSql('SELECT * FROM PRODUCTO', [])
+    return this.database.executeSql('SELECT * FROM producto', [])
       .then(res => {
         let items: any = [];
         if (res.rows.length > 0) {
@@ -322,10 +351,6 @@ export class BdserviceService {
               categoria: res.rows.item(i).categoria,
               img: res.rows.item(i).img
             });
-
-
-
-
           }
         }
         this.listaProductos.next(items as any);
@@ -335,18 +360,9 @@ export class BdserviceService {
   }
 
   eliminarProducto(id: any) {
-    return this.database.executeSql('DELETE FROM PRODUCTO WHERE ID=?', [id])
+    return this.database.executeSql('DELETE FROM producto WHERE ID=?', [id])
       .then(res => {
         this.cargarProducto();
-      })
-  }
-
-  actualizaPerfilUsuario(id: any, nombre: any, apellido: any, foto: any) {
-    return this.database.executeSql('UPDATE usuarios SET nombre=?, apellido= ?, foto= ? WHERE id= ?', [nombre, apellido, foto, id])
-      .then(res => {
-        this.cargarUsuarios();
-      }).catch(e => {
-        this.presentAlert("Error Modificar Usuario " + e)
       })
   }
 
@@ -391,7 +407,10 @@ export class BdserviceService {
       this.isDBReady.next(true);
       this.buscarUsuario();
     }
+   catch(e) {
+    this.presentAlert("Error en crearTablaUsuario: " + e);
   }
+}
 
 
 }
