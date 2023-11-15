@@ -5,6 +5,9 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { Producto } from './producto';
 import { ActivatedRoute } from '@angular/router';
 import { Rol } from './rol';
+import { Usuario } from './usuario';
+import { Categoria } from './categoria';
+import { Detalle } from './detalle';
 
 
 @Injectable({
@@ -26,6 +29,9 @@ export class BdserviceService {
 
   tablaDetalle: string = "CREATE TABLE IF NOT EXISTS detalle(id_detalle PRIMARY KEY autoincrement, total INTEGER NOT NULL, usuario INTEGER, FOREIGN KEY(usuario) REFERENCES tablaUsuario(id));";
 
+  tablaPregunta: string = "CREATE TABLE IF NOT EXISTS pregunta(idPregunta INTEGER PRIMARY KEY AUTOINCREMENT, nombrePregunta VARCHAR(30) NOT NULL);";
+
+
 
   //variables para los insert iniciales
   registroUsuario: string = "INSERT or IGNORE INTO tablaUsuario(id, nombre, apellido, correo, clave, rol,imagen) values (1,'Felipe','Shee','felipe@gmail.com','123456789',1,'');";
@@ -40,13 +46,21 @@ export class BdserviceService {
   registroRol: string = "INSERT or IGNORE INTO tablaRol(id_rol, nombre_rol) VALUES (1,'Administrador');";
   registroRolDos: string = "INSERT or IGNORE INTO tablaRol(id_rol, nombre_rol) VALUES (2,'Usuario');";
 
-  registroDetalle: string = "INSERT or IGNORE INTO tablaDetalle(id_detalle, total, usuario) values (21,12990,2);"; //No se si esta bien este insert!
+  registroDetalle: string = "INSERT or IGNORE INTO tablaDetalle(id_detalle, total, usuario) values (21,12990,2);";
+  
+  registroPregunta:string="INSERT or IGNORE INTO pregunta(idP, nombreP) VALUES(1, '¿cual es tu comida favorita?');";
+  registroPregunta2:string="INSERT or IGNORE INTO pregunta(idP, nombreP) VALUES(2, '¿cual es tu color favorito?');";
+  registroPregunta3:string="INSERT or IGNORE INTO pregunta(idP, nombreP) VALUES(3, '¿nombre de tu mascota?');";
+  
+  //No se si esta bien este insert!
   //observables de las tablas
   listaProductos = new BehaviorSubject([]);
   listaUsuarios = new BehaviorSubject([]);
   listaRol = new BehaviorSubject([]);
   listaCategoria = new BehaviorSubject([]);
   listaDetalle = new BehaviorSubject([]);
+  listaPregunta = new BehaviorSubject([]);
+
 
   //observable para la BD
   private isDBReady: BehaviorSubject<boolean> = new BehaviorSubject(false);
@@ -61,6 +75,46 @@ export class BdserviceService {
     return this.listaRol.asObservable();
   }
 
+  fetchproducto(): Observable<Producto[]> {
+    return this.listaProductos.asObservable();
+  }
+
+  fetchusuario(): Observable<Usuario[]> {
+    return this.listaUsuarios.asObservable();
+  }
+
+  fetchcategoria(): Observable<Categoria[]> {
+    return this.listaCategoria.asObservable();
+  }
+
+  fetchdetalle(): Observable<Detalle[]> {
+    return this.listaDetalle.asObservable();
+  }
+
+  fetchpregunta(): Observable<Producto[]> {
+    return this.listaProductos.asObservable();
+  }
+
+  //Rol
+buscarRol(){
+  return this.database.executeSql('SELECT * FROM rol',[]).then(res=>{
+    //variable para lmacenar el resultado
+    let items:Rol[]=[];
+    //verifico la cantidad de registros
+    if(res.rows.length > 0 ){
+      //agrego registro a registro em mi variable
+      for(var i = 0; i< res.rows.length; i++){
+        items.push({
+          id_rol:res.rows.item(i).id_rol,
+          nombre_rol:res.rows.item(i).nombre_rol
+
+        })
+      }
+    }
+    this.listaRol.next(items as any);
+
+  }) 
+} 
   async presentAlert(msj: string) {
     const alert = await this.alertController.create({
       header: 'Alert',
