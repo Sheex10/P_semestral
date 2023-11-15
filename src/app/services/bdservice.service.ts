@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { SQLite, SQLiteObject } from '@awesome-cordova-plugins/sqlite/ngx';
-import { AlertController, Platform } from '@ionic/angular';
+import { AlertController, Platform, ToastController } from '@ionic/angular';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Producto } from './producto';
+import { ActivatedRoute } from '@angular/router';
 
 
 @Injectable({
@@ -49,8 +50,14 @@ export class BdserviceService {
   //observable para la BD
   private isDBReady: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
-  constructor(private alertController: AlertController, public sqlite: SQLite, private platform: Platform) {
+  constructor(private activatedRoute: ActivatedRoute, private alertController: AlertController, public sqlite: SQLite, public toastController: ToastController, private platform: Platform) {
     this.crearBD();
+  }
+
+
+  //Fetchs
+  fetchrol(): Observable<Rol[]> {
+    return this.listaRol.asObservable();
   }
 
   async presentAlert(msj: string) {
@@ -147,35 +154,36 @@ export class BdserviceService {
   }
 
   cargarProducto() {
-    return this.database.executeSql('SELECT * FROM PRODUCTO',[])
-    .then(res=>{
-      let items:any=[];
-      if(res.rows.length>0){
-        for (var i = 0; i < res.rows.length; i++) {
-    items.push({
-            id:res.rows.item(i).id_producto, 
-            nombre:res.rows.item(i).nombre_producto,
-            descripcion:res.rows.item(i).descripcion,
-            precio:res.rows.item(i).precio,
-            categoria:res.rows.item(i).categoria,
-            img:res.rows.item(i).img
-    });
-  
-  
-  
-  
-    }
-      }
-      this.listaProductos.next(items as any);
-    }).catch(e=>{
-      this.presentAlert("error al cargar producto "+e)
-    })}
+    return this.database.executeSql('SELECT * FROM PRODUCTO', [])
+      .then(res => {
+        let items: any = [];
+        if (res.rows.length > 0) {
+          for (var i = 0; i < res.rows.length; i++) {
+            items.push({
+              id: res.rows.item(i).id_producto,
+              nombre: res.rows.item(i).nombre_producto,
+              descripcion: res.rows.item(i).descripcion,
+              precio: res.rows.item(i).precio,
+              categoria: res.rows.item(i).categoria,
+              img: res.rows.item(i).img
+            });
 
-  eliminarProducto(id:any){
-    return this.database.executeSql('DELETE FROM PRODUCTO WHERE ID=?',[id])
-    .then(res=>{
-      this.cargarProducto();
-    })
+
+
+
+          }
+        }
+        this.listaProductos.next(items as any);
+      }).catch(e => {
+        this.presentAlert("error al cargar producto " + e)
+      })
+  }
+
+  eliminarProducto(id: any) {
+    return this.database.executeSql('DELETE FROM PRODUCTO WHERE ID=?', [id])
+      .then(res => {
+        this.cargarProducto();
+      })
   }
 
   actualizaPerfilUsuario(id: any, nombre: any, apellido: any, foto: any) {
@@ -187,17 +195,17 @@ export class BdserviceService {
       })
   }
 
-  fetchProducto(): Observable<Producto[]>{
+  fetchProducto(): Observable<Producto[]> {
     return this.listaProductos.asObservable();
   }
-  buscarProducto(){
-    return this.database.executeSql('SELECT * FROM producto',[]).then(res=>{
+  buscarProducto() {
+    return this.database.executeSql('SELECT * FROM producto', []).then(res => {
       //variable para almacenar el resultado
       let items: Producto[] = [];
       //verfico la cantidad de registros
-      if(res.rows.length > 0){
+      if (res.rows.length > 0) {
         //agrego registro a registro en mi variable
-        for(var i=0; i < res.rows.length; i++){
+        for (var i = 0; i < res.rows.length; i++) {
           items.push({
             nombre_producto: res.rows.item(i).nombre_producto,
             descripcion: res.rows.item(i).descripcion,
