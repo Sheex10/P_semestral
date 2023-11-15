@@ -195,8 +195,8 @@ export class BdserviceService {
             correo: res.rows.item(i).correo,
             apellido: res.rows.item(i).apellido,
             imagen: res.rows.item(i).imagen,
-            idRol: res.rows.item(i).idRol,
-            idPregunta: res.rows.item(i).idPregunta
+            id_rol: res.rows.item(i).id_rol,
+            idP: res.rows.item(i).idP
 
           })
         }
@@ -239,7 +239,7 @@ export class BdserviceService {
   }
 
   actualizarRolUsuario(id: any, id_rol: any) {
-    return this.database.executeSql('UPDATE usuarios SET idRol= ? WHERE id= ?', [id_rol, id])
+    return this.database.executeSql('UPDATE usuarios SET id_rol= ? WHERE id= ?', [id_rol, id])
       .then(res => {
         this.buscarUsuario();
       }).catch(e => {
@@ -327,7 +327,7 @@ export class BdserviceService {
               correo: res.rows.item(i).correo,
               clave: res.rows.item(i).clave,
               imagen: res.rows.item(i).imagen,
-              idRol: res.rows.item(i).idRol
+              id_rol: res.rows.item(i).id_rol
             });
           }
         }
