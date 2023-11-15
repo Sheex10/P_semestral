@@ -4,6 +4,7 @@ import { AlertController, Platform, ToastController } from '@ionic/angular';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Producto } from './producto';
 import { ActivatedRoute } from '@angular/router';
+import { Rol } from './rol';
 
 
 @Injectable({
