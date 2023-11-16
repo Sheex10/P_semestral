@@ -129,7 +129,7 @@ export class BdserviceService {
   }
 
   actualizarRol(id_rol: any, nombre_rol: any) {
-    return this.database.executeSql('UPDATE rol SET nombre_rol=? WHERE idR=?', [nombre_rol, id_rol]).then(res => {
+    return this.database.executeSql('UPDATE rol SET nombre_rol=? WHERE id_rol=?', [nombre_rol, id_rol]).then(res => {
       this.buscarRol();
     })
   }
