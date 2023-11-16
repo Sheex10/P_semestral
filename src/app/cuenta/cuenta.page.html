@@ -15,13 +15,13 @@
   <ion-icon name="pencil-outline" class="centrado3"></ion-icon>
 </ion-button>
   <ion-item class="centrado1">
-    <ion-label> Nombre : Felipe </ion-label>
+    <ion-label> Nombre : {{ listaUsuarios.nombre }} </ion-label>
   </ion-item>
   <ion-item class="centrado1">
-    <ion-label> Apellidos : Rivas Shee</ion-label>
+    <ion-label> Apellido : {{ listaUsuarios.apellido }}</ion-label>
   </ion-item>
   <ion-item class="centrado1">
-    <ion-label> Correo : Feliperivas@gmail.com</ion-label>
+    <ion-label> Correo : {{ listaUsuarios.correo }}</ion-label>
   </ion-item>
   <div class="centrado">
     <ion-button (click)="goToeditarperfil()" color="secondary">Editar perfil</ion-button>
