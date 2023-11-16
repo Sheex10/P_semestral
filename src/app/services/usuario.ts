@@ -7,5 +7,4 @@ export class Usuario {
     imagen = "";
     id_rol = "";
     idP = "";
-
 }
