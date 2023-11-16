@@ -22,7 +22,7 @@ export class BdserviceService {
   //variables para la creacion de tablas
   tablaProducto: string = "CREATE TABLE IF NOT EXISTS producto(id_producto INTEGER PRIMARY KEY autoincrement, nombre_producto VARCHAR(30) NOT NULL, descripcion VARCHAR(300) NOT NULL, precio INTEGER NOT NULL, categoria INTEGER, img BLOB, FOREIGN KEY(categoria) REFERENCES tablaCategoria(id_categoria));";
 
-  tablaUsuario: string = "CREATE TABLE IF NOT EXISTS usuarios(id INTEGER PRIMARY KEY autoincrement, respuesta VARCHAR(50) NOT NULL, nombre VARCHAR(20) NOT NULL, apellido VARCHAR(20) NOT NULL, correo VARCHAR (50) NOT NULL, clave VARCHAR (12) NOT NULL, rol INTEGER, imagen BLOB, idRol INTEGER, idPregunta INTEGER, FOREIGN KEY(idP) REFERENCES tablaPregunta(idPregunta), FOREIGN KEY(idRol) REFERENCES tablaRol(id_rol));";
+  tablaUsuario: string = "CREATE TABLE IF NOT EXISTS usuarios(id INTEGER PRIMARY KEY autoincrement, respuesta VARCHAR(50) NOT NULL, nombre VARCHAR(20) NOT NULL, apellido VARCHAR(20) NOT NULL, correo VARCHAR (50) NOT NULL, clave VARCHAR (12) NOT NULL, rol INTEGER, imagen BLOB, idRol INTEGER, idP INTEGER, FOREIGN KEY(idP) REFERENCES tablaPregunta(idP), FOREIGN KEY(idRol) REFERENCES tablaRol(id_rol));";
 
   tablaCategoria: string = "CREATE TABLE IF NOT EXISTS categoria(id_categoria PRIMARY KEY autoincrement, nombre_categoria VARCHAR (20));";
 
@@ -49,9 +49,9 @@ export class BdserviceService {
 
   registroDetalle: string = "INSERT or IGNORE INTO tablaDetalle(id_detalle, total, usuario) values (21,12990,2);";
 
-  registroPregunta: string = "INSERT or IGNORE INTO pregunta(idP, nombreP) VALUES(1, '¿cual es tu comida favorita?');";
-  registroPregunta2: string = "INSERT or IGNORE INTO pregunta(idP, nombreP) VALUES(2, '¿cual es tu color favorito?');";
-  registroPregunta3: string = "INSERT or IGNORE INTO pregunta(idP, nombreP) VALUES(3, '¿nombre de tu mascota?');";
+  registroPregunta: string = "INSERT or IGNORE INTO pregunta(idP, nombrePregunta) VALUES(1, '¿cual es tu comida favorita?');";
+  registroPregunta2: string = "INSERT or IGNORE INTO pregunta(idP, nombrePregunta) VALUES(2, '¿cual es tu color favorito?');";
+  registroPregunta3: string = "INSERT or IGNORE INTO pregunta(idP, nombrePregunta) VALUES(3, '¿nombre de tu mascota?');";
 
   //No se si esta bien este insert!
   //observables de las tablas
@@ -180,25 +180,18 @@ export class BdserviceService {
   //Fin pregunta
 
   //Usuario
-  buscarUsuario() {
+  buscarUsuario(){
     return this.database.executeSql('SELECT * FROM usuarios', []).then(res => {
-      //variable para lmacenar el resultado
       let items: Usuario[] = [];
-      //verifico la cantidad de registros
       if (res.rows.length > 0) {
-        //agrego registro a registro em mi variable
         for (var i = 0; i < res.rows.length; i++) {
           items.push({
             id: res.rows.item(i).id,
             respuesta: res.rows.item(i).respuesta,
             nombre: res.rows.item(i).nombre,
-            clave: res.rows.item(i).clave,
             correo: res.rows.item(i).correo,
             apellido: res.rows.item(i).apellido,
             imagen: res.rows.item(i).imagen,
-            id_rol: res.rows.item(i).id_rol,
-            idP: res.rows.item(i).idP
-
           })
         }
       }
@@ -340,9 +333,12 @@ export class BdserviceService {
         //agrego registro a registro en mi variable
         for (var i = 0; i < res.rows.length; i++) {
           items.push({
+            id_producto: res.rows.item(i).id_producto,
             nombre_producto: res.rows.item(i).nombre_producto,
             descripcion: res.rows.item(i).descripcion,
-            precio: res.rows.item(i).precio
+            precio: res.rows.item(i).precio,
+            categoria: res.rows.item(i).categoria,
+            img: res.rows.item(i).img
           })
         }
       }
