@@ -15,13 +15,11 @@
   <ion-card>
     <img alt="Silhouette of mountains" src="https://veterinariaelabrazo.cl/cdn/shop/products/Cama_felpa_morada_perro_gato_600x_15572b3f-1861-4342-88f3-0680b3f53048_800x.jpg?v=1630958717" />
     <ion-card-header>
-      <ion-card-title>CAMA PARA GATO</ion-card-title>
+      <ion-card-title>{{ listaProductos.nombre_producto }}</ion-card-title>
       <br>
-      <ion-card-title style="font-size: larger;">Cama hecha para gatos o cachorros, con un diseño que
-         la vuelve un producto cómodo para tu mascota, quitando el estrés y proporcionando un lugar 
-         adecuado para descansar.
+      <ion-card-title style="font-size: larger;">{{ listaProductos.descripcion }}
         <br><br><br>
-        $29.990
+        {{ listaProductos.precio }}
       
       </ion-card-title>
     </ion-card-header>
