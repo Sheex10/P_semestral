@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { SQLite, SQLiteObject } from '@awesome-cordova-plugins/sqlite/ngx';
 import { AlertController, Platform, ToastController } from '@ionic/angular';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { Producto } from './producto';
 import { ActivatedRoute } from '@angular/router';
+import { Producto } from './producto';
 import { Rol } from './rol';
 import { Usuario } from './usuario';
 import { Categoria } from './categoria';
@@ -72,10 +72,11 @@ export class BdserviceService {
 
 
   //Fetchs 
+  //----------------------
   bdState() {
     return this.isDBReady.asObservable();
   }
-
+//-------------------------------
   fetchrol(): Observable<Rol[]> {
     return this.listaRol.asObservable();
   }
@@ -141,42 +142,42 @@ export class BdserviceService {
   //Fin rol
 
   //Pregunta
-  buscarPregunta(){
-    return this.database.executeSql('SELECT * FROM pregunta',[]).then(res=>{
+  buscarPregunta() {
+    return this.database.executeSql('SELECT * FROM pregunta', []).then(res => {
       //variable para lmacenar el resultado
-      let items:Pregunta[]=[];
+      let items: Pregunta[] = [];
       //verifico la cantidad de registros
-      if(res.rows.length > 0 ){
+      if (res.rows.length > 0) {
         //agrego registro a registro em mi variable
-        for(var i = 0; i< res.rows.length; i++){
+        for (var i = 0; i < res.rows.length; i++) {
           items.push({
-            idP:res.rows.item(i).idP,
-            nombrePregunta:res.rows.item(i).nombrePregunta
+            idP: res.rows.item(i).idP,
+            nombrePregunta: res.rows.item(i).nombrePregunta
           })
         }
       }
       this.listaPregunta.next(items as any);
-      })
-    }
-  
-    insertarPregunta(nombrePregunta:any){
-      return this.database.executeSql('INSERT INTO pregunta(nombrePregunta) VALUES(?)',[nombrePregunta]).then(res=>{
-        this.buscarPregunta();
-      })
-    }
-  
-    actualizarPregunta(idP:any, nombrePregunta:any){
-      return this.database.executeSql('UPDATE pregunta SET nombrePregunta=? WHERE idP=?',[nombrePregunta, idP]).then(res=>{
-        this.buscarPregunta();
-      })
-    }
-  
-    eliminarPregunta(idP:any){
-      return this.database.executeSql('DELETE FROM pregunta WHERE idP = ?',[idP]).then(res=>{
-        this.buscarPregunta();
-      })
-    }
-    //Fin pregunta
+    })
+  }
+
+  insertarPregunta(nombrePregunta: any) {
+    return this.database.executeSql('INSERT INTO pregunta(nombrePregunta) VALUES(?)', [nombrePregunta]).then(res => {
+      this.buscarPregunta();
+    })
+  }
+
+  actualizarPregunta(idP: any, nombrePregunta: any) {
+    return this.database.executeSql('UPDATE pregunta SET nombrePregunta=? WHERE idP=?', [nombrePregunta, idP]).then(res => {
+      this.buscarPregunta();
+    })
+  }
+
+  eliminarPregunta(idP: any) {
+    return this.database.executeSql('DELETE FROM pregunta WHERE idP = ?', [idP]).then(res => {
+      this.buscarPregunta();
+    })
+  }
+  //Fin pregunta
 
   //Usuario
   buscarUsuario() {
@@ -204,7 +205,6 @@ export class BdserviceService {
       this.listaUsuarios.next(items as any);
     })
   }
-
 
   insertarUsuario(respuesta: any, nombre: any, clave: any, correo: any, descripcion: any, foto: any, id_rol: any, idP: any) {
     return this.database.executeSql('INSERT INTO usuarios(respuesta, nombre, clave, correo, descripcion, foto, id_rol,idP ) VALUES(?,?,?,?,?,?,?,?,?)', [respuesta, nombre, clave, correo, descripcion, foto, id_rol, idP]).then(res => {
@@ -252,67 +252,29 @@ export class BdserviceService {
       this.buscarUsuario();
     })
   }
-
   //Fin Usuario
-  async presentAlert(msj: string) {
-    const alert = await this.alertController.create({
-      header: 'Alert',
-      subHeader: 'Important message',
-      message: msj,
-      buttons: ['OK'],
-    });
-    await alert.present();
-  }
 
-
-
-
+  //CREAR LA BASE DE DATOS
   crearBD() {
     this.platform.ready().then(() => {
-      //creación de la base de datos
       this.sqlite.create({
-        name: 'bdProyecto',
+        name: 'proyect.db',
         location: 'default'
       }).then((db: SQLiteObject) => {
-        //capturar la conexión a la BD
         this.database = db;
-        //comando que ejecuta la creación de tablas
-        //this.crearTablas();
-      }).catch(e => {
-        this.presentAlert("Error en crear la Base de datos: " + e);
-      })
+        //crear tablas
+
+        this.crearTablaCategoria();
+        this.crearTablaDetalle();
+        this.crearTablaPregunta();
+        this.crearTablaProducto();
+        this.crearTablaRol();
+        this.crearTablaUsuario();
+      }).catch((e) => this.presentAlert("Error en crear BD: " + e));
     })
   }
+//FIN BASE DE DATOS
 
-  /*async crearTablas() {
-    try {
-      await this.database.executeSql(this.tablaProducto, []);
-      await this.database.executeSql(this.tablaUsuario, []);
-      await this.database.executeSql(this.tablaCategoria, []);
-      await this.database.executeSql(this.tablaRol, []);
-      await this.database.executeSql(this.tablaDetalle, []);
-      this.isDBReady.next(true);
-
-    } catch (error) {
-      this.presentAlert("Error en crear tablas: " + error);
-    }
-  }*/
-  async insertTablas() {
-    try {
-      await this.database.executeSql(this.registrarProducto, []);
-      await this.database.executeSql(this.registrarProductoDos, []);
-      await this.database.executeSql(this.registroUsuario, []);
-      await this.database.executeSql(this.registroUsuarioDos, []);
-      await this.database.executeSql(this.registroRol, []);
-      await this.database.executeSql(this.registroRolDos, []);
-      await this.database.executeSql(this.registroCategoria, []);
-      await this.database.executeSql(this.registroCategoriaDos, []);
-      this.isDBReady.next(true);
-
-    } catch (error) {
-      this.presentAlert("Error en insertar en la tabla: " + error);
-    }
-  }
 
   cargarUsuarios() {
     return this.database.executeSql('SELECT * FROM usuarios', [])
@@ -382,7 +344,6 @@ export class BdserviceService {
             descripcion: res.rows.item(i).descripcion,
             precio: res.rows.item(i).precio
           })
-
         }
       }
       //actualizo el observable
@@ -391,26 +352,134 @@ export class BdserviceService {
     })
   }
 
+  buscarCategoria(){
+    return this.database.executeSql('SELECT * FROM categoria', []).then(res=>{
+      let items: Categoria[] = [];
+      if (res.rows.length > 0) {
+        for (var i = 0; i < res.rows.length; i++) {
+          items.push({
+            id_categoria: res.rows.item(i).id_categoria,
+            nombre_categoria: res.rows.item(i).nombre_categoria
+          })
+        }
+      }
+      this.listaCategoria.next(items as any);
+    })
+  }
 
+  buscarDetalle(){
+    return this.database.executeSql('SELECT * FROM detalle', []).then(res=>{
+      let items: Detalle[] = [];
+      if (res.rows.length > 0) {
+        for (var i = 0; i < res.rows.length; i++) {
+          items.push({
+            id_detalle: res.rows.item(i).id_detalle,
+            total: res.rows.item(i).total,
+            usuario: res.rows.item(i).usuario
+          })
+        }
+      }
+      this.listaCategoria.next(items as any);
+    })
+  }
 
   async crearTablaUsuario() {
     try {
-      //this.database.executeSql(this.registroUsuario,[]);
-      //this.database.executeSql(this.registroUsuarioDos,[]);
       await this.database.executeSql(this.tablaUsuario, []);
-
       //ejecución inserts
       this.database.executeSql(this.registroUsuario, []);
       this.database.executeSql(this.registroUsuarioDos, []);
-
       //cambio de observable
       this.isDBReady.next(true);
       this.buscarUsuario();
     }
-   catch(e) {
-    this.presentAlert("Error en crearTablaUsuario: " + e);
+    catch (e) {
+      this.presentAlert("Error en crearTablaUsuario: " + e);
+    }
   }
-}
 
+  async crearTablaRol() {
+    try {
+      //ejecutar la creación de la tabla
+      await this.database.executeSql(this.tablaRol, []);
+      //ejecución inserts
+      await this.database.executeSql(this.registroRol, []);
+      await this.database.executeSql(this.registroRolDos, []);
+      //cambio de observable de BD
+      this.isDBReady.next(true);
+      this.buscarRol();
+    } catch (e) {
+      this.presentAlert("Error en crear tabla rol: " + e);
+    }
+  }
 
+  async crearTablaProducto() {
+    try {
+      //ejecutar la creación de la tabla
+      await this.database.executeSql(this.tablaProducto, []);
+      //ejecución inserts
+      await this.database.executeSql(this.registrarProducto, []);
+      await this.database.executeSql(this.registrarProductoDos, []);
+      //cambio de observable de BD
+      this.isDBReady.next(true);
+      this.buscarProducto();
+    } catch (e) {
+      this.presentAlert("Error en crear tabla producto: " + e);
+    }
+  }
+
+  async crearTablaPregunta() {
+    try {
+      //ejecutar la creación de la tabla
+      await this.database.executeSql(this.tablaPregunta, []);
+      //ejecución inserts
+      await this.database.executeSql(this.registroPregunta, []);
+      await this.database.executeSql(this.registroPregunta2, []);
+      await this.database.executeSql(this.registroPregunta3, []);
+      //cambio de observable de BD
+      this.isDBReady.next(true);
+      this.buscarPregunta();
+    } catch (e) {
+      this.presentAlert("Error en crear tabla pregunta: " + e);
+    }
+  }
+
+  async crearTablaCategoria() {
+    try {
+      //ejecutar la creación de la tabla
+      await this.database.executeSql(this.tablaCategoria, []);
+      //ejecución inserts
+      await this.database.executeSql(this.registroCategoria, []);
+      await this.database.executeSql(this.registroCategoriaDos, []);
+      //cambio de observable de BD
+      this.isDBReady.next(true);
+      this.buscarCategoria();
+    } catch (e) {
+      this.presentAlert("Error en crear tabla Categoria: " + e);
+    }
+  }
+
+  async crearTablaDetalle() {
+    try {
+      //ejecutar la creación de la tabla
+      await this.database.executeSql(this.tablaDetalle, []);
+      //ejecución inserts
+      await this.database.executeSql(this.registroDetalle, []);
+      //cambio de observable de BD
+      this.isDBReady.next(true);
+      this.buscarDetalle();
+    } catch (e) {
+      this.presentAlert("Error en crear tabla Detalle: " + e);
+    }
+  }  
+  
+  async presentAlert(msj: string) {
+    const alert = await this.alertController.create({
+      header: 'Alert',
+      subHeader: 'Important message',
+      message: msj,
+      buttons: ['OK'],
+    });
+    await alert.present();
+  }
 }
