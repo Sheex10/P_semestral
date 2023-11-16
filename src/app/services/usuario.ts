@@ -5,5 +5,7 @@ export class Usuario {
     apellido = "";
     correo = "";
     imagen = "";
-    
+    id_rol = "";
+    idP = "";
+
 }

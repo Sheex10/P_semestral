@@ -192,6 +192,8 @@ export class BdserviceService {
             correo: res.rows.item(i).correo,
             apellido: res.rows.item(i).apellido,
             imagen: res.rows.item(i).imagen,
+            id_rol: res.rows.item(i).id_rol,
+            idP: res.rows.item(i).idP
           })
         }
       }
