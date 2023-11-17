@@ -19,8 +19,8 @@
       </ion-card-header>
 
       <ion-card-content class="ion-text-center">
-        <ion-input formControlName="Correo" type="text" label="Ingresa tu correo" label-placement="floating"
-          fill="solid" placeholder="alguien@gmail.com" [(ngModel)]="correoIngresado">
+        <ion-input formControlName="Correo1" type="text" label="Ingresa tu correo" label-placement="floating"
+          fill="solid" placeholder="alguien@gmail.com" [(ngModel)]="mailUsuario">
         </ion-input>
         <div [hidden]="correo?.valid || correo?.pristine">
           <span *ngIf="correo?.errors?.['required']">
@@ -34,8 +34,8 @@
           </span>
         </div>
         <br>
-        <ion-input formControlName="Contraseña" type="password" label="Contraseña" label-placement="floating"
-          fill="outline" placeholder="Contraseña" [(ngModel)]="claveIngresada">
+        <ion-input formControlName="Contrasena1" type="password" label="Contraseña" label-placement="floating"
+          fill="outline" placeholder="Contraseña" [(ngModel)]="claveUsuario">
         </ion-input>
         <ion-button (click)="goTorecuperar()" fill="clear">¿Olvidaste tu contraseña?</ion-button>
         <br>

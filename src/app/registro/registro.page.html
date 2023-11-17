@@ -43,7 +43,7 @@
             </span>
           </div>
         <br>
-        <ion-input formControlName="correo" [(ngModel)]="Correo" type="text" label="Correo" label-placement="floating" fill="solid"
+        <ion-input formControlName="Correo" [(ngModel)]="Correo" type="text" label="Correo" label-placement="floating" fill="solid"
           placeholder="alguien@gmail.com"></ion-input>
           <div [hidden]="Correo?.valid">
             <span *ngIf="Correo?.errors?.['required']">
@@ -71,7 +71,7 @@
         <br>
         <ion-label label="Confirmar contraseña" label-placement="floating" fill="outline"
           placeholder="Contraseña"></ion-label>
-        <ion-input formControlName="confirmar_contrasena" [(ngModel)]="Confirmar_contrasena" type="password" label="Confirmar contraseña" label-placement="floating" fill="solid"></ion-input>
+        <ion-input formControlName="Confirmar_contrasena" [(ngModel)]="Confirmar_contrasena" type="password" label="Confirmar contraseña" label-placement="floating" fill="solid"></ion-input>
         <div [hidden]="Confirmar_contrasena?.valid || Confirmar_contrasena.pristine ">
           <span *ngIf="Confirmar_contrasena.errors?.['required']">
             Confirmar contraseña es obligatoria.
