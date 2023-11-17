@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { SQLite } from '@awesome-cordova-plugins/sqlite/ngx';
-import { RegistroPage } from './registro.page';
+import { RegistroPage } from './RegistroPage';
 
 describe('RegistroPage', () => {
   let component: RegistroPage;
