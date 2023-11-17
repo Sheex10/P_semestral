@@ -7,7 +7,7 @@ import {
   FormBuilder
 } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ToastController } from '@ionic/angular';
+import { AlertController, ToastController } from '@ionic/angular';
 import { BdserviceService } from '../services/bdservice.service';
 
 
@@ -19,44 +19,46 @@ import { BdserviceService } from '../services/bdservice.service';
 
 export class LoginPage implements OnInit {
 
-  correoUsuario: string = "patoreyes@gmail.com";
-  claveUsuario: string = "1234567";
-  correoAdmin: string = "pipeshee@gmail.com";
-  claveAdmin: string = "123456789";
+  //correoUsuario: string = "patoreyes@gmail.com";
+  //claveUer: string = "1234567";
+  //correoAdmin: string = "pipeshee@gmail.com";
+  //claveAdmin: string = "123456789";
   
   formularioL: FormGroup;
+  usuarioOnline: boolean=false;
 
-  correoIngresado: string = "";
-  claveIngresada: string = "";
+  mailUsuario: string = "";
+  claveUsuario: string = "";
 
-  usuarios: any = [
+  arrayUsuarios: any = [
     {
       id: 0,
-      nombre: "",
+      nombreUser: "",
       apellido: "",
       correo: "",
       clave: "",
       imagen: "",
-      idRol: 0
+      idRol: 0,
+      idPregunta:0,
+      respuesta:''
     }
   ]
 
-  constructor(private bd: BdserviceService, private router: Router, private toastController: ToastController, public fb: FormBuilder) {
+  constructor(private bd: BdserviceService, private router: Router, private alertController: AlertController, public fb: FormBuilder) {
 
     this.formularioL = this.fb.group({
-
-      'Correo': new FormControl('', [Validators.required, Validators.minLength(5), Validators.email,]),
-      'Contraseña': new FormControl('', [Validators.required, Validators.minLength(5)])
+      'Correo1': new FormControl('', [Validators.required]),
+      'Contrasena1': new FormControl('', [Validators.required])
     })
   }
 
   get correo() {
-    return this.formularioL.get('Correo') as FormControl;
+    return this.formularioL.get('Correo1') as FormControl;
 
   }
 
   get contra() {
-    return this.formularioL.get('Correo') as FormControl;
+    return this.formularioL.get('Contrasena1') as FormControl;
 
   }
 
@@ -65,58 +67,61 @@ export class LoginPage implements OnInit {
   ngOnInit() {
     this.bd.bdState().subscribe(res => {
       if (res) {
-        this.bd.fetchUsuarios().subscribe(datos => {
-          this.usuarios = datos
+        this.bd.fetchusuario().subscribe(datos => {
+          this.arrayUsuarios = datos
         })
       }
     })
   }
 
-
-
-  async presentToast(position: 'top' | 'middle' | 'bottom', mensaje: string, duracion: number) {
-    const toast = await this.toastController.create({
-      message: mensaje,
-      duration: duracion,
-      position: position,
-      color: "dark"
-    });
-    await toast.present();
-  }
   //Validación
-  iniciarSesion(){
-    for(var i =0;i<this.usuarios.length;i++){
-      if(this.correoIngresado == this.usuarios[i].correo){
-        if(this.claveIngresada == this.usuarios[i].clave){
-          if(this.usuarios[i].idRol == 2){
-            let infoUsuario ={
-              iduser:this.usuarios[i].id,
-              nomUser:this.usuarios[i].nombre,
-              apeUser:this.usuarios[i].apellido,
-              correoU:this.usuarios[i].correo,
-              clavee:this.usuarios[i].clave,
-              imgg:this.usuarios[i].imagen,
-              rolcito:this.usuarios[i].idRol,
+  validaLogin(){
+    this.usuarioOnline=false;
+    for(var i = 0; i<this.arrayUsuarios.length; i++){
+      if(this.mailUsuario==this.arrayUsuarios[i].correo){
+        if(this.claveUsuario==this.arrayUsuarios[i].clave){
+          if(this.arrayUsuarios[i].idRol==2){
+
+            let infoUsuario={
+              id:this.arrayUsuarios[i].id,
+              correo:this.arrayUsuarios[i].correo,
+              nombre:this.arrayUsuarios[i].nombreUser,
+              rol:this.arrayUsuarios[i].idRol,
+              foto:this.arrayUsuarios[i].imagen,
+              respuesta:this.arrayUsuarios[i].respuesta,
+              idPregunta:this.arrayUsuarios[i].idPregunta
             }
-          let navigationExtras:NavigationExtras = {
-            state:{
-              infoUsuario:infoUsuario
+            let NavigationExtra:NavigationExtras={
+              state:{
+                infoUsuario:infoUsuario
+              }
             }
-          }
-          this.router.navigate(['/cuenta'],navigationExtras)
-        }
-        if(this.usuarios[i].idRol== 1){
-          let navigationExtras:NavigationExtras = {
-            state:{
-              infoUsuario:this.usuarios[i]
+            this.router.navigateByUrl('/cuenta', { skipLocationChange: true }).then(() => {
+              this.router.navigateByUrl('/cuenta', NavigationExtra);});
+              this.usuarioOnline=true;
             }
-          }
-          this.router.navigate(['/menuadmin'],navigationExtras)
+            if(this.arrayUsuarios[i].idRol==1){
+              this.router.navigate(['/menuadmin'])
+              this.usuarioOnline=true;
+            }
+        }else{
+          this.presentAlert("Contraseña Incorrecta");
         }
       }
+    }if(this.usuarioOnline == false){
+      this.presentAlert("Correo no registrado!");
     }
   }
-}
+
+  async presentAlert( msj:string){
+    const alert = await this.alertController.create({
+      header: 'Alert',
+      subHeader: 'Important message',
+      message: msj,
+      buttons: ['OK']
+    });
+    await alert.present();
+  }
 
   goToRegister() {
     this.router.navigate(['/registro'])
