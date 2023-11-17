@@ -76,7 +76,7 @@ export class BdserviceService {
   bdState() {
     return this.isDBReady.asObservable();
   }
-//-------------------------------
+  //-------------------------------
   fetchrol(): Observable<Rol[]> {
     return this.listaRol.asObservable();
   }
@@ -180,7 +180,7 @@ export class BdserviceService {
   //Fin pregunta
 
   //Usuario
-  buscarUsuario(){
+  buscarUsuario() {
     return this.database.executeSql('SELECT * FROM usuarios', []).then(res => {
       let items: Usuario[] = [];
       if (res.rows.length > 0) {
@@ -210,13 +210,13 @@ export class BdserviceService {
   }
 
   actualizarUsuario(id: any, respuesta: any, nombre: any, apellido: any, correo: any, clave: any, imagen: any, id_rol: any, idP: any) {
-    return this.database.executeSql('UPDATE usuarios SET respuesta= ?, nombre= ?, apellido= ?, correo= ?, clave= ?, foto= ?, id_rol= ?, idP= ? WHERE id= ?', [respuesta, nombre, apellido, clave, correo, imagen, id_rol, idP, id]).then(res => {
+    return this.database.executeSql('UPDATE usuarios SET respuesta= ?, nombre= ?, apellido= ?, correo= ?, clave= ?, imagen= ?, id_rol= ?, idP= ? WHERE id= ?', [respuesta, nombre, apellido, correo, clave,  imagen, id_rol, idP, id]).then(res => {
       this.buscarUsuario();
     })
   }
 
-  actualizaPerfilUsuario(id: any, correo: any, nombre: any, descripcion: any, foto: any) {
-    return this.database.executeSql('UPDATE usuarios SET correo=?, nombre= ?, descripcion= ?, foto= ? WHERE id= ?', [correo, nombre, descripcion, foto, id])
+  actualizaPerfilUsuario(id: any, nombre: any, apellido: any, correo: any, imagen: any) {
+    return this.database.executeSql('UPDATE usuarios SET nombre= ?, apellido=?, correo=?,  imagen= ? WHERE id= ?', [nombre, apellido, correo,  imagen, id])
       .then(res => {
         this.buscarUsuario();
       }).catch(e => {
@@ -268,7 +268,7 @@ export class BdserviceService {
       }).catch((e) => this.presentAlert("Error en crear BD: " + e));
     })
   }
-//FIN BASE DE DATOS
+  //FIN BASE DE DATOS
 
 
   cargarUsuarios() {
@@ -316,8 +316,8 @@ export class BdserviceService {
       })
   }
 
-  eliminarProducto(id: any) {
-    return this.database.executeSql('DELETE FROM producto WHERE ID=?', [id])
+  eliminarProducto(id_producto: any) {
+    return this.database.executeSql('DELETE FROM producto WHERE id_producto=?', [id_producto])
       .then(res => {
         this.cargarProducto();
       })
@@ -350,8 +350,8 @@ export class BdserviceService {
     })
   }
 
-  buscarCategoria(){
-    return this.database.executeSql('SELECT * FROM categoria', []).then(res=>{
+  buscarCategoria() {
+    return this.database.executeSql('SELECT * FROM categoria', []).then(res => {
       let items: Categoria[] = [];
       if (res.rows.length > 0) {
         for (var i = 0; i < res.rows.length; i++) {
@@ -365,8 +365,8 @@ export class BdserviceService {
     })
   }
 
-  buscarDetalle(){
-    return this.database.executeSql('SELECT * FROM detalle', []).then(res=>{
+  buscarDetalle() {
+    return this.database.executeSql('SELECT * FROM detalle', []).then(res => {
       let items: Detalle[] = [];
       if (res.rows.length > 0) {
         for (var i = 0; i < res.rows.length; i++) {
@@ -469,8 +469,8 @@ export class BdserviceService {
     } catch (e) {
       this.presentAlert("Error en crear tabla Detalle: " + e);
     }
-  }  
-  
+  }
+
   async presentAlert(msj: string) {
     const alert = await this.alertController.create({
       header: 'Alert',
