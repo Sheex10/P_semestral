@@ -22,7 +22,7 @@
         <ion-input formControlName="Correo1" type="text" label="Ingresa tu correo" label-placement="floating"
           fill="solid" placeholder="alguien@gmail.com" [(ngModel)]="mailUsuario">
         </ion-input>
-        <div [hidden]="correo?.valid || correo?.pristine">
+        <div [hidden]="correo?.valid">
           <span *ngIf="correo?.errors?.['required']">
             El correo es requerido.
           </span>
@@ -37,11 +37,10 @@
         <ion-input formControlName="Contrasena1" type="password" label="Contraseña" label-placement="floating"
           fill="outline" placeholder="Contraseña" [(ngModel)]="claveUsuario">
         </ion-input>
-        <ion-button (click)="goTorecuperar()" fill="clear">¿Olvidaste tu contraseña?</ion-button>
         <br>
-        <ion-button mat-raised-button color="secondary" (click)="iniciarSesion()"
+        <ion-button mat-raised-button color="secondary" (click)="validaLogin()"
           [disabled]="formularioL.invalid">Iniciar Sesión</ion-button>
-        <ion-button mat-raised-button color="secondary" (click)="validaLogin()">Registrarse</ion-button>
+        <ion-button mat-raised-button color="secondary" (click)="goToRegister()">Registrarse</ion-button>
       </ion-card-content>
     </ion-card>
   </form>
