@@ -36,7 +36,8 @@ export class RegistroPage implements OnInit {
 
   newImg: any = "";
 
-  pideUsuario = "";
+  pideNombre = "";
+  pideApellido = "";
   pideCorreo = "";
   pidePregunta: any;
   pideRespuesta = "";
@@ -80,7 +81,7 @@ export class RegistroPage implements OnInit {
     }
     if (this.prueba) {
       if (this.contra1 == this.contra2) {
-        this.bd.insertarUsuario(this.pideRespuesta,this.pideUsuario, this.pideContrasena, this.pideCorreo, this.newImg, this.pideRol, this.pidePregunta);
+        this.bd.insertarUsuario(this.pideRespuesta, this.pideNombre, this.pideApellido, this.pideCorreo, this.pideContrasena, this.newImg, this.pideRol, this.pidePregunta);
         this.presentAlert("Usuario agregado");
         this.router.navigate(["/login"]);
       } else {

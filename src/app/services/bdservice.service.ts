@@ -22,7 +22,7 @@ export class BdserviceService {
   //variables para la creacion de tablas
   tablaProducto: string = "CREATE TABLE IF NOT EXISTS producto(id_producto INTEGER PRIMARY KEY autoincrement, nombre_producto VARCHAR(30) NOT NULL, descripcion VARCHAR(300) NOT NULL, precio INTEGER NOT NULL, categoria INTEGER, img BLOB, FOREIGN KEY(categoria) REFERENCES tablaCategoria(id_categoria));";
 
-  tablaUsuario: string = "CREATE TABLE IF NOT EXISTS usuarios(id INTEGER PRIMARY KEY autoincrement, respuesta VARCHAR(50) NOT NULL, nombre VARCHAR(20) NOT NULL, apellido VARCHAR(20) NOT NULL, correo VARCHAR (50) NOT NULL, clave VARCHAR (12) NOT NULL, rol INTEGER, imagen BLOB, idRol INTEGER, idP INTEGER, FOREIGN KEY(idP) REFERENCES tablaPregunta(idP), FOREIGN KEY(idRol) REFERENCES tablaRol(id_rol));";
+  tablaUsuario: string = "CREATE TABLE IF NOT EXISTS usuarios(id INTEGER PRIMARY KEY autoincrement, respuesta VARCHAR(50) NOT NULL, nombre VARCHAR(20) NOT NULL, apellido VARCHAR(20) NOT NULL, correo VARCHAR (50) NOT NULL, clave VARCHAR (12) NOT NULL, imagen BLOB, idRol INTEGER, idP INTEGER, FOREIGN KEY(idP) REFERENCES tablaPregunta(idP), FOREIGN KEY(idRol) REFERENCES tablaRol(id_rol));";
 
   tablaCategoria: string = "CREATE TABLE IF NOT EXISTS categoria(id_categoria PRIMARY KEY autoincrement, nombre_categoria VARCHAR (20));";
 
@@ -35,8 +35,8 @@ export class BdserviceService {
 
 
   //variables para los insert iniciales
-  registroUsuario: string = "INSERT or IGNORE INTO tablaUsuario(id, nombre, apellido, correo, clave, rol,imagen) values (1,'Felipe','Shee','felipe@gmail.com','123456789',1,'');";
-  registroUsuarioDos: string = "INSERT or IGNORE INTO tablaUsuario(id, nombre, apellido, correo, clave, rol,imagen) values (1,'Patricio','Reyes','patricio@gmail.com','123456789',2,'');";
+  registroUsuario: string = "INSERT or IGNORE INTO tablaUsuario(id, respuesta,nombre, apellido, correo, clave, rol, imagen, idRol, idP) values (1, 'Arroz','Felipe','Shee','felipe@gmail.com','123456789',2,'', '1');";
+  registroUsuarioDos: string = "INSERT or IGNORE INTO tablaUsuario(id, nombre, apellido, correo, clave, rol,imagen) values (2, 'Molly','Patricio','Reyes','patrick@gmail.com','123456789',1,'', '3');";
 
   registroCategoria: string = "INSERT or IGNORE INTO tablaCategoria(id_categoria, nombre_categoria) values (1,'perros');";
   registroCategoriaDos: string = "INSERT or IGNORE INTO tablaCategoria(id_categoria, nombre_categoria) values (2,'gatos');";
@@ -201,16 +201,16 @@ export class BdserviceService {
     })
   }
 
-  insertarUsuario(respuesta: any, nombre: any, clave: any, correo: any, descripcion: any, foto: any, id_rol: any, idP: any) {
-    return this.database.executeSql('INSERT INTO usuarios(respuesta, nombre, clave, correo, descripcion, foto, id_rol,idP ) VALUES(?,?,?,?,?,?,?,?,?)', [respuesta, nombre, clave, correo, descripcion, foto, id_rol, idP]).then(res => {
+  insertarUsuario(respuesta: any, nombre: any, apellido: any, correo: any, clave: any, imagen: any, id_rol: any, idP: any) {
+    return this.database.executeSql('INSERT INTO usuarios(respuesta, nombre, apellido, correo, clave, imagen, id_rol, idP ) VALUES(?,?,?,?,?,?,?,?)', [respuesta, nombre, apellido, correo, clave, imagen, id_rol, idP]).then(res => {
       this.buscarUsuario();
     }).catch(e => {
       this.presentAlert("Error en insertar usuario");
     })
   }
 
-  actualizarUsuario(id: any, respuesta: any, nombre: any, clave: any, correo: any, descripcion: any, foto: any, id_rol: any, idP: any) {
-    return this.database.executeSql('UPDATE usuarios SET respuesta= ?, nombre= ?, clave= ?, correo= ?, descripcion= ?, foto= ?, id_rol= ?, idP= ? WHERE id= ?', [respuesta, nombre, clave, correo, descripcion, foto, id_rol, idP, id]).then(res => {
+  actualizarUsuario(id: any, respuesta: any, nombre: any, apellido: any, correo: any, clave: any, imagen: any, id_rol: any, idP: any) {
+    return this.database.executeSql('UPDATE usuarios SET respuesta= ?, nombre= ?, apellido= ?, correo= ?, clave= ?, foto= ?, id_rol= ?, idP= ? WHERE id= ?', [respuesta, nombre, apellido, clave, correo, imagen, id_rol, idP, id]).then(res => {
       this.buscarUsuario();
     })
   }
