@@ -21,59 +21,59 @@
 
     <ion-card-content class="ion-text-center">
       <form [formGroup]="formularioReg">
-        <ion-label type="text" label="Nombres" label-placement="floating" fill="solid" placeholder="Nombre"></ion-label>
-        <ion-input formControlName="nombre" [(ngModel)]="pNombre" type="text" label="Nombre" label-placement="floating" fill="solid"></ion-input>
-        <div [hidden]="nomUser?.valid || nomUser?.pristine ">
-          <span *ngIf="nomUser?.errors?.['required']">
+        <ion-label type="text" label="Nombre" label-placement="floating" fill="solid" placeholder="Nombre"></ion-label>
+        <ion-input formControlName="nombre" [(ngModel)]="nombre" type="text" label="Nombre" label-placement="floating" fill="solid"></ion-input>
+        <div [hidden]="nombre?.valid || nombre?.pristine ">
+          <span *ngIf="nombre?.errors?.['required']">
             El nombre de usuario es requerido.
           </span>
-          <span *ngIf="nomUser?.errors?.['minlength']">
+          <span *ngIf="nombre?.errors?.['minlength']">
             El nombre debe tener un minimo de 3 caracteres.
           </span>
         </div>
         <br>
-        <ion-input formControlName="apellido" [(ngModel)]="pApellido" type="text" label="Apellidos" label-placement="floating" fill="solid"
+        <ion-input formControlName="apellido" [(ngModel)]="apellido" type="text" label="Apellidos" label-placement="floating" fill="solid"
           placeholder="Apellido"></ion-input>
-          <div [hidden]="apeUser?.valid || apeUser?.pristine ">
-            <span *ngIf="apeUser?.errors?.['required']">
+          <div [hidden]="apellido?.valid || apellido?.pristine ">
+            <span *ngIf="apellido?.errors?.['required']">
               El apellido es obligatorio
             </span>
-            <span *ngIf="apeUser?.errors?.['minlength']">
+            <span *ngIf="apellido?.errors?.['minlength']">
               El nombre debe tener un minimo de 3 caracteres.
             </span>
           </div>
         <br>
-        <ion-input formControlName="correo" [(ngModel)]="pCorreo" type="text" label="Correo" label-placement="floating" fill="solid"
+        <ion-input formControlName="correo" [(ngModel)]="Correo" type="text" label="Correo" label-placement="floating" fill="solid"
           placeholder="alguien@gmail.com"></ion-input>
-          <div [hidden]="mailUser?.valid || apeUser?.pristine ">
-            <span *ngIf="mailUser?.errors?.['required']">
+          <div [hidden]="Correo?.valid">
+            <span *ngIf="Correo?.errors?.['required']">
               El correo es obligatorio
             </span>
-            <span *ngIf="mailUser?.errors?.['email']">
+            <span *ngIf="Correo?.errors?.['email']">
               El correo debe ser válido.
             </span>
           </div>
         <br>
         <ion-label label="Contraseña" label-placement="floating" fill="outline"
           placeholder="Contraseña"></ion-label>
-        <ion-input formControlName="contrasena" [(ngModel)]="pContra" type="password" label="Contraseña" label-placement="floating" fill="solid"></ion-input>
-        <div [hidden]="pwdUser?.valid || pwdUser?.pristine ">
-          <span *ngIf="pwdUser?.errors?.['required']">
+        <ion-input formControlName="contrasena" [(ngModel)]="contraseña" type="password" label="Contraseña" label-placement="floating" fill="solid"></ion-input>
+        <div [hidden]="contraseña?.valid || contraseña?.pristine ">
+          <span *ngIf="contraseña?.errors?.['required']">
             La contraseña es obligatoria.
           </span>
-          <span *ngIf="pwdUser?.errors?.['minlength']">
+          <span *ngIf="contraseña?.errors?.['minlength']">
             La contraseña permite un minimo de 8 caracteres.
           </span>
-          <span *ngIf="pwdUser?.errors?.['maxlength']">
+          <span *ngIf="contraseña?.errors?.['maxlength']">
             La contraseña permite un maximo de 15 caracteres.
           </span>
         </div>
         <br>
         <ion-label label="Confirmar contraseña" label-placement="floating" fill="outline"
           placeholder="Contraseña"></ion-label>
-        <ion-input formControlName="confirmar_contrasena" [(ngModel)]="pConContra" type="password" label="Confirmar contraseña" label-placement="floating" fill="solid"></ion-input>
-        <div [hidden]="conpwdUser?.valid || conpwdUser.pristine ">
-          <span *ngIf="conpwdUser.errors?.['required']">
+        <ion-input formControlName="confirmar_contrasena" [(ngModel)]="Confirmar_contraseña" type="password" label="Confirmar contraseña" label-placement="floating" fill="solid"></ion-input>
+        <div [hidden]="Confirmar_contraseña?.valid || Confirmar_contraseña.pristine ">
+          <span *ngIf="Confirmar_contraseña.errors?.['required']">
             Confirmar contraseña es obligatoria.
           </span>
         </div>
