@@ -56,24 +56,24 @@
         <br>
         <ion-label label="Contraseña" label-placement="floating" fill="outline"
           placeholder="Contraseña"></ion-label>
-        <ion-input formControlName="contrasena" [(ngModel)]="contraseña" type="password" label="Contraseña" label-placement="floating" fill="solid"></ion-input>
-        <div [hidden]="contraseña?.valid || contraseña?.pristine ">
-          <span *ngIf="contraseña?.errors?.['required']">
+        <ion-input formControlName="contrasena" [(ngModel)]="contrasena" type="password" label="Contraseña" label-placement="floating" fill="solid"></ion-input>
+        <div [hidden]="contrasena?.valid || contrasena?.pristine ">
+          <span *ngIf="contrasena?.errors?.['required']">
             La contraseña es obligatoria.
           </span>
-          <span *ngIf="contraseña?.errors?.['minlength']">
+          <span *ngIf="contrasena?.errors?.['minlength']">
             La contraseña permite un minimo de 8 caracteres.
           </span>
-          <span *ngIf="contraseña?.errors?.['maxlength']">
+          <span *ngIf="contrasena?.errors?.['maxlength']">
             La contraseña permite un maximo de 15 caracteres.
           </span>
         </div>
         <br>
         <ion-label label="Confirmar contraseña" label-placement="floating" fill="outline"
           placeholder="Contraseña"></ion-label>
-        <ion-input formControlName="confirmar_contrasena" [(ngModel)]="Confirmar_contraseña" type="password" label="Confirmar contraseña" label-placement="floating" fill="solid"></ion-input>
-        <div [hidden]="Confirmar_contraseña?.valid || Confirmar_contraseña.pristine ">
-          <span *ngIf="Confirmar_contraseña.errors?.['required']">
+        <ion-input formControlName="confirmar_contrasena" [(ngModel)]="Confirmar_contrasena" type="password" label="Confirmar contraseña" label-placement="floating" fill="solid"></ion-input>
+        <div [hidden]="Confirmar_contrasena?.valid || Confirmar_contrasena.pristine ">
+          <span *ngIf="Confirmar_contrasena.errors?.['required']">
             Confirmar contraseña es obligatoria.
           </span>
         </div>
