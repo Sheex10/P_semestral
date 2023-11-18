@@ -56,7 +56,7 @@
         <br>
         <ion-label label="Contraseña" label-placement="floating" fill="outline"
           placeholder="Contraseña"></ion-label>
-        <ion-input formControlName="contrasena" [(ngModel)]="pideContrasena" type="password" label="Contraseña" label-placement="floating" fill="solid"></ion-input>
+        <ion-input formControlName="contrasena" [(ngModel)]="pideContrasena" [(ngModel)]="contra1"  type="password" label="Contraseña" label-placement="floating" fill="solid"></ion-input>
         <div [hidden]="contrasenaU?.valid">
           <span *ngIf="contrasenaU?.errors?.['required']">
             La contraseña es obligatoria.
@@ -71,7 +71,7 @@
         <br>
         <ion-label label="Confirmar contraseña" label-placement="floating" fill="outline"
           placeholder="Contraseña"></ion-label>
-        <ion-input formControlName="Confirmar_contrasena" type="password" label="Confirmar contraseña" label-placement="floating" fill="solid"></ion-input>
+        <ion-input formControlName="Confirmar_contrasena" [(ngModel)]="contra2" type="password" label="Confirmar contraseña" label-placement="floating" fill="solid"></ion-input>
         <div [hidden]="confirmarU?.valid">
           <span *ngIf="confirmarU.errors?.['required']">
             Confirmar contraseña es obligatoria.

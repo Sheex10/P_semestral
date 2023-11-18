@@ -26,7 +26,7 @@ export class BdserviceService {
 
   tablaCategoria: string = "CREATE TABLE IF NOT EXISTS categoria(id_categoria PRIMARY KEY autoincrement, nombre_categoria VARCHAR (20));";
 
-  tablaRol: string = "CREATE TABLE IF NOT EXISTS rol(id_rol PRIMARY KEY autoincrement, nombre_rol VARCHAR (20));";
+  tablaRol: string = "CREATE TABLE IF NOT EXISTS rol(id_rol PRIMARY KEY autoincrement, nombre_rol VARCHAR(20) NOT NULL);";
 
   tablaDetalle: string = "CREATE TABLE IF NOT EXISTS detalle(id_detalle PRIMARY KEY autoincrement, total INTEGER NOT NULL, usuario INTEGER, FOREIGN KEY(usuario) REFERENCES usuarios(id));";
 
@@ -35,19 +35,19 @@ export class BdserviceService {
 
 
   //variables para los insert iniciales
-  registroUsuario: string = "INSERT or IGNORE INTO tablaUsuario(id, nombre, apellido, correo, clave, rol, imagen, idRol) values (1, 'Felipe','Shee','felipe@gmail.com','123456789',2,'');";
-  registroUsuarioDos: string = "INSERT or IGNORE INTO tablaUsuario(id, nombre, apellido, correo, clave, rol, imagen, idRol) values (2, 'Patricio','Reyes','patrick@gmail.com','123456789',1,'');";
+  registroUsuario: string = "INSERT or IGNORE INTO usuarios(id, nombre, apellido, correo, clave, imagen, idRol) values (1, 'Felipe','Shee','felipe@gmail.com','123456789','',2);";
+  registroUsuarioDos: string = "INSERT or IGNORE INTO usuarios(id, nombre, apellido, correo, clave, imagen, idRol) values (2, 'Patricio','Reyes','patrick@gmail.com','123456789','',1);";
 
-  registroCategoria: string = "INSERT or IGNORE INTO tablaCategoria(id_categoria, nombre_categoria) values (1,'perros');";
-  registroCategoriaDos: string = "INSERT or IGNORE INTO tablaCategoria(id_categoria, nombre_categoria) values (2,'gatos');";
+  registroCategoria: string = "INSERT or IGNORE INTO categoria(id_categoria, nombre_categoria) values (1,'perros');";
+  registroCategoriaDos: string = "INSERT or IGNORE INTO categoria(id_categoria, nombre_categoria) values (2,'gatos');";
 
-  registrarProducto: string = "INSERT or IGNORE INTO tablaProducto(id_producto,nombre_producto,descripcion,precio,categoria) VALUES (1,'Cama Perro','Linda cama cómoda para tu mascota',5990,1);";
-  registrarProductoDos: string = "INSERT or IGNORE INTO tablaProducto(id_producto,nombre_producto,descripcion,precio,categoria) VALUES (2,'Cama gato','Linda cama para tu gato',4990,2);";
+  registrarProducto: string = "INSERT or IGNORE INTO producto(id_producto,nombre_producto,descripcion,precio,categoria) VALUES (1,'Cama Perro','Linda cama cómoda para tu mascota',5990,1);";
+  registrarProductoDos: string = "INSERT or IGNORE INTO producto(id_producto,nombre_producto,descripcion,precio,categoria) VALUES (2,'Cama gato','Linda cama para tu gato',4990,2);";
 
-  registroRol: string = "INSERT or IGNORE INTO tablaRol(id_rol, nombre_rol) VALUES (1,'Usuario');";
-  registroRolDos: string = "INSERT or IGNORE INTO tablaRol(id_rol, nombre_rol) VALUES (2,'Aministrador');";
+  registroRol: string = "INSERT or IGNORE INTO rol(id_rol, nombre_rol) VALUES (1,'Usuario');";
+  registroRolDos: string = "INSERT or IGNORE INTO rol(id_rol, nombre_rol) VALUES (2,'Administrador');";
 
-  registroDetalle: string = "INSERT or IGNORE INTO tablaDetalle(id_detalle, total, usuario) values (21,12990,2);";
+  registroDetalle: string = "INSERT or IGNORE INTO detalle(id_detalle, total, usuario) values (21,12990,2);";
 
   //registroPregunta: string = "INSERT or IGNORE INTO pregunta(idP, nombrePregunta) VALUES(1, '¿cual es tu comida favorita?');";
   //registroPregunta2: string = "INSERT or IGNORE INTO pregunta(idP, nombrePregunta) VALUES(2, '¿cual es tu color favorito?');";
@@ -102,7 +102,7 @@ export class BdserviceService {
   }
 
   //Rol
-  buscarRol() {
+  /*buscarRol() {
     return this.database.executeSql('SELECT * FROM rol', []).then(res => {
       //variable para lmacenar el resultado
       let items: Rol[] = [];
@@ -120,23 +120,23 @@ export class BdserviceService {
       this.listaRol.next(items as any);
 
     })
-  }
+  }*/
 
   insertarRol(nombre_rol: any) {
     return this.database.executeSql('INSERT INTO rol(nombre_rol) VALUES(?)', [nombre_rol]).then(res => {
-      this.buscarRol();
+      this.cargarRol();
     })
   }
 
   actualizarRol(id_rol: any, nombre_rol: any) {
     return this.database.executeSql('UPDATE rol SET nombre_rol=? WHERE id_rol=?', [nombre_rol, id_rol]).then(res => {
-      this.buscarRol();
+      this.cargarRol();
     })
   }
 
   eliminarRol(id_rol: any) {
     return this.database.executeSql('DELETE FROM rol WHERE id_rol = ?', [id_rol]).then(res => {
-      this.buscarRol();
+      this.cargarRol();
     })
   }
   //Fin rol
@@ -187,13 +187,11 @@ export class BdserviceService {
         for (var i = 0; i < res.rows.length; i++) {
           items.push({
             id: res.rows.item(i).id,
-            respuesta: res.rows.item(i).respuesta,
             nombre: res.rows.item(i).nombre,
             correo: res.rows.item(i).correo,
             apellido: res.rows.item(i).apellido,
             imagen: res.rows.item(i).imagen,
             id_rol: res.rows.item(i).id_rol,
-            idP: res.rows.item(i).idP
           })
         }
       }
@@ -202,7 +200,7 @@ export class BdserviceService {
   }
 
   insertarUsuario(nombre: any, apellido: any, correo: any, clave: any, imagen: any, id_rol: any) {
-    return this.database.executeSql('INSERT INTO usuarios(nombre, apellido, correo, clave, imagen, id_rol ) VALUES(?,?,?,?,?,?,?,?)', [nombre, apellido, correo, clave, imagen, id_rol]).then(res => {
+    return this.database.executeSql('INSERT INTO usuarios(nombre, apellido, correo, clave, imagen, id_rol ) VALUES(?,?,?,?,?,?)', [nombre, apellido, correo, clave, imagen, id_rol]).then(res => {
       this.buscarUsuario();
     }).catch(e => {
       this.presentAlert("Error en insertar usuario");
@@ -294,6 +292,24 @@ export class BdserviceService {
       })
   }
 
+  cargarRol() {
+    return this.database.executeSql('SELECT * FROM rol', [])
+      .then(res => {
+        let items: any = [];
+        if (res.rows.length > 0) {
+          for (var i = 0; i < res.rows.length; i++) {
+            items.push({
+              id_rol: res.rows.item(i).id_rol,
+              nombre_rol: res.rows.item(i).nombre_rol,
+            });
+          }
+        }
+        this.listaRol.next(items as any);
+      }).catch(e => {
+        this.presentAlert("error: " + e)
+      })
+  }
+
   cargarProducto() {
     return this.database.executeSql('SELECT * FROM producto', [])
       .then(res => {
@@ -323,9 +339,6 @@ export class BdserviceService {
       })
   }
 
-  fetchProducto(): Observable<Producto[]> {
-    return this.listaProductos.asObservable();
-  }
   buscarProducto() {
     return this.database.executeSql('SELECT * FROM producto', []).then(res => {
       //variable para almacenar el resultado
@@ -390,6 +403,8 @@ export class BdserviceService {
       //cambio de observable
       this.isDBReady.next(true);
       this.buscarUsuario();
+      this.presentAlert("Tabla de usuario creada: " );
+
     }
     catch (e) {
       this.presentAlert("Error en crearTablaUsuario: " + e);
@@ -405,7 +420,9 @@ export class BdserviceService {
       await this.database.executeSql(this.registroRolDos, []);
       //cambio de observable de BD
       this.isDBReady.next(true);
-      this.buscarRol();
+      this.cargarRol();
+      this.presentAlert("Tabla rol creada: ");
+
     } catch (e) {
       this.presentAlert("Error en crear tabla rol: " + e);
     }

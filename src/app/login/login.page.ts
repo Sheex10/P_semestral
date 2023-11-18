@@ -39,8 +39,6 @@ export class LoginPage implements OnInit {
       clave: "",
       imagen: "",
       idRol: 0,
-      idPregunta:0,
-      respuesta:''
     }
   ]
 
@@ -80,7 +78,7 @@ export class LoginPage implements OnInit {
     for(var i = 0; i<this.arrayUsuarios.length; i++){
       if(this.mailUsuario==this.arrayUsuarios[i].correo){
         if(this.claveUsuario==this.arrayUsuarios[i].clave){
-          if(this.arrayUsuarios[i].idRol==2){
+          if(this.arrayUsuarios[i].idRol==1){
 
             let infoUsuario={
               id:this.arrayUsuarios[i].id,
@@ -88,8 +86,6 @@ export class LoginPage implements OnInit {
               nombre:this.arrayUsuarios[i].nombreUser,
               rol:this.arrayUsuarios[i].idRol,
               foto:this.arrayUsuarios[i].imagen,
-              respuesta:this.arrayUsuarios[i].respuesta,
-              idPregunta:this.arrayUsuarios[i].idPregunta
             }
             let NavigationExtra:NavigationExtras={
               state:{
@@ -100,7 +96,7 @@ export class LoginPage implements OnInit {
               this.router.navigateByUrl('/cuenta', NavigationExtra);});
               this.usuarioOnline=true;
             }
-            if(this.arrayUsuarios[i].idRol==1){
+            if(this.arrayUsuarios[i].idRol==2){
               this.router.navigate(['/menuadmin'])
               this.usuarioOnline=true;
             }

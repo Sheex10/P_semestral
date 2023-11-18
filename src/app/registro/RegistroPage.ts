@@ -29,9 +29,7 @@ export class RegistroPage implements OnInit {
     correo: '',
     contrasena: '',
     foto: '',
-    idPregunta: 0,
     idRol: 0,
-    respuesta: ''
   }];
 
   newImg: any = "";
