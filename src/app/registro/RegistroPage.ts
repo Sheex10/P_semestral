@@ -39,8 +39,8 @@ export class RegistroPage implements OnInit {
   pideNombre = "";
   pideApellido = "";
   pideCorreo = "";
-  pidePregunta: any;
-  pideRespuesta = "";
+  //pidePregunta: any;
+  //pideRespuesta = "";
   pideContrasena = "";
   pideRol = 1;
   infoUsuario: any;
@@ -70,6 +70,26 @@ export class RegistroPage implements OnInit {
     });
   }
 
+  get nombreU (){
+    return this.formularioReg.get('nombre') as FormControl
+  }
+
+  get apellidoU (){
+    return this.formularioReg.get('apellido') as FormControl
+  }
+
+  get contrasenaU (){
+    return this.formularioReg.get('contrasena') as FormControl
+  }
+
+  get correoUser (){
+    return this.formularioReg.get('Correo') as FormControl
+  }
+
+  get confirmarU (){
+    return this.formularioReg.get('Confirmar_contrasena') as FormControl
+  }
+
   registrar() {
     this.prueba = true;
     if (this.correoU != this.pideCorreo) {
@@ -82,7 +102,7 @@ export class RegistroPage implements OnInit {
     }
     if (this.prueba) {
       if (this.contra1 == this.contra2) {
-        this.bd.insertarUsuario(this.pideRespuesta, this.pideNombre, this.pideApellido, this.pideCorreo, this.pideContrasena, this.newImg, this.pideRol, this.pidePregunta);
+        this.bd.insertarUsuario(this.pideNombre, this.pideApellido, this.pideCorreo, this.pideContrasena, this.newImg, this.pideRol);
         this.presentAlert("Usuario agregado");
         this.router.navigate(["/login"]);
       } else {

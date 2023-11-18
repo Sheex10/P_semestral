@@ -22,15 +22,14 @@ export class Editarperfil2Page implements OnInit {
     nombre: '' ,
     apellido:'',
     correo:'',
-    clave:0,
     rol:'',
     imagen:'',
-    descripcion:''
   }]
 
   pedirNOMBRE="";
   pedirAPELLIDO="";
-  pedirDesc="";
+  pedirCorreo="";
+
 
   idUsuario:any;
 
@@ -74,7 +73,7 @@ export class Editarperfil2Page implements OnInit {
   ngOnInit() {
     this.bd.bdState().subscribe(res => {
       if (res) {
-        this.bd.fetchUsuarios().subscribe(datos => {
+        this.bd.fetchusuario().subscribe(datos => {
           this.arreglousuario = datos;
         })
       }
@@ -101,7 +100,7 @@ export class Editarperfil2Page implements OnInit {
    modificarP() {
     this.prueba = true;
       if(this.prueba){
-        this.bd.actualizaPerfilUsuario(this.idUsuario,this.pedirNOMBRE,this.pedirAPELLIDO,this.fotoN);
+        this.bd.actualizaPerfilUsuario(this.idUsuario,this.pedirNOMBRE,this.pedirAPELLIDO,this.imagenNueva);
         this.presentAlert("Usuario Modificado");
         let infoUsuario={
           id:this.idUsuario,
