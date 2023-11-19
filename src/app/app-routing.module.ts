@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { ProductsPage } from './pages/products/products.page';
+import { CartPage } from './pages/cart/cart.page';
 
 const routes: Routes = [
   {
@@ -135,17 +137,22 @@ const routes: Routes = [
     path: '**',
     loadChildren: () => import('./notfound/notfound.module').then( m => m.NotfoundPageModule)
   },
-  
-  
-
-
-
-
-
-
-
-
+  {
+    path: 'products',
+    loadChildren: () => import('./pages/products/products.module').then( m => m.ProductsPageModule)
+  },
+  {
+    path: 'cart',
+    loadChildren: () => import('./pages/cart/cart.module').then( m => m.CartPageModule)
+  },
+  { path: 'products', component: ProductsPage },
+  { path: 'cart', component: CartPage },
+  { path: '', redirectTo: '/products', pathMatch: 'full' },
 ];
+
+  
+  
+
 
 @NgModule({
   imports: [
