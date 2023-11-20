@@ -209,14 +209,14 @@ export class BdserviceService {
 
   actualizarUsuario(id: any, nombre: any, apellido: any, correo: any, clave: any, imagen: any, id_rol: any) {
     return this.database.executeSql('UPDATE usuarios SET nombre= ?, apellido= ?, correo= ?, clave= ?, imagen= ?, id_rol= ? WHERE id= ?', [nombre, apellido, correo, clave,  imagen, id_rol, id]).then(res => {
-      this.buscarUsuario();
+      this.cargarUsuarios();
     })
   }
 
   actualizaPerfilUsuario(id: any, nombre: any, apellido: any, imagen: any) {
     return this.database.executeSql('UPDATE usuarios SET nombre= ?, apellido=?, imagen= ? WHERE id= ?', [nombre, apellido,  imagen, id])
       .then(res => {
-        this.buscarUsuario();
+        this.cargarUsuarios();
       }).catch(e => {
         this.presentAlert("Error Modificar Usuario " + e)
       })
@@ -225,7 +225,7 @@ export class BdserviceService {
   actualizarclaveUsuario(id: any, clave: any) {
     return this.database.executeSql('UPDATE usuarios SET clave= ? WHERE id= ?', [clave, id])
       .then(res => {
-        this.buscarUsuario();
+        this.cargarUsuarios();
       }).catch(e => {
         this.presentAlert("Error Modificar Clave: " + e)
       })
@@ -234,7 +234,7 @@ export class BdserviceService {
   actualizarRolUsuario(id: any, id_rol: any) {
     return this.database.executeSql('UPDATE usuarios SET id_rol= ? WHERE id= ?', [id_rol, id])
       .then(res => {
-        this.buscarUsuario();
+        this.cargarUsuarios();
       }).catch(e => {
         this.presentAlert("Error Modificar Rol: " + e)
       })
@@ -242,7 +242,7 @@ export class BdserviceService {
 
   eliminarUsuario(id: any) {
     return this.database.executeSql('DELETE FROM usuarios WHERE id = ?', [id]).then(res => {
-      this.buscarUsuario();
+      this.cargarUsuarios();
     })
   }
   //Fin Usuario
