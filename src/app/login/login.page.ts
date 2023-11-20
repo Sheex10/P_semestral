@@ -77,14 +77,16 @@ export class LoginPage implements OnInit {
     this.usuarioOnline=false;
     for(var i = 0; i<this.arrayUsuarios.length; i++){
       if(this.mailUsuario==this.arrayUsuarios[i].correo){
-        if(this.claveUsuario==this.arrayUsuarios[i].clave){
-          if(this.arrayUsuarios[i].idRol==1){
 
+        if(this.claveUsuario==this.arrayUsuarios[i].clave){
+
+          if(this.arrayUsuarios[i].id_rol==1){
+  
             let infoUsuario={
               id:this.arrayUsuarios[i].id,
               correo:this.arrayUsuarios[i].correo,
-              nombre:this.arrayUsuarios[i].nombreUser,
-              rol:this.arrayUsuarios[i].idRol,
+              nombre:this.arrayUsuarios[i].nombre,
+              rol:this.arrayUsuarios[i].id_rol,
               foto:this.arrayUsuarios[i].imagen,
             }
             let NavigationExtra:NavigationExtras={
@@ -92,11 +94,10 @@ export class LoginPage implements OnInit {
                 infoUsuario:infoUsuario
               }
             }
-            this.router.navigateByUrl('/cuenta', { skipLocationChange: true }).then(() => {
-              this.router.navigateByUrl('/cuenta', NavigationExtra);});
-              this.usuarioOnline=true;
+            this.usuarioOnline =true;
+            this.router.navigate(["/cuenta"],NavigationExtra)
             }
-            if(this.arrayUsuarios[i].idRol==2){
+            if(this.arrayUsuarios[i].id_rol==2){
               this.router.navigate(['/menuadmin'])
               this.usuarioOnline=true;
             }

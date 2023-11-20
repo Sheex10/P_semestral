@@ -101,7 +101,7 @@ export class RegistroPage implements OnInit {
     if (this.prueba) {
       if (this.contra1 == this.contra2) {
         this.bd.insertarUsuario(this.pideNombre, this.pideApellido, this.pideCorreo, this.pideContrasena, this.newImg, this.pideRol);
-        this.presentAlert("Usuario agregado");
+        //this.presentAlert("Usuario agregado");
         this.router.navigate(["/login"]);
       } else {
         this.presentAlert("No hay coincidencias en las claves");
