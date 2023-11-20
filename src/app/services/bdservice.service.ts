@@ -414,6 +414,7 @@ export class BdserviceService {
   async crearTablaRol() {
     try {
       //ejecutar la creación de la tabla
+      await this.database.executeSql('DROP TABLE rol;', [])
       await this.database.executeSql(this.tablaRol, []);
       //ejecución inserts
       await this.database.executeSql(this.registroRol, []);
