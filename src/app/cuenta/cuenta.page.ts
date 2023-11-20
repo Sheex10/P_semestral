@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 
 
@@ -23,11 +23,16 @@ export class CuentaPage implements OnInit {
   ngOnInit() {
   }
   goToeditarperfil() {
-    this.router.navigate(['/editarperfil'])
+    let navigationExtras:NavigationExtras = {
+      state:{
+        usuario: this.usuario
+      }
+    }
+    this.router.navigate(['/editarperfil'],navigationExtras)
 
   }
-  goToeditarpd() {
-    this.router.navigate(['/editarpd'])
+  goToLogin() {
+    this.router.navigate(['/login'])
 
   }
 

@@ -200,7 +200,7 @@ export class BdserviceService {
   }
 
   insertarUsuario(nombre: any, apellido: any, correo: any, clave: any, imagen: any, id_rol: any) {
-    return this.database.executeSql('INSERT INTO usuarios(nombre, apellido, correo, clave, imagen, idRol ) VALUES(?,?,?,?,?,2)', [nombre, apellido, correo, clave, imagen]).then(res => {
+    return this.database.executeSql('INSERT INTO usuarios(nombre, apellido, correo, clave, imagen, idRol ) VALUES(?,?,?,?,?,1)', [nombre, apellido, correo, clave, imagen]).then(res => {
       this.cargarUsuarios();
     }).catch(e => {
       this.presentAlert("Error en insertar usuario");

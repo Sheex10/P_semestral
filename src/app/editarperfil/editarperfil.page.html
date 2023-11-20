@@ -13,14 +13,18 @@
   </ion-card-header>
 
   <ion-card-content class="ion-text-center">
-    <ion-input type="text" label="Nombres" label-placement="floating" fill="solid" placeholder="Nombre"></ion-input>
+    <ion-input type="text" [(ngModel)]="usuario.nombre" label="Nombres" label-placement="floating" fill="solid" placeholder="Nombre"></ion-input>
     <br>
-    <ion-input type="text" label="Apellidos" label-placement="floating" fill="solid" placeholder="Apellido"></ion-input>
+    <ion-input type="text" [(ngModel)]="usuario.apellido" label="Apellidos" label-placement="floating" fill="solid" placeholder="Apellido"></ion-input>
     <br>
-    <ion-input type="password" label="Contraseña" label-placement="floating" fill="outline" placeholder="Contraseña"></ion-input>
-    <br>
-    <ion-input type="password" label="Confirmar contraseña" label-placement="floating" fill="outline" placeholder="Contraseña"></ion-input>
-    <br>
+    <ion-button (click)="takePicture()">Elegir foto de perfil</ion-button>
+    <div *ngIf="image != ''">
+      <img [src]="image" alt="aaaa" style="width: 200px;height: 250px;">
+    </div>
+    <div *ngIf="usuario.image == '' && image">
+       <img [src]="image" alt="aaaa" style="width: 200px;height: 250px;">
+    </div>
+    <br />
     <ion-button (click)="goTocuenta()" mat-raised-button color="secondary">Guardar</ion-button>
   </ion-card-content>
   <ion-header collapse="condense">

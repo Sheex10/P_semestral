@@ -1,7 +1,6 @@
 <ion-header [translucent]="true">
   <ion-toolbar color="secondary">
     <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>Cuenta</ion-title>
   </ion-toolbar>
@@ -9,11 +8,8 @@
 
 <ion-content [fullscreen]="true">
   <div class="centrado">
-    <img *ngIf="image" [src]="image" alt="image" style="width: 100%;max-width: 250px;">
+    <img *ngIf="usuario.imagen != ''" [src]="usuario.imagen" alt="image" style="width: 200px;height: 250px;">
   </div>
-  <ion-button (click)="takePicture()">
-  <ion-icon name="pencil-outline" class="centrado3"></ion-icon>
-</ion-button>
   <ion-item class="centrado1">
     <ion-label> Nombre : {{usuario.nombre}} </ion-label>
   </ion-item>
@@ -25,5 +21,8 @@
   </ion-item>
   <div class="centrado">
     <ion-button (click)="goToeditarperfil()" color="secondary">Editar perfil</ion-button>
+  </div>
+  <div class="centrado">
+    <ion-button (click)="goToLogin()" color="secondary">Cerrar Sesión</ion-button>
   </div>
 </ion-content>
