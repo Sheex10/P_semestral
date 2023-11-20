@@ -131,6 +131,10 @@ const routes: Routes = [
     path: 'usocamara',
     loadChildren: () => import('./usocamara/usocamara.module').then( m => m.UsocamaraPageModule)
   },
+  {
+    path: 'agregar-producto',
+    loadChildren: () => import('./agregar-producto/agregar-producto.module').then( m => m.AgregarProductoPageModule)
+  },
 
   //Cualquier pagina nueva debe ir antes que esto.
   {
@@ -148,6 +152,8 @@ const routes: Routes = [
   { path: 'products', component: ProductsPage },
   { path: 'cart', component: CartPage },
   { path: '', redirectTo: '/products', pathMatch: 'full' },
+
+
 ];
 
   

@@ -27,4 +27,8 @@ export class MenuadminPage implements OnInit {
     this.router.navigate(['/editarperfil2'])
 
   }
+
+  goToAddPd(){
+    this.router.navigate(['/agregar-producto'])
+  }
 }

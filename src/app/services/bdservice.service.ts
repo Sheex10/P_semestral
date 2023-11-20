@@ -369,8 +369,8 @@ export class BdserviceService {
       if (res.rows.length > 0) {
         for (var i = 0; i < res.rows.length; i++) {
           items.push({
-            id_categoria: res.rows.item(i).id_categoria,
-            nombre_categoria: res.rows.item(i).nombre_categoria
+            id_categoria: res.rows.item(i).idCategoria,
+            nombre_categoria: res.rows.item(i).nombreCategoria
           })
         }
       }

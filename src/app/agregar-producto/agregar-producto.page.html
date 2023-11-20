@@ -1,0 +1,64 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>agregarProducto</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">agregarProducto</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title class="ion-text-center">agregar Producto</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content class="ion-text-center">
+      <form [formGroup]="formularioReg">
+        <ion-label type="text" label="Nombre" label-placement="floating" fill="solid" placeholder="Nombre"></ion-label>
+        <ion-input formControlName="nombre" [(ngModel)]="nombreProducto" type="text" label="Nombre" label-placement="floating" fill="solid"></ion-input>
+        <div [hidden]="nombreU?.valid || nombreU?.pristine ">
+          <span *ngIf="nombreU?.errors?.['required']">
+            El nombre de producto es requerido.
+          </span>
+          <span *ngIf="nombreU?.errors?.['minlength']">
+            El nombre debe tener un minimo de 3 caracteres.
+          </span>
+        </div>
+        <br>
+        <ion-input formControlName="apellido" [(ngModel)]="descripcion" type="text" label="descripcion" label-placement="floating" fill="solid"
+          placeholder="Apellido"></ion-input>
+          <div [hidden]="apellidoU?.valid || apellidoU?.pristine ">
+            <span *ngIf="apellidoU?.errors?.['required']">
+              La descripcion es obligatorio
+            </span>
+            <span *ngIf="apellidoU?.errors?.['minlength']">
+              La descripcion debe tener un minimo de 3 caracteres.
+            </span>
+          </div>
+        <br>
+        <ion-input formControlName="Correo" [(ngModel)]="precio" type="number" label="Precio" label-placement="floating" fill="solid"
+          placeholder="1200"></ion-input>
+          <div [hidden]="correoUser?.valid">
+            <span *ngIf="correoUser?.errors?.['required']">
+              El Precio es obligatorio
+            </span>
+          </div>
+        <br>
+        <ion-button (click)="takePicture()">Buscar Imagen</ion-button>
+        <br />
+        <img [src]="fotoN" alt="uwu" style="width: 200px;height: 200px;">
+        <br />
+      </form>
+      <ion-item>
+        <ion-select label="Categoria" label-placement="fixed">
+          <ion-select-option *ngFor="let x of categorias" [value]="x.id_categoria">{{x.nombre_categoria}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-button [disabled]="formularioReg.invalid" mat-raised-button color="secondary">Registrarse</ion-button>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

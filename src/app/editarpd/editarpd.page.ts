@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
+import { BdserviceService } from '../services/bdservice.service';
 
 
 @Component({
@@ -10,49 +11,15 @@ import { MenuController } from '@ionic/angular';
 })
 export class EditarpdPage implements OnInit {
 
-  constructor(private router: Router, private menuCtrl: MenuController) {
+  productos:any;
+  constructor(private router: Router, private menuCtrl: MenuController,private bd:BdserviceService) {
     this.menuCtrl.enable(true, 'principal');
   }
 
   ngOnInit() {
-  }
-  goToedcamaperro(){
-    this.router.navigate(['/edcamaperro'])
-    
-  }
-
-  goToedcasaperro(){
-    this.router.navigate(['/edcasaperro'])
-    
-  }
-
-  goToedcomederoperro(){
-    this.router.navigate(['/edcomederoperro'])
-    
-  }
-
-  goToedjugueteperro(){
-    this.router.navigate(['/edjugueteperro'])
-    
-  }
-  goToedcamagato(){
-    this.router.navigate(['/edcamagato'])
-    
-  }
-
-  goToedcasagato(){
-    this.router.navigate(['/edcasagato'])
-    
-  }
-
-  goToedcomederogato(){
-    this.router.navigate(['/edcomederogato'])
-    
-  }
-
-  goToedjuguetegato(){
-    this.router.navigate(['/edjuguetegato'])
-    
+   this.bd.fetchproducto().subscribe(datos=>{
+       this.productos = datos;
+   })
   }
   
 }
