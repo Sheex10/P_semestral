@@ -9,26 +9,29 @@
 
 <ion-content [fullscreen]="true">
   <ion-card>
-    <img alt="Silhouette of mountains" src="https://www.amigales.cl/media/catalog/product/cache/e41c4201e1eb7e3f60e4abbd62ba2679/c/a/cama_oval.jpg" />
     <ion-card-header>
-      <ion-card-title>CAMA PARA PERRO</ion-card-title>
-      <br>
-      <ion-card-title style="font-size: larger;">Esta suave y confortable cama con forma ovala y borde acolchado imita a un nido,
-        generando que tu perro o gato se sientan protegidos
-        y puedan acurrucarse. Ideal para gatos y perros small o de tamaño pequeño.
-      
-        <br><br><br>
-        $29.990
-      
-      </ion-card-title>
+      <ion-title>
+        Modificar Producto
+      </ion-title>
     </ion-card-header>
-    <ion-card-title>
-      <ion-button (click)="goToproductoed()" color="secondary"><ion-icon name="pencil"></ion-icon></ion-button>
-    </ion-card-title>
+    <ion-card-content>
+      <ion-input [(ngModel)]="producto.nombre_producto" label="Nombre Producto" label-placement="floating"></ion-input>
+      <br />
+      <ion-input [(ngModel)]="producto.descripcion" label="Descripcion" label-placement="floating"></ion-input>
+      <br />
+      <ion-input [(ngModel)]="producto.precio" label="Precio" label-placement="floating"></ion-input>
+      <br />
+      <ion-item>
+        <ion-select label="Categoria" label-placement="floating" [(ngModel)]="producto.categoria">
+          <ion-select-option *ngFor="let x of categorias" [value]="x.id_categoria">{{x.nombre_categoria}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <br />
+      <ion-button (click)="takePicture()">Cambiar imagen</ion-button>
+      <img [src]="fotoN" alt="perro" style="width: 200px;height: 250px;">
+    </ion-card-content>
+    <div style="text-align: center;">
+    <ion-button color="danger" (click)="modificar()">Modificar</ion-button>
+  </div>
   </ion-card>
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">edcamaperro</ion-title>
-    </ion-toolbar>
-  </ion-header>
 </ion-content>

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { BdserviceService } from '../services/bdservice.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-agregar-producto',
@@ -19,12 +20,10 @@ export class AgregarProductoPage implements OnInit {
   categoriaId:any;
   //
   categorias:any;
-  constructor(public fb: FormBuilder,private bd:BdserviceService) { 
+  constructor(public fb: FormBuilder,private bd:BdserviceService,private router:Router) { 
     this.formularioReg = this.fb.group({
       'nombre': new FormControl("", [Validators.required, Validators.minLength(3)]),
       'apellido': new FormControl("", [Validators.required, Validators.minLength(3)]),
-      'contrasena': new FormControl("", [Validators.required, Validators.minLength(5), Validators.maxLength(15), Validators.pattern(new RegExp("(?=.*[0-9])")), Validators.pattern(new RegExp("(?=.*[A-Z])")), Validators.pattern(new RegExp("(?=.*[a-z])"))]),
-      'Confirmar_contrasena': new FormControl("", [Validators.required]),
       'Correo': new FormControl("", [Validators.required]),
     });
   }
@@ -33,6 +32,11 @@ export class AgregarProductoPage implements OnInit {
     this.bd.fetchcategoria().subscribe(datos=>{
       this.categorias = datos
     })
+ }
+ guardarProducto(){
+  
+  this.bd.insertarProducto(this.nombreProducto,this.descripcion,this.precio,this.categoriaId,this.fotoN)
+  this.router.navigate(['/editarpd'])
  }
 
  takePicture = async () => {
@@ -53,16 +57,11 @@ get apellidoU (){
   return this.formularioReg.get('apellido') as FormControl
 }
 
-get contrasenaU (){
-  return this.formularioReg.get('contrasena') as FormControl
-}
+
 
 get correoUser (){
   return this.formularioReg.get('Correo') as FormControl
 }
 
-get confirmarU (){
-  return this.formularioReg.get('Confirmar_contrasena') as FormControl
-}
 
 }

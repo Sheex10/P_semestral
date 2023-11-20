@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 
 
@@ -11,8 +11,14 @@ import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 export class CuentaPage implements OnInit {
 
   image: any;
-
-  constructor(private router: Router) { }
+  usuario:any
+  constructor(private router: Router,private activatedRouter:ActivatedRoute) { 
+    this.activatedRouter.queryParams.subscribe(param =>{
+      if(this.router.getCurrentNavigation()?.extras.state){
+        this.usuario= this.router.getCurrentNavigation()?.extras.state?.["infoUsuario"];
+      }
+    })
+  }
 
   ngOnInit() {
   }

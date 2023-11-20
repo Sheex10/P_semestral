@@ -82,16 +82,9 @@ export class LoginPage implements OnInit {
 
           if(this.arrayUsuarios[i].id_rol==1){
   
-            let infoUsuario={
-              id:this.arrayUsuarios[i].id,
-              correo:this.arrayUsuarios[i].correo,
-              nombre:this.arrayUsuarios[i].nombre,
-              rol:this.arrayUsuarios[i].id_rol,
-              foto:this.arrayUsuarios[i].imagen,
-            }
             let NavigationExtra:NavigationExtras={
               state:{
-                infoUsuario:infoUsuario
+                infoUsuario:this.arrayUsuarios[i]
               }
             }
             this.usuarioOnline =true;

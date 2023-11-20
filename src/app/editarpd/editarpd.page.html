@@ -11,7 +11,19 @@
 <ion-content [fullscreen]="true">
    <ion-card *ngFor="let x of productos">
     <ion-card-header>
-      <h3>{{x.nombre_producto}}</h3>
+      <ion-item>
+        <h3>{{x.nombre_producto}}</h3>
+        <ion-buttons slot="end" >
+          <ion-button color="success" (click)="modificarProducto(x)">
+             <ion-icon name="pencil-outline"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+        <ion-buttons slot="end">
+          <ion-button color="danger" (click)="eliminarProducto(x.id)">
+             <ion-icon name="trash-outline"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+      </ion-item>
     </ion-card-header>
    </ion-card>
 </ion-content>

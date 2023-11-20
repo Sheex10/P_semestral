@@ -318,7 +318,7 @@ export class BdserviceService {
           for (var i = 0; i < res.rows.length; i++) {
             items.push({
               id: res.rows.item(i).id_producto,
-              nombre: res.rows.item(i).nombre_producto,
+              nombre_producto: res.rows.item(i).nombre_producto,
               descripcion: res.rows.item(i).descripcion,
               precio: res.rows.item(i).precio,
               categoria: res.rows.item(i).categoria,
@@ -332,11 +332,30 @@ export class BdserviceService {
       })
   }
 
+  insertarProducto(nombre:any,desc:any,precio:any,categoria:any,img:any){
+    return this.database.executeSql('INSERT INTO producto(nombre_producto,descripcion,precio,categoria,img) VALUES(?,?,?,?,?)',[nombre,desc,precio,categoria,img])
+    .then(e=>{
+      this.cargarProducto()
+    }).catch(e=>{
+      console.log("error insertar producto: "+e);
+    })
+  }
   eliminarProducto(id_producto: any) {
     return this.database.executeSql('DELETE FROM producto WHERE id_producto=?', [id_producto])
       .then(res => {
         this.cargarProducto();
+      }).catch(e=>{
+        console.log("error eliminar producto: "+e)
       })
+  }
+
+  modificarProducto(id:any,nombre:any,desc:any,precio:any,categoria:any,img:any){
+    return this.database.executeSql('UPDATE producto SET nombre_producto = ?,descripcion = ?, precio = ?, categoria = ?, img = ? WHERE id_producto = ?',[nombre,desc,precio,categoria,img,id])
+    .then(res=>{
+      this.cargarProducto()
+    }).catch(e=>{
+      console.log("error modificar producto: "+ e)
+    })
   }
 
   buscarProducto() {
@@ -403,7 +422,6 @@ export class BdserviceService {
       //cambio de observable
       this.isDBReady.next(true);
       this.cargarUsuarios();
-      this.presentAlert("Tabla de usuario creada: " );
 
     }
     catch (e) {
@@ -422,7 +440,6 @@ export class BdserviceService {
       //cambio de observable de BD
       this.isDBReady.next(true);
       this.cargarRol();
-      this.presentAlert("Tabla rol creada: ");
 
     } catch (e) {
       console.log("Error en crear tabla rol: " + JSON.stringify(e));
@@ -438,7 +455,7 @@ export class BdserviceService {
       await this.database.executeSql(this.registrarProductoDos, []);
       //cambio de observable de BD
       this.isDBReady.next(true);
-      this.buscarProducto();
+      this.cargarProducto();
     } catch (e) {
       this.presentAlert("Error en crear tabla producto: " + e);
     }

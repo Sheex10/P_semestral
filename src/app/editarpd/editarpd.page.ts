@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationExtras, Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
 import { BdserviceService } from '../services/bdservice.service';
 
@@ -17,9 +17,27 @@ export class EditarpdPage implements OnInit {
   }
 
   ngOnInit() {
-   this.bd.fetchproducto().subscribe(datos=>{
-       this.productos = datos;
+    this.bd.bdState().subscribe(res=>{
+      if(res){
+      this.bd.fetchproducto().subscribe(datos=>{
+        this.productos = datos;
+      })
+    }
    })
+  }
+
+  modificarProducto(x:any){
+    let navigationExtras:NavigationExtras = {
+      state:{
+        producto: x
+      }
+    }
+    this.router.navigate(['edcamaperro'],navigationExtras)
+  }
+
+  eliminarProducto(id:any){
+    console.log(id)
+    this.bd.eliminarProducto(id)
   }
   
 }

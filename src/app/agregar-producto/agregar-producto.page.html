@@ -54,11 +54,11 @@
         <br />
       </form>
       <ion-item>
-        <ion-select label="Categoria" label-placement="fixed">
+        <ion-select label="Categoria" label-placement="fixed" [(ngModel)]="categoriaId">
           <ion-select-option *ngFor="let x of categorias" [value]="x.id_categoria">{{x.nombre_categoria}}</ion-select-option>
         </ion-select>
       </ion-item>
-      <ion-button [disabled]="formularioReg.invalid" mat-raised-button color="secondary">Registrarse</ion-button>
+      <ion-button (click)="guardarProducto()" [disabled]="formularioReg.invalid" mat-raised-button color="secondary">Registrarse</ion-button>
     </ion-card-content>
   </ion-card>
 </ion-content>
