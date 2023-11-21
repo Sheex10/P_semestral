@@ -1,19 +1,22 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>agregarProducto</ion-title>
+  <ion-toolbar color="secondary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Agregar productos</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">agregarProducto</ion-title>
+      <ion-title size="large"></ion-title>
     </ion-toolbar>
   </ion-header>
 
   <ion-card>
     <ion-card-header>
-      <ion-card-title class="ion-text-center">agregar Producto</ion-card-title>
+      <ion-card-title class="ion-text-center">Agregar productos</ion-card-title>
     </ion-card-header>
 
     <ion-card-content class="ion-text-center">
@@ -58,7 +61,7 @@
           <ion-select-option *ngFor="let x of categorias" [value]="x.id_categoria">{{x.nombre_categoria}}</ion-select-option>
         </ion-select>
       </ion-item>
-      <ion-button (click)="guardarProducto()" [disabled]="formularioReg.invalid" mat-raised-button color="secondary">Registrarse</ion-button>
+      <ion-button (click)="guardarProducto()" [disabled]="formularioReg.invalid" mat-raised-button color="secondary">Agregar</ion-button>
     </ion-card-content>
   </ion-card>
 </ion-content>
