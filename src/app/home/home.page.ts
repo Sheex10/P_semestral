@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertController, ToastController } from '@ionic/angular';
 import { ApiserviceService } from '../services/apiservice.service';
@@ -8,15 +8,23 @@ import { ApiserviceService } from '../services/apiservice.service';
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage {
+export class HomePage implements OnInit {
   razas: any[] = [];
-  constructor(private router: Router, api: ApiserviceService) { }
+
+  constructor(private router: Router, public api: ApiserviceService) { }
+
+  ngOnInit(){
+
+  }
 
   goTocarrito() {
     this.router.navigate(['/carrito'])
 
   }
   obtenerRazas(): void {
-    this.api.getData
+    this.api.getRazas().subscribe((data) =>{
+      this.razas = data.results;
+    })
   }
+
 }
