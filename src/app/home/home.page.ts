@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertController, ToastController } from '@ionic/angular';
 import { ApiserviceService } from '../services/apiservice.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-home',
@@ -9,12 +10,12 @@ import { ApiserviceService } from '../services/apiservice.service';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage implements OnInit {
-  razas: any[] = [];
+  users: any[] = [];
 
-  constructor(private router: Router, public api: ApiserviceService) { }
+  constructor(private router: Router, public api: ApiserviceService, private http: HttpClientModule) { }
 
   ngOnInit(){
-
+    this.obtenerRazas();
   }
 
   goTocarrito() {
@@ -22,8 +23,8 @@ export class HomePage implements OnInit {
 
   }
   obtenerRazas(): void {
-    this.api.getRazas().subscribe((data) =>{
-      this.razas = data.results;
+    this.api.getData().subscribe((data) =>{
+      this.users = data;
     })
   }
 

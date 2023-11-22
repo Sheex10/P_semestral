@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 
 export class ApiserviceService {
 
-  private urlApi="https://dog.ceo/api/breeds/list/all";
+  private urlApi="https://jsonplaceholder.typicode.com/users";
 
   constructor(private http: HttpClient) { }
 

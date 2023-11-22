@@ -26,6 +26,11 @@
   <div class="contenedor-centro" class="div" style="align-items:flex-start">
     <img src="https://i.pinimg.com/originals/f5/ce/16/f5ce16422edbc1cf4711eca8660837cd.gif" alt="xd">
 </div>
+<div *ngFor="let x of users" class="contenedor-centro" class="div" style="align-items:flex-start">
+  <p>
+    {{ x.username }}
+  </p>
+</div>
   <ion-header collapse="condense">
     <ion-toolbar>
       <ion-title size="large">Blank</ion-title>
