@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { NavigationExtras, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { AlertController, ToastController } from '@ionic/angular';
+import { ApiserviceService } from '../services/apiservice.service';
 
 @Component({
   selector: 'app-home',
@@ -8,12 +9,14 @@ import { AlertController, ToastController } from '@ionic/angular';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-
-  constructor(private router: Router, private toastController: ToastController,
-    private alertController: AlertController) { }
+  razas: any[] = [];
+  constructor(private router: Router, api: ApiserviceService) { }
 
   goTocarrito() {
     this.router.navigate(['/carrito'])
 
+  }
+  obtenerRazas(): void {
+    this.api.getData
   }
 }
