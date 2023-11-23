@@ -18,10 +18,6 @@ export class HomePage implements OnInit {
     this.obtenerRazas();
   }
 
-  goTocarrito() {
-    this.router.navigate(['/carrito'])
-
-  }
   obtenerRazas(): void {
     this.api.getData().subscribe((data) =>{
       this.users = data;
