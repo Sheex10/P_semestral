@@ -41,8 +41,12 @@ export class BdserviceService {
   registroCategoria: string = "INSERT or IGNORE INTO categoria(idCategoria, nombreCategoria) values(1,'perros');";
   registroCategoriaDos: string = "INSERT or IGNORE INTO categoria(idCategoria, nombreCategoria) values (2,'gatos');";
 
-  registrarProducto: string = "INSERT or IGNORE INTO producto(id_producto,nombre_producto,descripcion,precio,categoria) VALUES (1,'Cama Perro','Linda cama cómoda para tu mascota',5990,1);";
-  registrarProductoDos: string = "INSERT or IGNORE INTO producto(id_producto,nombre_producto,descripcion,precio,categoria) VALUES (2,'Cama gato','Linda cama para tu gato',4990,2);";
+  registrarProducto: string = "INSERT or IGNORE INTO producto(id_producto,nombre_producto,descripcion,precio,categoria) VALUES (1,'Cama Perro','Linda cama cómoda para tu mascota',5990,1,'https://www.amigales.cl/media/catalog/product/cache/e41c4201e1eb7e3f60e4abbd62ba2679/c/a/cama_oval.jpg');";
+  registrarProductoDos: string = "INSERT or IGNORE INTO producto(id_producto,nombre_producto,descripcion,precio,categoria) VALUES (2,'Cama gato','Linda cama para tu gato',4990,2,'');";
+  registrarProductoTres: string = "INSERT or IGNORE INTO producto(id_producto,nombre_producto,descripcion,precio,categoria) VALUES (3,'Juguete','Juguete para tu perro',6990,1,'');";
+  registrarProductoCuatro: string = "INSERT or IGNORE INTO producto(id_producto,nombre_producto,descripcion,precio,categoria) VALUES (4,'Juguete Gato','Divertido juguete para tu gato!',3990,2,'');";
+  registrarProductoCinco: string = "INSERT or IGNORE INTO producto(id_producto,nombre_producto,descripcion,precio,categoria) VALUES (5,'Plato','Plato para tu perro para su comida',7990,1,'');";
+  registrarProductoSeis: string = "INSERT or IGNORE INTO producto(id_producto,nombre_producto,descripcion,precio,categoria) VALUES (6,'Casa gato','Linda casa para tu gato',10990,2,'');";
 
   registroRol: string = "INSERT or IGNORE INTO rol(idRol, nombreRol) VALUES (1,'Usuario');";
   registroRolDos: string = "INSERT or IGNORE INTO rol(idRol, nombreRol) VALUES (2,'Administrador');";

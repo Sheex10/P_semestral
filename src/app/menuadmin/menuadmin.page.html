@@ -13,13 +13,14 @@
       <ion-button (click)="goToeditPd()" color="secondary">Lista productos</ion-button>
       <br>
       <ion-button (click)="goToAddPd()" color="secondary">Agregar productos</ion-button>
-    </div>
-    <br>
-    <div class="centrado">
-      <ion-button (click)="goToeditarperfil2()" color="secondary">Editar perfil</ion-button>
-    </div>
-    <div class="centrado">
+      <br>
       <ion-button (click)="goTologin()" color="secondary">Cerrar Sesión</ion-button>
     </div>
   </ion-content>
+  <h3>Lista colaboradores</h3>
+  <div *ngFor="let x of users" class="contenedor-centro">
+    <p>
+      {{ x.username }}
+    </p>
+  </div>
 </ion-content>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { BdserviceService } from '../services/bdservice.service';
 
 
 @Component({
@@ -9,11 +10,20 @@ import { Router } from '@angular/router';
 })
 export class PerrosPage implements OnInit {
 
-  constructor(private router: Router) { 
+  listadoPerros: any = [];
+
+  constructor(private router: Router, private bd: BdserviceService) { 
     
   }
 
   ngOnInit() {
+    this.bd.bdState().subscribe(res => {
+      if (res) {
+        this.bd.fetchproducto().subscribe(datos => {
+          this.listadoPerros = datos;
+        })
+      }
+    })
   }
   goTocarrito() {
     this.router.navigate(['/carrito'])

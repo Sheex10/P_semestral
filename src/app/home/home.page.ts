@@ -10,18 +10,14 @@ import { HttpClientModule } from '@angular/common/http';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage implements OnInit {
-  users: any[] = [];
+
 
   constructor(private router: Router, public api: ApiserviceService, private http: HttpClientModule) { }
 
   ngOnInit(){
-    this.obtenerRazas();
+
   }
 
-  obtenerRazas(): void {
-    this.api.getData().subscribe((data) =>{
-      this.users = data;
-    })
-  }
+
 
 }
