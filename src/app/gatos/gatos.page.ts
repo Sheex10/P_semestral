@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
+import { BdserviceService } from '../services/bdservice.service';
 
 
 @Component({
@@ -8,35 +9,30 @@ import { Router } from '@angular/router';
   styleUrls: ['./gatos.page.scss'],
 })
 export class GatosPage implements OnInit {
+  
+  listadoPerros: any = [];
 
-  constructor(private router: Router) { 
+  constructor(private router: Router, private bd: BdserviceService, private activatedRouter:ActivatedRoute) { 
 
   }
 
   ngOnInit() {
+    this.bd.bdState().subscribe(res => {
+      if (res) {
+        this.bd.fetchproducto().subscribe(datos => {
+          this.listadoPerros = datos;
+        })
+      }
+    })
   }
-  goTocarrito() {
-    this.router.navigate(['/carrito'])
 
-  }
-  goTocamagato(){
-    this.router.navigate(['/camagato'])
+  goTocamaperro(x:any){
+    let navigationExtras : NavigationExtras = {
+      state: {
+        name : x
+      }
+    }
+    this.router.navigate(['/camaperro'], navigationExtras)
     
   }
-
-  goTocasagato(){
-    this.router.navigate(['/casagato'])
-    
-  }
-
-  goTocomederogato(){
-    this.router.navigate(['/comederogato'])
-    
-  }
-
-  goTojuguetegato(){
-    this.router.navigate(['/juguetegato'])
-    
-  }
-
 }
