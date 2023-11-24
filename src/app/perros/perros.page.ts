@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { BdserviceService } from '../services/bdservice.service';
 
 
@@ -12,7 +12,7 @@ export class PerrosPage implements OnInit {
 
   listadoPerros: any = [];
 
-  constructor(private router: Router, private bd: BdserviceService) { 
+  constructor(private router: Router, private bd: BdserviceService, private activatedRouter:ActivatedRoute) { 
     
   }
 
@@ -25,28 +25,13 @@ export class PerrosPage implements OnInit {
       }
     })
   }
-  goTocarrito() {
-    this.router.navigate(['/carrito'])
-
-  }
-  goTocamaperro(){
-    this.router.navigate(['/camaperro'])
+  goTocamaperro(x:any){
+    let navigationExtras : NavigationExtras = {
+      state: {
+        name : x
+      }
+    }
+    this.router.navigate(['/camaperro'], navigationExtras)
     
   }
-
-  goTocasaperro(){
-    this.router.navigate(['/casaperro'])
-    
-  }
-
-  goTocomederoperro(){
-    this.router.navigate(['/comederoperro'])
-    
-  }
-
-  goTojugueteperro(){
-    this.router.navigate(['/jugueteperro'])
-    
-  }
-
 }

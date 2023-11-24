@@ -41,12 +41,12 @@ export class BdserviceService {
   registroCategoria: string = "INSERT or IGNORE INTO categoria(idCategoria, nombreCategoria) values(1,'perros');";
   registroCategoriaDos: string = "INSERT or IGNORE INTO categoria(idCategoria, nombreCategoria) values (2,'gatos');";
 
-  registrarProducto: string = "INSERT or IGNORE INTO producto(id_producto,nombre_producto,descripcion,precio,categoria) VALUES (1,'Cama Perro','Linda cama cómoda para tu mascota',5990,1,'https://www.amigales.cl/media/catalog/product/cache/e41c4201e1eb7e3f60e4abbd62ba2679/c/a/cama_oval.jpg');";
-  registrarProductoDos: string = "INSERT or IGNORE INTO producto(id_producto,nombre_producto,descripcion,precio,categoria) VALUES (2,'Cama gato','Linda cama para tu gato',4990,2,'');";
-  registrarProductoTres: string = "INSERT or IGNORE INTO producto(id_producto,nombre_producto,descripcion,precio,categoria) VALUES (3,'Juguete','Juguete para tu perro',6990,1,'');";
-  registrarProductoCuatro: string = "INSERT or IGNORE INTO producto(id_producto,nombre_producto,descripcion,precio,categoria) VALUES (4,'Juguete Gato','Divertido juguete para tu gato!',3990,2,'');";
-  registrarProductoCinco: string = "INSERT or IGNORE INTO producto(id_producto,nombre_producto,descripcion,precio,categoria) VALUES (5,'Plato','Plato para tu perro para su comida',7990,1,'');";
-  registrarProductoSeis: string = "INSERT or IGNORE INTO producto(id_producto,nombre_producto,descripcion,precio,categoria) VALUES (6,'Casa gato','Linda casa para tu gato',10990,2,'');";
+  registrarProducto: string = "INSERT or IGNORE INTO producto(id_producto,nombre_producto,descripcion,precio,categoria, img) VALUES (1,'Cama Perro','Linda cama cómoda para tu mascota',5990,1,'https://www.amigales.cl/media/catalog/product/cache/e41c4201e1eb7e3f60e4abbd62ba2679/c/a/cama_oval.jpg');";
+  registrarProductoDos: string = "INSERT or IGNORE INTO producto(id_producto,nombre_producto,descripcion,precio,categoria, img) VALUES (2,'Cama gato','Linda cama para tu gato',4990,2,'https://www.michy.cl/cdn/shop/products/la-michy-tienda-cama-iglu-en-forma-de-gato-nuestro-best-seller-28824132976817.jpg?v=1635312622');";
+  registrarProductoTres: string = "INSERT or IGNORE INTO producto(id_producto,nombre_producto,descripcion,precio,categoria, img) VALUES (3,'Juguete','Juguete para tu perro',6990,1,'https://static.miscota.com/media/1/photos/products/132374/juguete-para-perros-pequenos-pelota-con-pinchos-azul_1_g.jpeg');";
+  registrarProductoCuatro: string = "INSERT or IGNORE INTO producto(id_producto,nombre_producto,descripcion,precio,categoria, img) VALUES (4,'Juguete Gato','Divertido juguete para tu gato!',3990,2,'https://www.animal-lovers.cl/wp-content/uploads/2023/09/juguete-gato-raton-orejon-rojo-1-600x600.jpg');";
+  registrarProductoCinco: string = "INSERT or IGNORE INTO producto(id_producto,nombre_producto,descripcion,precio,categoria, img) VALUES (5,'Plato','Plato para tu perro para su comida',7990,1,'https://faunasalud.cl/wp-content/uploads/2021/02/12-1.jpg');";
+  registrarProductoSeis: string = "INSERT or IGNORE INTO producto(id_producto,nombre_producto,descripcion,precio,categoria, img) VALUES (6,'Casa gato','Linda casa para tu gato',10990,2,'https://ovacen.com/wp-content/uploads/2019/09/casa-gatos-lana.jpg');";
 
   registroRol: string = "INSERT or IGNORE INTO rol(idRol, nombreRol) VALUES (1,'Usuario');";
   registroRolDos: string = "INSERT or IGNORE INTO rol(idRol, nombreRol) VALUES (2,'Administrador');";
@@ -457,6 +457,12 @@ export class BdserviceService {
       //ejecución inserts
       await this.database.executeSql(this.registrarProducto, []);
       await this.database.executeSql(this.registrarProductoDos, []);
+      await this.database.executeSql(this.registrarProductoTres, []);
+      await this.database.executeSql(this.registrarProductoCuatro, []);
+      await this.database.executeSql(this.registrarProductoCinco, []);
+      await this.database.executeSql(this.registrarProductoSeis, []);
+
+
       //cambio de observable de BD
       this.isDBReady.next(true);
       this.cargarProducto();

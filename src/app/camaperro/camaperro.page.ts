@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 @Component({
@@ -9,7 +9,15 @@ import { Router } from '@angular/router';
 })
 export class CamaperroPage implements OnInit {
 
-  constructor(private router: Router) { }
+  infoProducto: any = [];
+
+  constructor(private router: Router, private activatedRouter: ActivatedRoute) { 
+    this.activatedRouter.queryParams.subscribe(param =>{
+      if(this.router.getCurrentNavigation()?.extras.state){
+        this.infoProducto= this.router.getCurrentNavigation()?.extras.state?.["name"];
+      }
+    })
+  }
 
   ngOnInit() {
   }

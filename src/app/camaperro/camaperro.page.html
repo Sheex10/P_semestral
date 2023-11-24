@@ -9,16 +9,14 @@
 
 <ion-content [fullscreen]="true">
   <ion-card>
-    <img alt="Silhouette of mountains" src="https://www.amigales.cl/media/catalog/product/cache/e41c4201e1eb7e3f60e4abbd62ba2679/c/a/cama_oval.jpg" />
+    <img alt="Silhouette of mountains" [src]="infoProducto.img" />
     <ion-card-header>
-      <ion-card-title>CAMA PARA PERRO</ion-card-title>
+      <ion-card-title>{{ infoProducto.nombre_producto }}</ion-card-title>
       <br>
-      <ion-card-title style="font-size: larger;">Esta suave y confortable cama con forma ovala y borde acolchado imita a un nido,
-        generando que tu perro se sienta protegido
-        y pueda acurrucarse. Ideal para perros small o de tamaño pequeño.
+      <ion-card-title style="font-size: larger;"> {{ infoProducto.descripcion }}
       
         <br><br><br>
-        $29.990
+        $ {{ infoProducto.precio }}
       
       </ion-card-title>
     </ion-card-header>

@@ -4,9 +4,6 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>Accesorios para perros</ion-title>
-    <ion-button (click)="goTocarrito()" color="secondary" slot="end">
-      <ion-icon slot="icon-only" name="cart"></ion-icon>
-    </ion-button>
   </ion-toolbar>
 </ion-header>
 
@@ -14,8 +11,8 @@
    
         <ion-card *ngFor="let x of listadoPerros">
           <ion-card-header>
-            <img (click)="goTocamaperro()" alt="Silhouette of mountains" [src]="x.img" />
-            <ion-button (click)="goTocamaperro()" fill="clear" color="dark"> {{ x.nombre_producto }} </ion-button>
+            <img (click)="goTocamaperro(x)" alt="Silhouette of mountains" [src]="x.img" />
+            <ion-button (click)="goTocamaperro(x)" fill="clear" color="dark"> {{ x.nombre_producto }} </ion-button>
           </ion-card-header>
           <ion-card-content style="text-align: center;">
             Precio : $ {{ x.precio }}
