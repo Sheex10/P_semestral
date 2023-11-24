@@ -9,6 +9,9 @@ import { BdserviceService } from '../services/bdservice.service';
   styleUrls: ['./perros.page.scss'],
 })
 export class PerrosPage implements OnInit {
+  onModalCancel(onModalCancel: any) {
+    throw new Error('Method not implemented.');
+  }
 
   listadoPerros: any = [];
 

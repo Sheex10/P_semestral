@@ -9,6 +9,9 @@ import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
   styleUrls: ['./cuenta.page.scss'],
 })
 export class CuentaPage implements OnInit {
+  onModalCancel(onModalCancel: any) {
+    throw new Error('Method not implemented.');
+  }
 
   image: any;
   usuario:any

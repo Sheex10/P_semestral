@@ -8,7 +8,6 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-content class="ion-padding">
     <div class="centrado">
       <ion-button (click)="goToeditPd()" color="secondary">Lista productos</ion-button>
       <br>
@@ -16,11 +15,17 @@
       <br>
       <ion-button (click)="goTologin()" color="secondary">Cerrar Sesión</ion-button>
     </div>
-  </ion-content>
-  <h3>Lista colaboradores</h3>
-  <div *ngFor="let x of users" class="contenedor-centro">
-    <p>
-      {{ x.username }}
-    </p>
+  <br>
+  <br>
+  <br>
+  <h2>Lista colaboradores</h2>
+  <div *ngFor="let x of users" >
+    <ion-card>
+      <ion-card-content>
+        {{ x.name }}
+        <br>
+        {{ x.email }}
+      </ion-card-content>
+    </ion-card>
   </div>
-</ion-content>
+  </ion-content>
