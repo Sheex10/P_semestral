@@ -33,7 +33,7 @@ export class CamaperroPage implements OnInit {
 
   AnadirAlCarrito(){
     this.bd.insertarCarrito(this.infoProducto.id_producto,1)
-    this.mostrarToast("Producto agregado!");
+    this.mostrarToast("Producto agregado!"), this.infoProducto.id_producto;
   }
 
   async mostrarToast(mensaje: string) {
