@@ -4,14 +4,14 @@
       <ion-back-button></ion-back-button>
     </ion-buttons>
     <ion-title>Accesorios para perros</ion-title>
-    <ion-button color="secondary" slot="end">
+    <ion-button (click)="goTocarrito()" color="secondary" slot="end">
       <ion-icon slot="icon-only" name="cart"></ion-icon>
     </ion-button>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-card>
+  <ion-card >
     <img alt="Silhouette of mountains" [src]="infoProducto.img" />
     <ion-card-header>
       <ion-card-title>{{ infoProducto.nombre_producto }}</ion-card-title>
