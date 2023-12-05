@@ -17,9 +17,9 @@
     </ion-card-header>
     <ion-card-content>
       <ion-list>
-        <ion-item *ngFor="let x of listadoCarrito">
-          <div *ngFor="let p of listadoProducto">
-            <div *ngIf="p.id_producto == x.idProducto">
+        <ion-item *ngFor="let p of listadoProducto">
+          <div *ngFor="let x of listadoCarrito">
+            <div *ngIf="x.idProducto == p.id_producto">
               <ion-thumbnail slot="start">
                 <img alt="Silhouette of mountains" [src]="p.img" />
               </ion-thumbnail>
