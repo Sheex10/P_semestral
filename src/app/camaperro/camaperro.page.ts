@@ -26,6 +26,7 @@ export class CamaperroPage implements OnInit {
   ngOnInit() {
   }
   goTocarrito() {
+    this.router.navigate(['/juguetegato'])
   }
 
   AnadirAlCarrito(){
