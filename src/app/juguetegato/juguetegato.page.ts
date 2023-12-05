@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { BdserviceService } from '../services/bdservice.service';
 
 
 @Component({
@@ -9,12 +10,28 @@ import { Router } from '@angular/router';
 })
 export class JuguetegatoPage implements OnInit {
 
-  constructor(private router: Router) { }
+  listadoCarrito: any ;
+  listadoProducto: any ;
+
+  constructor(private router: Router, private bd: BdserviceService) { }
 
   ngOnInit() {
+    this.bd.bdState().subscribe(res => {
+      if (res) {
+        this.bd.fetchcarrito().subscribe(datos => {
+          this.listadoCarrito = datos;
+        })
+      }
+    })
+    this.bd.bdState().subscribe(res => {
+      if (res) {
+        this.bd.fetchproducto().subscribe(datos => {
+          this.listadoProducto = datos;
+        })
+      }
+    })
   }
   goTocarrito() {
-    this.router.navigate(['/carrito'])
 
   }
 }

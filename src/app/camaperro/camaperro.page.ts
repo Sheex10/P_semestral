@@ -26,11 +26,9 @@ export class CamaperroPage implements OnInit {
   ngOnInit() {
   }
   goTocarrito() {
-    this.router.navigate(['/carrito'])
-
   }
 
-  AñadirAlCarrito(){
+  AnadirAlCarrito(){
     this.bd.insertarCarrito(this.infoProducto.id_producto,1)
   }
 
