@@ -19,9 +19,9 @@
       <ion-list>
         <ion-item *ngFor="let x of listadoCarrito">
           <div *ngFor="let p of listadoProducto">
-            <div *ngIf="p.id_producto == x.id_producto">
+            <div *ngIf="p.id_producto == x.idProducto">
               <ion-thumbnail slot="start">
-                <img alt="Silhouette of mountains" src="p.img" />
+                <img alt="Silhouette of mountains" [src]="p.img" />
               </ion-thumbnail>
               <ion-label>{{ p.nombre_producto }}</ion-label>
               <ion-label slot="end">{{ p.precio }}</ion-label>

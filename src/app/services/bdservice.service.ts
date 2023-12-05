@@ -31,7 +31,7 @@ export class BdserviceService {
 
   tablaDetalle: string = "CREATE TABLE IF NOT EXISTS detalle(idDetalle INTEGER PRIMARY KEY autoincrement, total INTEGER NOT NULL, usuario INTEGER, FOREIGN KEY(usuario) REFERENCES usuarios(id));";
 
-  tablaCarrito: string = "CREATE TABLE IF NOT EXISTS carrito(id_Carrito INTEGER PRIMARY KEY autoincrement, id_producto INTEGER, id_usuario INTEGER, FOREIGN KEY(id_producto) REFERENCES producto(id_producto) FOREIGN KEY(id_usuario) REFERENCES usuarios(id))"
+  tablaCarrito: string = "CREATE TABLE IF NOT EXISTS carrito(idCarrito INTEGER PRIMARY KEY autoincrement, idProducto INTEGER, idUsuario INTEGER, FOREIGN KEY(idProducto) REFERENCES producto(id_producto) FOREIGN KEY(idUsuario) REFERENCES usuarios(id));";
 
   //tablaPregunta: string = "CREATE TABLE IF NOT EXISTS pregunta(idP INTEGER PRIMARY KEY AUTOINCREMENT, nombrePregunta VARCHAR(30) NOT NULL);";
 
@@ -269,9 +269,9 @@ export class BdserviceService {
         if (res.rows.length > 0) {
           for (var i = 0; i < res.rows.length; i++) {
             items.push({
-              id_carrito: res.rows.item(i).id_carrito,
-              id_producto: res.rows.item(i).id_producto,
-              id_usuario: res.rows.item(i).id_usuario,
+              idCarrito: res.rows.item(i).idCarrito,
+              idProducto: res.rows.item(i).idProducto,
+              idUsuario: res.rows.item(i).idUsuario,
             });
           }
         }
@@ -281,16 +281,16 @@ export class BdserviceService {
       })
   }
 
-  insertarCarrito(id_producto: any, id_usuario: any) {
-    return this.database.executeSql('INSERT INTO carrito(id_producto, id_usuario) VALUES(?,?)', [id_producto, id_usuario]).then(res => {
+  insertarCarrito(idProducto: any, idUsuario: any) {
+    return this.database.executeSql('INSERT INTO carrito(idProducto, idUsuario) VALUES(?,?)', [idProducto, idUsuario]).then(res => {
       this.cargarCarrito();
     }).catch(e => {
       this.presentAlert("Error en insertar carrito");
     })
   }
 
-  eliminarCarrito(id_Carrito: any) {
-    return this.database.executeSql('DELETE FROM carrito WHERE id_Carrito = ?', [id_Carrito]).then(res => {
+  eliminarCarrito(idCarrito: any) {
+    return this.database.executeSql('DELETE FROM carrito WHERE idCarrito = ?', [idCarrito]).then(res => {
       this.cargarCarrito();
     })
   }
