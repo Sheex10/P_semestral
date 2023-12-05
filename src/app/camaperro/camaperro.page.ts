@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { BdserviceService } from '../services/bdservice.service';
 
 
 @Component({
@@ -10,11 +11,14 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class CamaperroPage implements OnInit {
 
   infoProducto: any = [];
+  infoUsuario: any = [];
 
-  constructor(private router: Router, private activatedRouter: ActivatedRoute) { 
+
+  constructor(private router: Router, private activatedRouter: ActivatedRoute, private bd: BdserviceService) { 
     this.activatedRouter.queryParams.subscribe(param =>{
       if(this.router.getCurrentNavigation()?.extras.state){
         this.infoProducto= this.router.getCurrentNavigation()?.extras.state?.["name"];
+        this.infoUsuario= this.router.getCurrentNavigation()?.extras.state?.["name"];
       }
     })
   }
@@ -25,4 +29,9 @@ export class CamaperroPage implements OnInit {
     this.router.navigate(['/carrito'])
 
   }
+
+  AñadirAlCarrito(){
+    this.bd.insertarCarrito(this.infoProducto.id_producto,1)
+  }
+
 }

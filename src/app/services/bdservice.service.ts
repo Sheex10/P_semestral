@@ -9,6 +9,7 @@ import { Usuario } from './usuario';
 import { Categoria } from './categoria';
 import { Detalle } from './detalle';
 import { Pregunta } from './pregunta';
+import { Carrito} from './carrito';
 
 
 @Injectable({
@@ -29,6 +30,8 @@ export class BdserviceService {
   tablaRol: string = "CREATE TABLE IF NOT EXISTS rol(idRol INTEGER PRIMARY KEY AUTOINCREMENT, nombreRol TEXT NOT NULL)";
 
   tablaDetalle: string = "CREATE TABLE IF NOT EXISTS detalle(idDetalle INTEGER PRIMARY KEY autoincrement, total INTEGER NOT NULL, usuario INTEGER, FOREIGN KEY(usuario) REFERENCES usuarios(id));";
+
+  tablaCarrito: string = "CREATE TABLE IF NOT EXISTS carrito(id_Carrito INTEGER PRIMARY KEY autoincrement, id_producto INTEGER, id_usuario INTEGER, FOREIGN KEY(id_producto) REFERENCES producto(id_producto) FOREIGN KEY(id_usuario) REFERENCES usuarios(id))"
 
   //tablaPregunta: string = "CREATE TABLE IF NOT EXISTS pregunta(idP INTEGER PRIMARY KEY AUTOINCREMENT, nombrePregunta VARCHAR(30) NOT NULL);";
 
@@ -65,6 +68,8 @@ export class BdserviceService {
   listaCategoria = new BehaviorSubject([]);
   listaDetalle = new BehaviorSubject([]);
   listaPregunta = new BehaviorSubject([]);
+  listaCarrito = new BehaviorSubject([]);
+
 
 
   //observable para la BD
@@ -103,6 +108,10 @@ export class BdserviceService {
 
   fetchpregunta(): Observable<Pregunta[]> {
     return this.listaPregunta.asObservable();
+  }
+
+  fetchcarrito(): Observable<Carrito[]> {
+    return this.listaCarrito.asObservable();
   }
 
   //Rol
@@ -251,6 +260,42 @@ export class BdserviceService {
   }
   //Fin Usuario
 
+  //Carrito
+
+  cargarCarrito() {
+    return this.database.executeSql('SELECT * FROM carrito', [])
+      .then(res => {
+        let items: any = [];
+        if (res.rows.length > 0) {
+          for (var i = 0; i < res.rows.length; i++) {
+            items.push({
+              id_carrito: res.rows.item(i).id_carrito,
+              id_producto: res.rows.item(i).id_producto,
+              id_usuario: res.rows.item(i).id_usuario,
+            });
+          }
+        }
+        this.listaCarrito.next(items as any);
+      }).catch(e => {
+        this.presentAlert("error: " + e)
+      })
+  }
+
+  insertarCarrito(id_producto: any, id_usuario: any) {
+    return this.database.executeSql('INSERT INTO carrito(id_producto, id_usuario) VALUES(?,?)', [id_producto, id_usuario]).then(res => {
+      this.cargarCarrito();
+    }).catch(e => {
+      this.presentAlert("Error en insertar carrito");
+    })
+  }
+
+  eliminarCarrito(id_Carrito: any) {
+    return this.database.executeSql('DELETE FROM carrito WHERE id_Carrito = ?', [id_Carrito]).then(res => {
+      this.cargarCarrito();
+    })
+  }
+  //Fin carrito
+
   //CREAR LA BASE DE DATOS
   crearBD() {
     this.platform.ready().then(() => {
@@ -263,6 +308,7 @@ export class BdserviceService {
 
         this.crearTablaCategoria();
         this.crearTablaDetalle();
+        this.crearTablaCarrito();
         //this.crearTablaPregunta();
         this.crearTablaProducto();
         this.crearTablaRol();
@@ -514,6 +560,20 @@ export class BdserviceService {
       this.buscarDetalle();
     } catch (e) {
       console.log("Error en crear tabla Detalle: " + JSON.stringify(e));
+    }
+  }
+
+  async crearTablaCarrito() {
+    try {
+      //ejecutar la creación de la tabla
+      //await this.database.executeSql('DROP TABLE rol;', [])
+      await this.database.executeSql(this.tablaCarrito, []);
+      //cambio de observable de BD
+      this.isDBReady.next(true);
+      this.cargarCarrito();
+
+    } catch (e) {
+      console.log("Error en crear tabla carrito: " + JSON.stringify(e));
     }
   }
 

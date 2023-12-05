@@ -11,8 +11,14 @@ import { BdserviceService } from '../services/bdservice.service';
 export class GatosPage implements OnInit {
   
   listadoPerros: any = [];
+  infoUsuario: any = [];
 
   constructor(private router: Router, private bd: BdserviceService, private activatedRouter:ActivatedRoute) { 
+    this.activatedRouter.queryParams.subscribe(param =>{
+      if (this.router.getCurrentNavigation()?.extras.state){
+        this.infoUsuario = this.router.getCurrentNavigation()?.extras?.state?.["infoUsuario"];
+      }
+    })
 
   }
 
