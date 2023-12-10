@@ -150,7 +150,7 @@ export class RegistroPage implements OnInit {
 
   goTologin() {
     this.router.navigate(['/login']);
-
+    this.presentAlert("Usuario registrado correctamente");
   }
 
 
