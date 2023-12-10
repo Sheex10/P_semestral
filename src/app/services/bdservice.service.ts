@@ -285,7 +285,7 @@ export class BdserviceService {
     return this.database.executeSql('INSERT INTO carrito(idProducto, idUsuario) VALUES(?,?)', [idProducto, idUsuario]).then(res => {
       this.cargarCarrito();
     }).catch(e => {
-      this.presentAlert("Error en insertar carrito");
+      this.presentAlert("Error en insertar al carrito");
     })
   }
 
@@ -338,7 +338,7 @@ export class BdserviceService {
         }
         this.listaUsuarios.next(items as any);
       }).catch(e => {
-        this.presentAlert("error: " + e)
+        this.presentAlert("Error: " + e)
       })
   }
 
@@ -356,7 +356,7 @@ export class BdserviceService {
         }
         this.listaRol.next(items as any);
       }).catch(e => {
-        this.presentAlert("error: " + e)
+        this.presentAlert("Error: " + e)
       })
   }
 
@@ -378,7 +378,7 @@ export class BdserviceService {
         }
         this.listaProductos.next(items as any);
       }).catch(e => {
-        this.presentAlert("error al cargar producto " + e)
+        this.presentAlert("Error al cargar producto " + e)
       })
   }
 
@@ -475,7 +475,7 @@ export class BdserviceService {
 
     }
     catch (e) {
-      this.presentAlert("Error en crearTablaUsuario: " + e);
+      this.presentAlert("Error en crear la Tabla Usuario: " + e);
     }
   }
 
