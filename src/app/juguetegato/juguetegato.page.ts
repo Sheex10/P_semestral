@@ -33,6 +33,7 @@ export class JuguetegatoPage implements OnInit {
     })
     this.calculartotal();
   }
+  
   EliminarPd(x:any) {
     this.bd.eliminarCarrito(x.idCarrito);
   }
