@@ -30,6 +30,10 @@ export class CamaperroPage implements OnInit {
     this.router.navigate(['/juguetegato'])
     
   }
+  goToPerfil() {
+    this.router.navigate(['/cuenta'])
+    
+  }
 
   AnadirAlCarrito(){
     this.bd.insertarCarrito(this.infoProducto.id,1)

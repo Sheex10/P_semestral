@@ -14,10 +14,13 @@ export class HomePage implements OnInit {
 
   constructor(private router: Router, public api: ApiserviceService, private http: HttpClientModule) { }
 
-  ngOnInit(){
+  ngOnInit() {
 
   }
+  goToPerfil() {
+    this.router.navigate(['/cuenta'])
 
+  }
 
 
 }

@@ -44,4 +44,7 @@ export class GatosPage implements OnInit {
   goTocarrito() {
     this.router.navigate(['/juguetegato'])
   }
+  goToPerfil() {
+    this.router.navigate(['/cuenta'])
+  }
 }

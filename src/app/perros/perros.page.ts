@@ -41,4 +41,8 @@ export class PerrosPage implements OnInit {
     this.router.navigate(['/juguetegato'])
 
   }
+  goToPerfil() {
+    this.router.navigate(['/cuenta'])
+
+  }
 }
