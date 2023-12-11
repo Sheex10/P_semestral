@@ -24,7 +24,7 @@ export class AgregarProductoPage implements OnInit {
     this.formularioReg = this.fb.group({
       'nombre': new FormControl("", [Validators.required, Validators.minLength(3)]),
       'apellido': new FormControl("", [Validators.required, Validators.minLength(3)]),
-      'Correo': new FormControl("", [Validators.required]),
+      'Correo': new FormControl("", [Validators.required, Validators.min(1000)]),
     });
   }
 
