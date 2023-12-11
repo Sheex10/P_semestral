@@ -139,7 +139,7 @@ export class RegistroPage implements OnInit {
   async presentAlert(mensaje: string) {
     const alert = await this.alertController.create({
       header: "Aviso",
-      subHeader: 'Usuario registrado!',
+      subHeader: 'Seguridad de la contraseña',
       message: mensaje,
       buttons: ['Continuar'],
     });
