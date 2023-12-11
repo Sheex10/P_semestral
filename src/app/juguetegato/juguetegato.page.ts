@@ -10,6 +10,7 @@ import { BdserviceService } from '../services/bdservice.service';
 })
 export class JuguetegatoPage implements OnInit {
 
+  subtotal : number = 0;
   listadoCarrito: any ;
   listadoProducto: any ;
 
@@ -30,8 +31,19 @@ export class JuguetegatoPage implements OnInit {
         })
       }
     })
+    this.calculartotal();
   }
-  goTocarrito() {
+  EliminarPd(x:any) {
+    this.bd.eliminarCarrito(x.idCarrito);
+  }
 
+  calculartotal(){
+    for(var p = 0; p<this.listadoProducto.length; p++){
+      for(var x = 0; x<this.listadoCarrito.length; x++){
+        if (this.listadoProducto[p].id==this.listadoCarrito[x].idProducto){
+          this.subtotal+=this.listadoProducto[p].precio
+        }
+      }
+    }
   }
 }

@@ -101,14 +101,13 @@ export class RegistroPage implements OnInit {
     if (this.prueba) {
       if (this.contra1 == this.contra2) {
         this.bd.insertarUsuario(this.pideNombre, this.pideApellido, this.pideCorreo, this.pideContrasena, this.newImg, this.pideRol);
-        //this.presentAlert("Usuario agregado");
         this.router.navigate(["/login"]);
+        this.presentAlert("Usuario registrado correctamente");
       } else {
         this.presentAlert("No hay coincidencias en las claves");
       }
     }
   }
-
 
   ngOnInit() {
     this.bd.bdState().subscribe(res =>{
@@ -147,13 +146,7 @@ export class RegistroPage implements OnInit {
     await alert.present();
   }
 
-
   goTologin() {
     this.router.navigate(['/login']);
-    this.presentAlert("Usuario registrado correctamente");
   }
-
-
-
-
 }

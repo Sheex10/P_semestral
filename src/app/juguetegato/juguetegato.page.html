@@ -17,13 +17,18 @@
     </ion-card-header>
     <ion-card-content>
       <ion-list>
-        <ion-item *ngFor="let p of listadoProducto">
-          <div *ngFor="let x of listadoCarrito">
+        <ion-item *ngFor="let x of listadoCarrito">
+          <div *ngFor="let p of listadoProducto">
+            <div *ngIf="p.id===x.idProducto">
               <ion-thumbnail slot="start">
-                <img alt="Silhouette of mountains" [src]="" />
+                <img alt="Silhouette of mountains" [src]="p.img" />
               </ion-thumbnail>
-              <ion-label>{{ x.idProducto }}</ion-label>
+              <ion-label>{{ p.nombre_producto }} <ion-button (click)="EliminarPd(x)" color="secondary" slot="end">
+                <ion-icon name="trash-outline"></ion-icon>
+              </ion-button> </ion-label>
+              <ion-label>$ {{ p.precio }}</ion-label>
               <ion-label slot="end"></ion-label>
+            </div>
           </div>
         </ion-item>
       </ion-list>
@@ -34,7 +39,7 @@
       <ion-list>
         <ion-item>
           <ion-label>SubTotal:</ion-label>
-          <ion-label slot="end">$85.960</ion-label>
+          <ion-label slot="end">$ {{ subtotal }}</ion-label>
         </ion-item>
       </ion-list>
     </ion-card-content>

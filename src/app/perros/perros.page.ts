@@ -37,4 +37,8 @@ export class PerrosPage implements OnInit {
     this.router.navigate(['/camaperro'], navigationExtras)
     
   }
+  goTocarrito() {
+    this.router.navigate(['/juguetegato'])
+
+  }
 }
