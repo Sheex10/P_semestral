@@ -14,16 +14,29 @@ export class JuguetegatoPage implements OnInit {
   listadoCarrito: any ;
   listadoProducto: any ;
 
+  usu:any;
+
   constructor(private router: Router, private bd: BdserviceService) { }
 
   ngOnInit() {
     this.bd.bdState().subscribe(res => {
       if (res) {
-        this.bd.fetchcarrito().subscribe(datos => {
-          this.listadoCarrito = datos;
+        this.bd.fetchusu().subscribe(datos => {
+          this.usu = datos;
         })
       }
     })
+    for(var p = 0; p<this.usu.length; p++){
+      if (this.usu[p].idUsu== 1){
+
+         this.bd.bdState().subscribe(res => {
+      if (res) {
+        this.bd.fetchcarrito().subscribe(datos => {
+          this.listadoCarrito = datos.filter(item=> item.idUsuario == this.usu[p].usuarioc);
+        })
+      }
+    })
+      }}
     this.bd.bdState().subscribe(res => {
       if (res) {
         this.bd.fetchproducto().subscribe(datos => {

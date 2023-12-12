@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
+import { BdserviceService } from '../services/bdservice.service';
 
 
 @Component({
@@ -15,7 +16,7 @@ export class CuentaPage implements OnInit {
 
   image: any;
   usuario:any
-  constructor(private router: Router,private activatedRouter:ActivatedRoute) { 
+  constructor(private router: Router,private activatedRouter:ActivatedRoute, private bd:BdserviceService) { 
     this.activatedRouter.queryParams.subscribe(param =>{
       if(this.router.getCurrentNavigation()?.extras.state){
         this.usuario= this.router.getCurrentNavigation()?.extras.state?.["infoUsuario"];
@@ -36,7 +37,7 @@ export class CuentaPage implements OnInit {
   }
   goToLogin() {
     this.router.navigate(['/login'])
-
+    this.bd.vaciarTablaUsu();
   }
 
   takePicture = async () => {

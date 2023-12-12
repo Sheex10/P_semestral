@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
+import { BdserviceService } from './services/bdservice.service';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +10,7 @@ import { MenuController } from '@ionic/angular';
 })
 export class AppComponent {
   
-  constructor(private router: Router,private menuCtrl: MenuController) {
+  constructor(private router: Router,private menuCtrl: MenuController, private bd: BdserviceService) {
     
   }
 
@@ -34,6 +35,7 @@ export class AppComponent {
   
   goTologin() {
     this.router.navigate(['/login'])
+    this.bd.vaciarTablaUsu();
   }
 
 }

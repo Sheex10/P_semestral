@@ -10,6 +10,7 @@ import { Categoria } from './categoria';
 import { Detalle } from './detalle';
 import { Pregunta } from './pregunta';
 import { Carrito} from './carrito';
+import { Usu} from './usu';
 
 
 @Injectable({
@@ -32,6 +33,8 @@ export class BdserviceService {
   tablaDetalle: string = "CREATE TABLE IF NOT EXISTS detalle(idDetalle INTEGER PRIMARY KEY autoincrement, total INTEGER NOT NULL, usuario INTEGER, FOREIGN KEY(usuario) REFERENCES usuarios(id));";
 
   tablaCarrito: string = "CREATE TABLE IF NOT EXISTS carrito(idCarrito INTEGER PRIMARY KEY autoincrement, idProducto INTEGER, idUsuario INTEGER, FOREIGN KEY(idProducto) REFERENCES producto(id_producto) FOREIGN KEY(idUsuario) REFERENCES usuarios(id));";
+
+  tablaUsu: string = "CREATE TABLE IF NOT EXISTS usu(idUsu INTEGER PRIMARY KEY autoincrement, usuarioc INTEGER,  FOREIGN KEY(usuarioc) REFERENCES usuarios(id));";
 
   //tablaPregunta: string = "CREATE TABLE IF NOT EXISTS pregunta(idP INTEGER PRIMARY KEY AUTOINCREMENT, nombrePregunta VARCHAR(30) NOT NULL);";
 
@@ -69,6 +72,7 @@ export class BdserviceService {
   listaDetalle = new BehaviorSubject([]);
   listaPregunta = new BehaviorSubject([]);
   listaCarrito = new BehaviorSubject([]);
+  listaUsu = new BehaviorSubject([]);
 
 
 
@@ -112,6 +116,9 @@ export class BdserviceService {
 
   fetchcarrito(): Observable<Carrito[]> {
     return this.listaCarrito.asObservable();
+  }
+  fetchusu(): Observable<Usu[]> {
+    return this.listaUsu.asObservable();
   }
 
   //Rol
@@ -295,6 +302,50 @@ export class BdserviceService {
     })
   }
   //Fin carrito
+    //usuario conectado
+
+    cargarUsu() {
+      return this.database.executeSql('SELECT * FROM usu', [])
+        .then(res => {
+          let items: any = [];
+          if (res.rows.length > 0) {
+            for (var i = 0; i < res.rows.length; i++) {
+              items.push({
+                idUsu: res.rows.item(i).idUsu,
+                usuarioc: res.rows.item(i).usuarioc,
+                
+              });
+            }
+          }
+          this.listaUsu.next(items as any);
+        }).catch(e => {
+          this.presentAlert("error: " + e)
+        })
+    }
+  
+    insertarUsu( usuarioc: any) {
+      return this.database.executeSql('INSERT INTO usu(usuarioc) VALUES(?)', [ usuarioc]).then(res => {
+        this.cargarUsu();
+      }).catch(e => {
+        this.presentAlert("Error en insertar al usu");
+      })
+    }
+  
+    eliminarUsu(idUsu: any) {
+      return this.database.executeSql('DELETE FROM usu WHERE idUsu = ?', [idUsu]).then(res => {
+        this.cargarUsu();
+      })
+    }
+    async vaciarTablaUsu() {
+      try {
+        await this.database.executeSql('DELETE FROM usu', []);
+        await this.database.executeSql('DELETE FROM sqlite_sequence WHERE name="usu"', []);
+        this.cargarUsu(); // Recargar la lista de usu después de eliminar los registros
+      } catch (error) {
+        console.error('Error al vaciar tabla usu:', error);
+      }
+    }
+    //fin usuario conectado
 
   //CREAR LA BASE DE DATOS
   crearBD() {
@@ -309,6 +360,8 @@ export class BdserviceService {
         this.crearTablaCategoria();
         this.crearTablaDetalle();
         this.crearTablaCarrito();
+        this.crearTablaUsu();
+
         //this.crearTablaPregunta();
         this.crearTablaProducto();
         this.crearTablaRol();
@@ -577,6 +630,19 @@ export class BdserviceService {
     }
   }
 
+  async crearTablaUsu() {
+    try {
+      //ejecutar la creación de la tabla
+      //await this.database.executeSql('DROP TABLE usu;', [])
+      await this.database.executeSql(this.tablaUsu, []);
+      //cambio de observable de BD
+      this.isDBReady.next(true);
+      this.cargarUsu();
+
+    } catch (e) {
+      console.log("Error en crear tabla usu: " + JSON.stringify(e));
+    }
+  }
   async presentAlert(msj: string) {
     const alert = await this.alertController.create({
       header: 'Alert',

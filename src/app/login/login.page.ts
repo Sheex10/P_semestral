@@ -27,6 +27,8 @@ export class LoginPage implements OnInit {
   formularioL: FormGroup;
   usuarioOnline: boolean=false;
 
+  id: number =0;
+
   mailUsuario: string = "";
   claveUsuario: string = "";
 
@@ -81,7 +83,8 @@ export class LoginPage implements OnInit {
         if(this.claveUsuario==this.arrayUsuarios[i].clave){
 
           if(this.arrayUsuarios[i].id_rol==1){
-  
+            this.id=this.arrayUsuarios[i].id
+             this.bd.insertarUsu(this.id);
             let NavigationExtra:NavigationExtras={
               state:{
                 infoUsuario:this.arrayUsuarios[i]

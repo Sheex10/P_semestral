@@ -2,6 +2,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiserviceService } from '../services/apiservice.service';
+import { BdserviceService } from '../services/bdservice.service';
 
 
 @Component({
@@ -13,7 +14,7 @@ export class MenuadminPage implements OnInit {
 
   users: any[] = [];
   
-  constructor(private router: Router, public api: ApiserviceService, private http: HttpClientModule, private activatedRouter:ActivatedRoute) { 
+  constructor(private router: Router, public api: ApiserviceService, private http: HttpClientModule, private activatedRouter:ActivatedRoute, private bd: BdserviceService) { 
     
   }
 
@@ -31,6 +32,7 @@ export class MenuadminPage implements OnInit {
 
   goTologin() {
     this.router.navigate(['/login'])
+    this.bd.vaciarTablaUsu();
   }
 
   goToeditarperfil2() {
